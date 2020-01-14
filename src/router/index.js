@@ -10,12 +10,26 @@ const routes = [
     path: "/",
     component: Layout,
     redirect: "/dashboard",
+    meta: { title: "Dashboard", icon: "dashboard" },
     children: [
       {
         path: "dashboard",
         component: () => import("@/views/dashboard"),
-        name: "Dashboard",
+        name: "dashboard",
         meta: { title: "Dashboard", icon: "dashboard" }
+      }
+    ]
+  },
+  {
+    path: "/about",
+    component: Layout,
+    meta: { title: "About", icon: "info" },
+    children: [
+      {
+        path: "index",
+        component: () => import("@/views/about/index"),
+        name: "about",
+        meta: { title: "About", icon: "info" }
       }
     ]
   }
@@ -24,5 +38,7 @@ const routes = [
 const router = new VueRouter({
   routes
 });
+
+export { routes };
 
 export default router;

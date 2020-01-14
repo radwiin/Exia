@@ -31,8 +31,8 @@ export default {
           activeTextColor: this.activeTextColor
         },
         on: {
-          open: this.$emit("open"),
-          close: this.$emit("close")
+          open: () => this.$emit("open"),
+          close: () => this.$emit("close")
         }
       },
       this.menu.map(child => this.menuItem(h, child))
@@ -51,7 +51,7 @@ export default {
           [
             h("svg-icon", {
               props: {
-                "icon-class": item.icon
+                "icon-class": item.meta.icon
               }
             }),
             h(
@@ -59,7 +59,7 @@ export default {
               {
                 slot: "title"
               },
-              item.title
+              item.meta.title
             )
           ]
         );
@@ -80,7 +80,7 @@ export default {
               [
                 h("svg-icon", {
                   props: {
-                    "icon-class": item.icon
+                    "icon-class": item.meta.icon
                   }
                 }),
                 h(
@@ -88,7 +88,7 @@ export default {
                   {
                     slot: "title"
                   },
-                  item.title
+                  item.meta.title
                 )
               ]
             ),

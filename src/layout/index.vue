@@ -24,18 +24,17 @@
           />
         </div>
       </el-header>
-      <el-main>
-        <div>
-          <keep-alive>
-            <router-view />
-          </keep-alive>
-        </div>
+      <el-main class="main-wrapper">
+        <keep-alive>
+          <router-view />
+        </keep-alive>
       </el-main>
     </el-container>
   </el-container>
 </template>
 
 <script>
+import { routes } from "@/router";
 import NavMenu from "@/components/NavMenu";
 export default {
   name: "Layout",
@@ -44,41 +43,7 @@ export default {
   },
   data: () => ({
     collapse: true,
-    menu: [
-      {
-        icon: "edit",
-        title: "导航一",
-        path: "/",
-        children: [
-          {
-            icon: "edit",
-            title: "导航二",
-            path: "a"
-          },
-          {
-            icon: "edit",
-            title: "导航三",
-            path: "b"
-          }
-        ]
-      },
-      {
-        icon: "edit",
-        title: "导航二",
-        path: "/c"
-      },
-      {
-        icon: "edit",
-        title: "导航三",
-        path: "/d",
-        disabled: true
-      },
-      {
-        icon: "edit",
-        title: "导航四",
-        path: "/e"
-      }
-    ]
+    menu: routes
   }),
   methods: {
     handleOpen() {},
@@ -149,6 +114,10 @@ $HeaderHeight: 50px;
         }
       }
     }
+  }
+
+  .main-wrapper {
+    padding: unset;
   }
 }
 </style>
