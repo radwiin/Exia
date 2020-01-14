@@ -23,13 +23,13 @@ const routes = [
   {
     path: "/about",
     component: Layout,
-    meta: { title: "About", icon: "info" },
+    meta: { title: "About", icon: "info-circle" },
     children: [
       {
         path: "index",
         component: () => import("@/views/about/index"),
         name: "about",
-        meta: { title: "About", icon: "info" }
+        meta: { title: "About", icon: "info-circle" }
       }
     ]
   }

@@ -6,13 +6,13 @@ export default {
       type: Boolean,
       required: true
     },
-    backgroundColor: {
-      type: String
-    },
     textColor: {
       type: String
     },
     activeTextColor: {
+      type: String
+    },
+    backgroundColor: {
       type: String
     },
     menu: {
@@ -26,9 +26,9 @@ export default {
       {
         props: {
           collapse: this.collapse,
-          backgroundColor: this.backgroundColor,
           textColor: this.textColor,
-          activeTextColor: this.activeTextColor
+          activeTextColor: this.activeTextColor,
+          backgroundColor: this.backgroundColor
         },
         on: {
           open: () => this.$emit("open"),
@@ -39,8 +39,17 @@ export default {
     );
   },
   methods: {
+    visibleRule(item) {
+      return !item.hidden;
+    },
     menuItem(h, item) {
-      if (!item.children) {
+      const isLeaf = !item.children;
+      const visibleChildren = isLeaf
+        ? []
+        : item.children.filter(this.visibleRule);
+      const hasVisibleChildren = visibleChildren.length > 0;
+      const isOnlyOneVisibleChildren = visibleChildren.length === 1;
+      if (isLeaf) {
         return h(
           "el-menu-item",
           {
