@@ -27,15 +27,15 @@ const routes = [
     ]
   },
   {
-    path: "/about",
+    path: "/jexl",
     component: Layout,
-    meta: { title: "About", icon: "info-circle" },
+    meta: { title: "Jexl", icon: "baidu", alwaysShow: true },
     children: [
       {
-        path: "index",
-        component: () => import("@/views/about/index"),
-        name: "about",
-        meta: { title: "About", icon: "info-circle" }
+        path: "operate",
+        component: () => import("@/views/jexl/operate"),
+        name: "operate",
+        meta: { title: "Operate", icon: "locate" }
       }
     ]
   },
@@ -68,6 +68,19 @@ const routes = [
         component: () => import("@/views/bpmn/viewer"),
         name: "viewer",
         meta: { title: "Viewer", icon: "show" }
+      }
+    ]
+  },
+  {
+    path: "/about",
+    component: Layout,
+    meta: { title: "About", icon: "info-circle" },
+    children: [
+      {
+        path: "index",
+        component: () => import("@/views/about/index"),
+        name: "about",
+        meta: { title: "About", icon: "info-circle" }
       }
     ]
   },
