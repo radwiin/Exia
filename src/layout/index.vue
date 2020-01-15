@@ -12,6 +12,7 @@
         background-color="#545c64"
         text-color="#fff"
         active-text-color="#ffd04b"
+        :default-active="activeMenu"
         :menu="menu"
       />
     </el-aside>
@@ -45,6 +46,13 @@ export default {
     collapse: true,
     menu: routes
   }),
+  computed: {
+    activeMenu() {
+      const route = this.$route;
+      const { path } = route;
+      return path;
+    }
+  },
   methods: {
     handleOpen() {},
     handleClose() {}
@@ -68,10 +76,13 @@ $HeaderHeight: 50px;
       height: $HeaderHeight;
       background: #545c64;
       border-right: solid 1px #e6e6e6;
+      display: flex;
+      align-items: center;
+      justify-content: center;
 
       .logo {
-        height: 100%;
-        padding: 16px;
+        width: 24px;
+        height: 24px;
       }
     }
 

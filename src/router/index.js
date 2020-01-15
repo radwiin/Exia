@@ -7,6 +7,12 @@ Vue.use(VueRouter);
 
 const routes = [
   {
+    path: "/login",
+    component: () => import("@/views/login"),
+    name: "login",
+    meta: { hidden: true }
+  },
+  {
     path: "/",
     component: Layout,
     redirect: "/dashboard",
@@ -23,7 +29,7 @@ const routes = [
   {
     path: "/about",
     component: Layout,
-    meta: { title: "About", icon: "info-circle" },
+    meta: { title: "About", icon: "info-circle", alwaysShow: true },
     children: [
       {
         path: "index",
