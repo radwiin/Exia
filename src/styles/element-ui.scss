@@ -1,0 +1,33 @@
+.el-menu>.el-submenu,
+.el-menu>.el-menu-item,
+.el-menu--popup>.el-menu-item-group .el-menu-item {
+  .svg-icon {
+    margin-right: 5px;
+    width: 24px;
+    height: 16px;
+    text-align: center;
+    vertical-align: middle;
+  }
+}
+
+.el-menu--collapse>.el-menu-item,
+.el-menu--collapse>.el-submenu>.el-submenu__title {
+  .svg-icon {
+    margin: 0;
+    vertical-align: middle;
+    width: 24px;
+    text-align: center;
+  }
+}
+
+.el-submenu__title .svg-icon {
+  color: #909399;
+}
+
+.el-menu-item .svg-icon {
+  color: #909399;
+}
+
+.el-menu-item.is-active .svg-icon {
+  color: inherit;
+}

@@ -38,6 +38,38 @@ const routes = [
         meta: { title: "About", icon: "info-circle" }
       }
     ]
+  },
+  {
+    path: "/bpmn",
+    component: Layout,
+    meta: { title: "Bpmn", icon: "bpmn-io", alwaysShow: true },
+    children: [
+      {
+        path: "modeler",
+        component: () => import("@/views/bpmn/modeler"),
+        name: "modeler",
+        meta: { title: "Modeler", icon: "build" }
+      },
+      {
+        path: "viewer",
+        component: () => import("@/views/bpmn/viewer"),
+        name: "viewer",
+        meta: { title: "Viewer", icon: "show" }
+      }
+    ]
+  },
+  {
+    path: "/system",
+    component: Layout,
+    meta: { title: "System", icon: "setting", alwaysShow: true },
+    children: [
+      {
+        path: "tenant",
+        component: () => import("@/views/system/tenant"),
+        name: "tenant",
+        meta: { title: "Tenant", icon: "key" }
+      }
+    ]
   }
 ];
 
