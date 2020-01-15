@@ -61,7 +61,7 @@ export default {
 </script>
 
 <style lang="scss" scoped>
-$MenuWidth: 200px;
+$MenuWidth: 241px;
 $HeaderHeight: 50px;
 
 .app-wrapper {
@@ -90,7 +90,7 @@ $HeaderHeight: 50px;
       height: calc(100% - #{$HeaderHeight});
 
       &:not(.el-menu--collapse) {
-        width: 200px;
+        width: $MenuWidth;
       }
     }
   }

@@ -29,13 +29,26 @@ const routes = [
   {
     path: "/about",
     component: Layout,
-    meta: { title: "About", icon: "info-circle", alwaysShow: true },
+    meta: { title: "About", icon: "info-circle" },
     children: [
       {
         path: "index",
         component: () => import("@/views/about/index"),
         name: "about",
         meta: { title: "About", icon: "info-circle" }
+      }
+    ]
+  },
+  {
+    path: "/baidu",
+    component: Layout,
+    meta: { title: "Baidu", icon: "baidu", alwaysShow: true },
+    children: [
+      {
+        path: "coordinate-select",
+        component: () => import("@/views/baidu/coordinate-select"),
+        name: "coordinate-select",
+        meta: { title: "CoordinateSelect", icon: "locate" }
       }
     ]
   },
