@@ -29,13 +29,13 @@ const routes = [
   {
     path: "/jexl",
     component: Layout,
-    meta: { title: "Jexl", icon: "baidu", alwaysShow: true },
+    meta: { title: "Jexl", icon: "calculator", alwaysShow: true },
     children: [
       {
         path: "operate",
         component: () => import("@/views/jexl/operate"),
         name: "operate",
-        meta: { title: "Operate", icon: "locate" }
+        meta: { title: "Operate", icon: "division" }
       }
     ]
   },
@@ -72,19 +72,6 @@ const routes = [
     ]
   },
   {
-    path: "/about",
-    component: Layout,
-    meta: { title: "About", icon: "info-circle" },
-    children: [
-      {
-        path: "index",
-        component: () => import("@/views/about/index"),
-        name: "about",
-        meta: { title: "About", icon: "info-circle" }
-      }
-    ]
-  },
-  {
     path: "/system",
     component: Layout,
     meta: { title: "System", icon: "setting", alwaysShow: true },
@@ -94,6 +81,19 @@ const routes = [
         component: () => import("@/views/system/tenant"),
         name: "tenant",
         meta: { title: "Tenant", icon: "key" }
+      }
+    ]
+  },
+  {
+    path: "/about",
+    component: Layout,
+    meta: { title: "About", icon: "info-circle" },
+    children: [
+      {
+        path: "index",
+        component: () => import("@/views/about/index"),
+        name: "about",
+        meta: { title: "About", icon: "info-circle" }
       }
     ]
   }
