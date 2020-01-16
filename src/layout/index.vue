@@ -24,27 +24,40 @@
             :class-name="`hamburger ${collapse ? '' : 'is-active'}`"
           />
         </div>
+        <div class="right-menu-wrapper">
+          <el-tooltip content="Setting" placement="bottom">
+            <div class="menu-item" @click="handleSettingClick">
+              <svg-icon icon-class="setting" />
+            </div>
+          </el-tooltip>
+        </div>
       </el-header>
       <el-main class="main-wrapper">
-        <keep-alive>
-          <router-view />
-        </keep-alive>
+        <transition name="fade-transform" mode="out-in">
+          <keep-alive>
+            <router-view />
+          </keep-alive>
+        </transition>
       </el-main>
     </el-container>
+    <setting-drawer :visible.sync="settingDrawer" />
   </el-container>
 </template>
 
 <script>
 import { routes } from "@/router";
 import NavMenu from "@/components/NavMenu";
+import settingDrawer from "./components/SettingDrawer";
 export default {
   name: "Layout",
   components: {
-    NavMenu
+    NavMenu,
+    settingDrawer
   },
   data: () => ({
     collapse: true,
-    menu: routes
+    menu: routes,
+    settingDrawer: false
   }),
   computed: {
     activeMenu() {
@@ -55,7 +68,10 @@ export default {
   },
   methods: {
     handleOpen() {},
-    handleClose() {}
+    handleClose() {},
+    handleSettingClick() {
+      this.settingDrawer = true;
+    }
   }
 };
 </script>
@@ -100,10 +116,12 @@ $HeaderHeight: 50px;
     padding: 0px;
     display: flex;
     align-items: center;
+    justify-content: space-between;
 
     .hamburger-wrapper {
       width: $HeaderHeight;
       height: 100%;
+      flex-shrink: 0;
       display: flex;
       align-items: center;
       justify-content: center;
@@ -122,6 +140,26 @@ $HeaderHeight: 50px;
 
         &.is-active {
           transform: rotate(180deg);
+        }
+      }
+    }
+
+    .right-menu-wrapper {
+      height: 100%;
+      flex-shrink: 0;
+
+      .menu-item {
+        height: 100%;
+        margin-left: 10px;
+        margin-right: 10px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        cursor: pointer;
+
+        ::v-deep .svg-icon {
+          width: 16px;
+          height: 16px;
         }
       }
     }

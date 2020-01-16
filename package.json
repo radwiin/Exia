@@ -9,6 +9,7 @@
     "deploy": "sh scripts/deploy.sh"
   },
   "dependencies": {
+    "@antv/g2": "^3.5.11",
     "bpmn-js": "^6.1.2",
     "bpmn-js-properties-panel": "^0.33.1",
     "camunda-bpmn-moddle": "^4.3.0",
