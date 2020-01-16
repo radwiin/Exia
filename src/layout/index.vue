@@ -9,9 +9,9 @@
         :collapse="collapse"
         @open="handleOpen"
         @close="handleClose"
-        background-color="#545c64"
-        text-color="#fff"
-        active-text-color="#ffd04b"
+        background-color="#3d4ea8"
+        text-color="#909399"
+        active-text-color="#ffffff"
         :default-active="activeMenu"
         :menu="menu"
       />
@@ -90,7 +90,7 @@ $HeaderHeight: 50px;
 
     .logo-wrapper {
       height: $HeaderHeight;
-      background: #545c64;
+      background: #3d4ea8;
       border-right: solid 1px #e6e6e6;
       display: flex;
       align-items: center;
