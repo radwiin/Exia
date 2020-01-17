@@ -35,7 +35,10 @@
               style="display:flex; align-items:center;justify-content:space-between;"
             >
               <span style="font-size:20px;">visitor</span>
-              <img class="avator" src="@/assets/avator.jpg" alt="avator" />
+              <el-avatar
+                size="small"
+                :src="require('@/assets/avator.jpg')"
+              ></el-avatar>
             </div>
             <div slot="reference" class="menu-item" @click="handleUserClick">
               <span>visitor</span>
@@ -97,7 +100,7 @@ $HeaderHeight: 50px;
 
   .aside-wrapper {
     width: unset !important;
-    flex-shrink: 1;
+    flex-shrink: 0;
     flex-grow: 0;
 
     .logo-wrapper {
@@ -184,11 +187,5 @@ $HeaderHeight: 50px;
   .main-wrapper {
     padding: unset;
   }
-}
-
-.avator {
-  width: 32px;
-  height: 32px;
-  border-radius: 100%;
 }
 </style>

@@ -11,7 +11,8 @@ export default {
     const chart = new G2.Chart({
       container: "container",
       forceFit: true,
-      height: 500
+      height: 500,
+      padding: "auto"
     });
     chart.source(data, {
       time: {
@@ -57,7 +58,7 @@ export default {
         type: "记录2"
       });
       chart.changeData(data);
-    }, 1000);
+    }, 2000);
   }
 };
 </script>
