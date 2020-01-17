@@ -1,6 +1,6 @@
 <template>
   <div class="page-container">
-    <div style="margin:30px;">
+    <div style="padding:30px;">
       <span style="font-size:32px;vertical-align:middle">EXIA</span>
       <el-tag
         color="#36c2cf"
@@ -16,27 +16,40 @@
     </div>
     <el-row :gutter="20" style="margin-left:20px;margin-right:20px;">
       <el-col v-bind="colSpan" v-for="(item, index) in cardList" :key="index">
-        <div class="card" :style="{ background: item.background }">
-          <div class="card-left-part">
-            <div class="card-value">{{ item.value }}</div>
-            <div class="card-title">{{ item.title }}</div>
-            <div class="card-description">{{ item.description }}</div>
+        <el-card
+          shadow="hover"
+          style="margin: 10px 0; cursor: pointer;"
+          :body-style="{ padding: '0px' }"
+        >
+          <div class="card" :style="{ background: item.background }">
+            <div class="card-left-part">
+              <div class="card-value">{{ item.value }}</div>
+              <div class="card-title">{{ item.title }}</div>
+              <div class="card-description">{{ item.description }}</div>
+            </div>
+            <div class="card-right-part">
+              <svg-icon :icon-class="item.icon" class-name="card-icon" />
+            </div>
           </div>
-          <div class="card-right-part">
-            <svg-icon :icon-class="item.icon" class-name="card-icon" />
-          </div>
-        </div>
+        </el-card>
       </el-col>
     </el-row>
+    <div style="height:500px;width:100%;padding-right:32px;">
+      <line-chart />
+    </div>
   </div>
 </template>
 
 <script>
+import LineChart from "./components/LineChart";
 export default {
   name: "dashboard",
+  components: {
+    LineChart
+  },
   data: () => ({
     colSpan: {
-      xs: 12,
+      xs: 24,
       sm: 12,
       md: 12,
       lg: 6,
@@ -85,7 +98,6 @@ export default {
   display: flex;
   padding-left: 30px;
   padding-right: 30px;
-  margin: 10px 0;
 
   &-left-part {
     flex-grow: 1;

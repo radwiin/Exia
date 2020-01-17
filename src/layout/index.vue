@@ -9,8 +9,8 @@
         :collapse="collapse"
         @open="handleOpen"
         @close="handleClose"
-        background-color="#3d4ea8"
-        text-color="#909399"
+        background-color="#253ca4"
+        text-color="#8492cf"
         active-text-color="#ffffff"
         :default-active="activeMenu"
         :menu="menu"
@@ -30,6 +30,17 @@
               <svg-icon icon-class="setting" />
             </div>
           </el-tooltip>
+          <el-popover placement="bottom" width="auto" trigger="hover">
+            <div
+              style="display:flex; align-items:center;justify-content:space-between;"
+            >
+              <span style="font-size:20px;">visitor</span>
+              <img class="avator" src="@/assets/avator.jpg" alt="avator" />
+            </div>
+            <div slot="reference" class="menu-item" @click="handleUserClick">
+              <span>visitor</span>
+            </div>
+          </el-popover>
         </div>
       </el-header>
       <el-main class="main-wrapper">
@@ -71,7 +82,8 @@ export default {
     handleClose() {},
     handleSettingClick() {
       this.settingDrawer = true;
-    }
+    },
+    handleUserClick() {}
   }
 };
 </script>
@@ -90,7 +102,7 @@ $HeaderHeight: 50px;
 
     .logo-wrapper {
       height: $HeaderHeight;
-      background: #3d4ea8;
+      background: #253ca4;
       border-right: solid 1px #e6e6e6;
       display: flex;
       align-items: center;
@@ -147,6 +159,10 @@ $HeaderHeight: 50px;
     .right-menu-wrapper {
       height: 100%;
       flex-shrink: 0;
+      padding-left: 10px;
+      padding-right: 10px;
+      display: flex;
+      align-items: center;
 
       .menu-item {
         height: 100%;
@@ -157,7 +173,7 @@ $HeaderHeight: 50px;
         justify-content: center;
         cursor: pointer;
 
-        ::v-deep .svg-icon {
+        .setting {
           width: 16px;
           height: 16px;
         }
@@ -168,5 +184,11 @@ $HeaderHeight: 50px;
   .main-wrapper {
     padding: unset;
   }
+}
+
+.avator {
+  width: 32px;
+  height: 32px;
+  border-radius: 100%;
 }
 </style>
