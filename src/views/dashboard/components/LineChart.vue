@@ -34,7 +34,7 @@ export default {
     chart
       .line()
       .position("time*temperature")
-      .color("type", ["#ff7f0e", "#2ca02c"])
+      .color("type", ["#fe9f21", "#36c2cf"])
       .shape("smooth")
       .size(2);
     chart.render();
@@ -43,7 +43,7 @@ export default {
       const time = now.getTime();
       const temperature1 = ~~(Math.random() * 5) + 22;
       const temperature2 = ~~(Math.random() * 7) + 17;
-      if (data.length >= 200) {
+      if (data.length >= 20) {
         data.shift();
         data.shift();
       }

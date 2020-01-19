@@ -30,18 +30,36 @@
               <svg-icon icon-class="setting" />
             </div>
           </el-tooltip>
-          <el-popover placement="bottom" width="auto" trigger="hover">
-            <div
-              style="display:flex; align-items:center;justify-content:space-between;"
-            >
-              <span style="font-size:20px;">visitor</span>
-              <el-avatar
-                size="small"
-                :src="require('@/assets/avator.jpg')"
-              ></el-avatar>
-            </div>
+          <el-popover
+            placement="bottom"
+            width="280"
+            trigger="hover"
+            popper-class="popper-wrapper"
+          >
             <div slot="reference" class="menu-item" @click="handleUserClick">
               <span>visitor</span>
+            </div>
+            <div class="user-menu">
+              <div class="user-info-item">
+                <el-avatar
+                  class="user-avatar"
+                  shape="square"
+                  :size="50"
+                  :src="require('@/assets/avator.jpg')"
+                />
+                <span class="user-name">visitor</span>
+              </div>
+              <div class="user-menu-item">
+                <svg-icon icon-class="user" class-name="user-menu-item-icon" />
+                <span class="user-menu-item-label">Self</span>
+              </div>
+              <div class="user-menu-item">
+                <svg-icon
+                  icon-class="logout"
+                  class-name="user-menu-item-icon"
+                />
+                <span class="user-menu-item-label">Exit</span>
+              </div>
             </div>
           </el-popover>
         </div>
@@ -145,7 +163,7 @@ $HeaderHeight: 50px;
       -webkit-tap-highlight-color: transparent;
 
       &:hover {
-        background: rgba(0, 0, 0, 0.025);
+        background: rgba(0, 0, 0, 0.05);
       }
 
       .hamburger {
@@ -187,5 +205,62 @@ $HeaderHeight: 50px;
   .main-wrapper {
     padding: unset;
   }
+}
+
+.user-menu {
+  padding: 4px 0;
+
+  .user-info-item {
+    height: 70px;
+    padding: 4px 8px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    cursor: pointer;
+    transition: background 0.3s;
+    -webkit-tap-highlight-color: transparent;
+
+    &:hover {
+      background: rgba(0, 0, 0, 0.05);
+    }
+
+    .user-avatar {
+    }
+
+    .user-name {
+      font-size: 20px;
+      margin-right: 16px;
+      color: #000000;
+    }
+  }
+
+  .user-menu-item {
+    height: 42px;
+    padding: 8px 16px;
+    cursor: pointer;
+    transition: background 0.3s;
+    -webkit-tap-highlight-color: transparent;
+
+    &:hover {
+      background: rgba(0, 0, 0, 0.05);
+    }
+
+    &-icon {
+      width: 24px;
+      height: 24px;
+      vertical-align: middle;
+    }
+
+    &-label {
+      margin-left: 16px;
+      vertical-align: middle;
+    }
+  }
+}
+</style>
+
+<style lang="scss">
+.popper-wrapper {
+  padding: 0px;
 }
 </style>
