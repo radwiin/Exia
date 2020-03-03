@@ -81,6 +81,24 @@ const routes = [
         component: () => import("@/views/system/tenant"),
         name: "tenant",
         meta: { title: "Tenant", icon: "key" }
+      },
+      {
+        path: "dept",
+        component: () => import("@/views/system/dept"),
+        name: "dept",
+        meta: { title: "Dept", icon: "key" }
+      },
+      {
+        path: "user",
+        component: () => import("@/views/system/user"),
+        name: "user",
+        meta: { title: "User", icon: "key" }
+      },
+      {
+        path: "menu",
+        component: () => import("@/views/system/menu"),
+        name: "menu",
+        meta: { title: "Menu", icon: "key" }
       }
     ]
   },

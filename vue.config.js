@@ -9,6 +9,9 @@ function resolve(dir) {
 module.exports = {
   publicPath: "./", // use ./ relative
   chainWebpack(config) {
+    // set mock
+    const entry = config.entry("app");
+    entry.add("@/mock").end();
     // set svg-sprite-loader
     config.module
       .rule("svg")

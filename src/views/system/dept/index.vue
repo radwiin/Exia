@@ -7,14 +7,14 @@
       label-width="auto"
       inline
     >
-      <el-form-item label="租户ID" prop="id">
-        <el-input v-model="queryForm.id" />
+      <el-form-item label="机构名称" prop="deptName">
+        <el-input v-model="queryForm.deptName" placeholder="机构名称" />
       </el-form-item>
-      <el-form-item label="租户名称" prop="name">
-        <el-input v-model="queryForm.name" />
+      <el-form-item label="所属租户" prop="tenantId">
+        <el-input v-model="queryForm.name" placeholder="所属租户" />
       </el-form-item>
-      <el-form-item label="联系人" prop="contact">
-        <el-input v-model="queryForm.contact" />
+      <el-form-item label="机构全称" prop="fullName">
+        <el-input v-model="queryForm.contact" placeholder="机构全称" />
       </el-form-item>
       <el-form-item>
         <el-button
@@ -31,39 +31,48 @@
         >新建</el-button
       >
     </div>
-    <el-table class="data-table" :data="tableData" border>
-      <el-table-column fixed type="index" label="#" width="50" align="center" />
-      <el-table-column prop="id" label="租户ID" />
-      <el-table-column prop="name" label="租户名称" />
-      <el-table-column prop="contact" label="联系人" />
-      <el-table-column prop="phone" label="联系电话" />
-      <el-table-column prop="quota" label="账号额度" />
-      <el-table-column prop="expire" label="过期时间" />
-      <el-table-column prop="domain" label="绑定域名" />
-      <el-table-column fixed="right" label="操作">
-        <template slot-scope="scope">
-          <el-button type="text" @click="handleViewClick(scope)">
-            查看
-          </el-button>
-          <el-button type="text" @click="handleEditClick(scope)">
-            编辑
-          </el-button>
-          <el-popconfirm
-            title="确定删除?"
-            @onConfirm="handleDeleteConfirm(scope)"
-          >
-            <el-button slot="reference" type="text">删除</el-button>
-          </el-popconfirm>
-        </template>
-      </el-table-column>
-    </el-table>
-    <el-pagination
-      class="data-pagination"
-      v-bind="paginationBind"
-      @size-change="handleSizeChange"
-      @current-change="handleCurrentChange"
-    >
-    </el-pagination>
+    <div class="table-container">
+      <el-table
+        :data="tableData"
+        border
+        row-key="id"
+        height="100%"
+        :tree-props="{ children: 'children' }"
+      >
+        <el-table-column
+          fixed
+          type="index"
+          label="#"
+          width="50"
+          align="center"
+        />
+        <el-table-column prop="deptName" label="机构名称" />
+        <el-table-column prop="tenantId" label="所属租户" />
+        <el-table-column prop="fullName" label="机构全称" />
+        <el-table-column prop="deptCategoryName" label="机构类型" />
+        <el-table-column prop="sort" label="排序" width="50" align="center" />
+        <el-table-column fixed="right" label="操作">
+          <template slot-scope="scope">
+            <el-button type="text" @click="handleViewClick(scope)">
+              查看
+            </el-button>
+            <el-button type="text" @click="handleEditClick(scope)">
+              编辑
+            </el-button>
+            <el-popconfirm
+              title="确定删除?"
+              @onConfirm="handleDeleteConfirm(scope)"
+            >
+              <el-button slot="reference" type="text">删除</el-button>
+            </el-popconfirm>
+            <el-button type="text" @click="handleEditClick(scope)">
+              新增子项
+            </el-button>
+          </template>
+        </el-table-column>
+      </el-table>
+    </div>
+
     <el-dialog
       :visible.sync="dialogVisible"
       :title="dialogCategory"
@@ -109,14 +118,14 @@
 </template>
 
 <script>
-import { query } from "@/api/system/tenant";
+import { query } from "@/api/system/dept";
 const DIALOG_CATEGORY = {
   CREATE: "新建",
   VIEW: "查看",
   EDIT: "编辑"
 };
 export default {
-  name: "tenant",
+  name: "dept",
   data() {
     return {
       queryForm: {
@@ -125,13 +134,6 @@ export default {
         contact: ""
       },
       tableData: [],
-      paginationBind: {
-        currentPage: 1,
-        pageSizes: [100, 200, 300, 400],
-        pageSize: 100,
-        layout: "total, sizes, prev, pager, next, jumper",
-        total: 400
-      },
 
       DIALOG_CATEGORY, // for html
       dialogVisible: false,
@@ -153,8 +155,6 @@ export default {
     });
   },
   methods: {
-    handleSizeChange() {},
-    handleCurrentChange() {},
     handleQueryClick() {
       query().then(rsp => {
         rsp;
@@ -199,6 +199,10 @@ export default {
   margin-left: 10px;
 }
 
+span + .el-button {
+  margin-left: 10px;
+}
+
 .page-container {
   padding: 20px;
   display: flex;
@@ -213,15 +217,9 @@ export default {
     padding-bottom: 10px;
   }
 
-  .data-table {
+  .table-container {
     min-height: 0px;
     flex-grow: 1;
-  }
-
-  .data-pagination {
-    flex-shrink: 0;
-    align-self: flex-end;
-    padding-top: 10px;
   }
 }
 </style>

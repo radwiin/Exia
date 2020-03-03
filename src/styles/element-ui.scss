@@ -31,3 +31,16 @@
 .el-menu-item.is-active .svg-icon {
   color: inherit;
 }
+
+@media screen and (max-width: 992px) {
+  .el-dialog {
+    width: 98% !important;
+  }
+}
+
+.el-input.is-disabled .el-input__inner {
+  background-color: unset;
+  border-color: #E4E7ED;
+  color: unset;
+  cursor: not-allowed;
+}
