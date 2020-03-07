@@ -27,3 +27,27 @@ Mock.mock("/user/query", "post", options => {
     }
   };
 });
+
+Mock.mock("/user/add", "post", () => {
+  return {
+    code: 200,
+    success: true,
+    msg: "操作成功"
+  };
+});
+
+Mock.mock("/user/update", "post", () => {
+  return {
+    code: 200,
+    success: true,
+    msg: "操作成功"
+  };
+});
+
+Mock.mock("/user/remove", "post", () => {
+  return {
+    code: 200,
+    success: true,
+    msg: "操作成功"
+  };
+});

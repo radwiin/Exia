@@ -29,3 +29,27 @@ Mock.mock("/role/query", "post", () => {
     data
   };
 });
+
+Mock.mock("/role/add", "post", () => {
+  return {
+    code: 200,
+    success: true,
+    msg: "操作成功"
+  };
+});
+
+Mock.mock("/role/update", "post", () => {
+  return {
+    code: 200,
+    success: true,
+    msg: "操作成功"
+  };
+});
+
+Mock.mock("/role/remove", "post", () => {
+  return {
+    code: 200,
+    success: true,
+    msg: "操作成功"
+  };
+});

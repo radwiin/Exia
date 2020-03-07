@@ -6,3 +6,14 @@ export function query() {
     method: "post"
   });
 }
+
+export function setAuthority() {
+  return request({
+    url: "/role/setAuthority",
+    method: "post",
+    data: {
+      menuAuthority: [],
+      apiAuthority: []
+    }
+  });
+}

@@ -25,3 +25,27 @@ Mock.mock("/tenant/query", "post", options => {
     }
   };
 });
+
+Mock.mock("/tenant/add", "post", () => {
+  return {
+    code: 200,
+    success: true,
+    msg: "操作成功"
+  };
+});
+
+Mock.mock("/tenant/update", "post", () => {
+  return {
+    code: 200,
+    success: true,
+    msg: "操作成功"
+  };
+});
+
+Mock.mock("/tenant/remove", "post", () => {
+  return {
+    code: 200,
+    success: true,
+    msg: "操作成功"
+  };
+});

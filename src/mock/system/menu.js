@@ -71,3 +71,27 @@ Mock.mock("/menu/query", "post", () => {
     data: records
   };
 });
+
+Mock.mock("/menu/add", "post", () => {
+  return {
+    code: 200,
+    success: true,
+    msg: "操作成功"
+  };
+});
+
+Mock.mock("/menu/update", "post", () => {
+  return {
+    code: 200,
+    success: true,
+    msg: "操作成功"
+  };
+});
+
+Mock.mock("/menu/remove", "post", () => {
+  return {
+    code: 200,
+    success: true,
+    msg: "操作成功"
+  };
+});
