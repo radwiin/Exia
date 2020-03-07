@@ -4,6 +4,9 @@ export function query() {
   return request({
     url: "/tenant/query",
     method: "post",
-    data: {}
+    data: {
+      currentPage: 1,
+      pageSize: 10
+    }
   });
 }

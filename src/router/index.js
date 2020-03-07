@@ -26,12 +26,12 @@ Vue.use(VueRouter);
   }
  */
 
-const routes = [
+export const constantRoutes = [
   {
     path: "/login",
     component: () => import("@/views/login"),
     name: "login",
-    meta: { hidden: true }
+    meta: { title: "登录", hidden: true }
   },
   {
     path: "/",
@@ -87,52 +87,6 @@ const routes = [
     ]
   },
   {
-    path: "/auth",
-    component: Layout,
-    redirect: "/auth/role",
-    meta: { title: "权限管理", icon: "setting", alwaysShow: true },
-    children: [
-      {
-        path: "role",
-        component: () => import("@/views/auth/role"),
-        name: "role",
-        meta: { title: "角色管理", icon: "key" }
-      }
-    ]
-  },
-  {
-    path: "/system",
-    component: Layout,
-    redirect: "/system/tenant",
-    meta: { title: "系统管理", icon: "setting", alwaysShow: true },
-    children: [
-      {
-        path: "tenant",
-        component: () => import("@/views/system/tenant"),
-        name: "tenant",
-        meta: { title: "租户管理", icon: "key" }
-      },
-      // {
-      //   path: "dept",
-      //   component: () => import("@/views/system/dept"),
-      //   name: "dept",
-      //   meta: { title: "机构管理", icon: "key" }
-      // },
-      {
-        path: "user",
-        component: () => import("@/views/system/user"),
-        name: "user",
-        meta: { title: "用户管理", icon: "key" }
-      },
-      {
-        path: "menu",
-        component: () => import("@/views/system/menu"),
-        name: "menu",
-        meta: { title: "菜单管理", icon: "key" }
-      }
-    ]
-  },
-  {
     path: "/about",
     component: Layout,
     redirect: "/about/index",
@@ -147,10 +101,19 @@ const routes = [
   }
 ];
 
-const router = new VueRouter({
-  routes
-});
+const createRouter = () =>
+  new VueRouter({
+    // mode: 'history', // require service support
+    scrollBehavior: () => ({ y: 0 }),
+    routes: constantRoutes
+  });
 
-export { routes };
+const router = createRouter();
+
+// Detail see: https://github.com/vuejs/vue-router/issues/1234#issuecomment-357941465
+export function resetRouter() {
+  const newRouter = createRouter();
+  router.matcher = newRouter.matcher; // reset router
+}
 
 export default router;

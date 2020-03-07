@@ -11,17 +11,17 @@ const records = [
   }
 ];
 
-Mock.mock("/tenant/query", "post", () => {
+Mock.mock("/tenant/query", "post", options => {
+  console.info(options);
   return {
     code: 200,
     success: true,
     msg: "操作成功",
     data: {
       records,
-      current: 1,
-      size: 10,
-      total: 1,
-      pages: 1
+      currentPage: 1,
+      pageSize: 10,
+      total: 1
     }
   };
 });

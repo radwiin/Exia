@@ -13,7 +13,7 @@
         text-color="#8492cf"
         active-text-color="#ffffff"
         :default-active="activeMenu"
-        :menu="menu"
+        :menu="routes"
       />
     </el-aside>
     <el-container>
@@ -78,7 +78,7 @@
 </template>
 
 <script>
-import { routes } from "@/router";
+import { mapGetters } from "vuex";
 import NavMenu from "@/components/NavMenu";
 import settingDrawer from "./components/SettingDrawer";
 import Breadcrumb from "@/components/Breadcrumb";
@@ -92,10 +92,10 @@ export default {
   },
   data: () => ({
     collapse: true,
-    menu: routes,
     settingDrawer: false
   }),
   computed: {
+    ...mapGetters(["routes"]),
     activeMenu() {
       const route = this.$route;
       const { path } = route;

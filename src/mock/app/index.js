@@ -1,6 +1,6 @@
 import Mock from "mockjs";
 
-const records = [
+const menus = [
   {
     id: "1",
     sort: 1,
@@ -63,11 +63,27 @@ const records = [
   }
 ];
 
-Mock.mock("/menu/query", "post", () => {
+Mock.mock("/app/signIn", "post", options => {
+  console.info(options);
   return {
     code: 200,
     success: true,
     msg: "操作成功",
-    data: records
+    data: {
+      token: "EXIA_TOKEN_0"
+    }
+  };
+});
+
+Mock.mock("/app/userInfo", "post", () => {
+  return {
+    code: 200,
+    success: true,
+    msg: "操作成功",
+    data: {
+      account: "root",
+      roles: ["root-admin"],
+      menus
+    }
   };
 });

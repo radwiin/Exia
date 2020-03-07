@@ -28,7 +28,7 @@
     </el-form>
     <div class="function-container">
       <el-button type="primary" icon="el-icon-plus" @click="handleCreateClick"
-        >新建</el-button
+        >新 增</el-button
       >
     </div>
     <div class="table-container">
@@ -110,9 +110,9 @@
 <script>
 import { query } from "@/api/system/tenant";
 const DIALOG_CATEGORY = {
-  CREATE: "新建",
-  VIEW: "查看",
-  EDIT: "编辑"
+  CREATE: "新 增",
+  VIEW: "查 看",
+  EDIT: "编 辑"
 };
 export default {
   name: "tenant",
@@ -126,8 +126,8 @@ export default {
       tableData: [],
       paginationBind: {
         currentPage: 1,
-        pageSize: 100,
-        total: 400,
+        pageSize: 10,
+        total: 1,
         pageSizes: [10, 20, 50, 100],
         layout: "total, sizes, prev, pager, next, jumper"
       },
@@ -147,8 +147,8 @@ export default {
   created() {
     query().then(rsp => {
       this.tableData = rsp.data.records;
-      this.paginationBind.currentPage = rsp.data.current;
-      this.paginationBind.pageSize = rsp.data.size;
+      this.paginationBind.currentPage = rsp.data.currentPage;
+      this.paginationBind.pageSize = rsp.data.pageSize;
       this.paginationBind.total = rsp.data.total;
     });
   },

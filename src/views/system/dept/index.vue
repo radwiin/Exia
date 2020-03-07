@@ -28,7 +28,7 @@
     </el-form>
     <div class="function-container">
       <el-button type="primary" icon="el-icon-plus" @click="handleCreateClick"
-        >新建</el-button
+        >新 增</el-button
       >
     </div>
     <div class="table-container">
@@ -120,9 +120,9 @@
 <script>
 import { query } from "@/api/system/dept";
 const DIALOG_CATEGORY = {
-  CREATE: "新建",
-  VIEW: "查看",
-  EDIT: "编辑"
+  CREATE: "新 增",
+  VIEW: "查 看",
+  EDIT: "编 辑"
 };
 export default {
   name: "dept",

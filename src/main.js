@@ -10,6 +10,8 @@ import store from "./store";
 
 import "./icons";
 
+import "@/permission";
+
 Vue.config.productionTip = false;
 
 Vue.use(ElementUI, { size: "small" });

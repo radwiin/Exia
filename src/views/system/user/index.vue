@@ -117,9 +117,9 @@
 <script>
 import { query } from "@/api/system/user";
 const DIALOG_CATEGORY = {
-  CREATE: "新建",
-  VIEW: "查看",
-  EDIT: "编辑"
+  CREATE: "新 增",
+  VIEW: "查 看",
+  EDIT: "编 辑"
 };
 export default {
   name: "user",
@@ -155,8 +155,8 @@ export default {
   created() {
     query().then(rsp => {
       this.tableData = rsp.data.records;
-      this.paginationBind.currentPage = rsp.data.current;
-      this.paginationBind.pageSize = rsp.data.size;
+      this.paginationBind.currentPage = rsp.data.currentPage;
+      this.paginationBind.pageSize = rsp.data.pageSize;
       this.paginationBind.total = rsp.data.total;
     });
   },

@@ -4,7 +4,10 @@
 
 <script>
 export default {
-  name: "login"
+  name: "login",
+  created() {
+    // this.$store.dispatch("app/signIn");
+  }
 };
 </script>
 
