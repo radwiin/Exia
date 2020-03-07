@@ -7,14 +7,11 @@
       label-width="auto"
       inline
     >
-      <el-form-item label="菜单名称" prop="deptName">
-        <el-input v-model="queryForm.deptName" placeholder="机构名称" />
+      <el-form-item label="角色名称" prop="roleName">
+        <el-input v-model="queryForm.roleName" placeholder="机构名称" />
       </el-form-item>
-      <el-form-item label="所属租户" prop="tenantId">
-        <el-input v-model="queryForm.tenantId" placeholder="所属租户" />
-      </el-form-item>
-      <el-form-item label="机构全称" prop="fullName">
-        <el-input v-model="queryForm.fullName" placeholder="机构全称" />
+      <el-form-item label="角色别名" prop="roleAlias">
+        <el-input v-model="queryForm.roleAlias" placeholder="机构全称" />
       </el-form-item>
       <el-form-item>
         <el-button
@@ -30,15 +27,11 @@
       <el-button type="primary" icon="el-icon-plus" @click="handleCreateClick"
         >新建</el-button
       >
+      <el-button icon="el-icon-setting">权限设置</el-button>
     </div>
     <div class="table-container">
-      <el-table
-        :data="tableData"
-        border
-        height="100%"
-        row-key="id"
-        :tree-props="{ children: 'children' }"
-      >
+      <el-table :data="tableData" border height="100%">
+        <el-table-column fixed type="selection" width="50" align="center" />
         <el-table-column
           fixed
           type="index"
@@ -46,10 +39,8 @@
           width="50"
           align="center"
         />
-        <el-table-column prop="meta.title" label="菜单名称" />
-        <el-table-column prop="path" label="路由地址" />
-        <el-table-column prop="meta.icon" label="菜单图标" />
-        <el-table-column prop="redirect" label="跳转" />
+        <el-table-column prop="roleName" label="角色名称" />
+        <el-table-column prop="roleAlias" label="角色别名" />
         <el-table-column prop="sort" label="排序" width="50" align="center" />
         <el-table-column fixed="right" label="操作">
           <template slot-scope="scope">
@@ -65,9 +56,6 @@
             >
               <el-button slot="reference" type="text">删除</el-button>
             </el-popconfirm>
-            <el-button type="text" @click="handleEditClick(scope)">
-              新增子项
-            </el-button>
           </template>
         </el-table-column>
       </el-table>
@@ -88,23 +76,14 @@
         label-width="auto"
         :disabled="dialogCategory === DIALOG_CATEGORY.VIEW"
       >
-        <el-form-item label="机构名称" prop="deptName">
-          <el-input v-model="form.deptName" />
+        <el-form-item label="角色名称" prop="roleName">
+          <el-input v-model="form.roleName" />
         </el-form-item>
-        <el-form-item label="机构全称" prop="fullName">
-          <el-input v-model="form.fullName" />
-        </el-form-item>
-        <el-form-item label="上级机构" prop="parentId">
-          <el-input v-model="form.parentId" />
-        </el-form-item>
-        <el-form-item label="机构类型" prop="deptCategoryName">
-          <el-input v-model="form.deptCategoryName" />
+        <el-form-item label="角色别名" prop="roleAlias">
+          <el-input v-model="form.roleAlias" />
         </el-form-item>
         <el-form-item label="排序" prop="sort">
           <el-input v-model="form.sort" />
-        </el-form-item>
-        <el-form-item label="备注" prop="remark">
-          <el-input v-model="form.remark" />
         </el-form-item>
       </el-form>
       <div slot="footer">
@@ -118,20 +97,19 @@
 </template>
 
 <script>
-import { query } from "@/api/system/menu";
+import { query } from "@/api/auth/role";
 const DIALOG_CATEGORY = {
   CREATE: "新建",
   VIEW: "查看",
   EDIT: "编辑"
 };
 export default {
-  name: "menu",
+  name: "role",
   data() {
     return {
       queryForm: {
-        deptName: "",
-        tenantId: "",
-        fullName: ""
+        roleName: "",
+        roleAlias: ""
       },
       tableData: [],
 
@@ -140,12 +118,9 @@ export default {
       dialogCategory: "",
       formLoading: false,
       form: {
-        deptName: "",
-        fullName: "",
-        parentId: "",
-        deptCategoryName: "",
-        sort: "",
-        remark: ""
+        roleName: "",
+        roleAlias: "",
+        sort: ""
       }
     };
   },

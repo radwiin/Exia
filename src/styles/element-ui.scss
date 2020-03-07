@@ -44,3 +44,7 @@
   color: unset;
   cursor: not-allowed;
 }
+
+.el-table-column--selection .cell {
+  padding-right: 10px;
+}

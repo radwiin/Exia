@@ -24,6 +24,7 @@
             :class-name="`hamburger ${collapse ? '' : 'is-active'}`"
           />
         </div>
+        <breadcrumb class="breadcrumb-container" />
         <div class="right-menu-wrapper">
           <el-tooltip content="Setting" placement="bottom">
             <div class="menu-item" @click="handleSettingClick">
@@ -80,11 +81,14 @@
 import { routes } from "@/router";
 import NavMenu from "@/components/NavMenu";
 import settingDrawer from "./components/SettingDrawer";
+import Breadcrumb from "@/components/Breadcrumb";
+
 export default {
   name: "Layout",
   components: {
     NavMenu,
-    settingDrawer
+    settingDrawer,
+    Breadcrumb
   },
   data: () => ({
     collapse: true,
@@ -149,7 +153,6 @@ $HeaderHeight: 50px;
     padding: 0px;
     display: flex;
     align-items: center;
-    justify-content: space-between;
 
     .hamburger-wrapper {
       width: $HeaderHeight;
@@ -175,6 +178,10 @@ $HeaderHeight: 50px;
           transform: rotate(180deg);
         }
       }
+    }
+
+    .breadcrumb-container {
+      flex-grow: 1;
     }
 
     .right-menu-wrapper {

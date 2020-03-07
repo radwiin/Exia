@@ -31,39 +31,44 @@
         >新建</el-button
       >
     </div>
-    <el-table class="data-table" :data="tableData" border>
-      <el-table-column fixed type="index" label="#" width="50" align="center" />
-      <el-table-column prop="id" label="租户ID" />
-      <el-table-column prop="name" label="租户名称" />
-      <el-table-column prop="contact" label="联系人" />
-      <el-table-column prop="phone" label="联系电话" />
-      <el-table-column prop="quota" label="账号额度" />
-      <el-table-column prop="expire" label="过期时间" />
-      <el-table-column prop="domain" label="绑定域名" />
-      <el-table-column fixed="right" label="操作">
-        <template slot-scope="scope">
-          <el-button type="text" @click="handleViewClick(scope)">
-            查看
-          </el-button>
-          <el-button type="text" @click="handleEditClick(scope)">
-            编辑
-          </el-button>
-          <el-popconfirm
-            title="确定删除?"
-            @onConfirm="handleDeleteConfirm(scope)"
-          >
-            <el-button slot="reference" type="text">删除</el-button>
-          </el-popconfirm>
-        </template>
-      </el-table-column>
-    </el-table>
+    <div class="table-container">
+      <el-table class="data-table" :data="tableData" border height="100%">
+        <el-table-column
+          fixed
+          type="index"
+          label="#"
+          width="50"
+          align="center"
+        />
+        <el-table-column prop="id" label="租户ID" />
+        <el-table-column prop="name" label="租户名称" />
+        <el-table-column prop="contact" label="联系人" />
+        <el-table-column prop="phone" label="联系电话" />
+        <el-table-column prop="app_id" label="小程序ID" />
+        <el-table-column fixed="right" label="操作">
+          <template slot-scope="scope">
+            <el-button type="text" @click="handleViewClick(scope)">
+              查看
+            </el-button>
+            <el-button type="text" @click="handleEditClick(scope)">
+              编辑
+            </el-button>
+            <el-popconfirm
+              title="确定删除?"
+              @onConfirm="handleDeleteConfirm(scope)"
+            >
+              <el-button slot="reference" type="text">删除</el-button>
+            </el-popconfirm>
+          </template>
+        </el-table-column>
+      </el-table>
+    </div>
     <el-pagination
       class="data-pagination"
       v-bind="paginationBind"
       @size-change="handleSizeChange"
       @current-change="handleCurrentChange"
-    >
-    </el-pagination>
+    />
     <el-dialog
       :visible.sync="dialogVisible"
       :title="dialogCategory"
@@ -88,14 +93,8 @@
         <el-form-item label="联系电话" prop="phone">
           <el-input v-model="form.phone" />
         </el-form-item>
-        <el-form-item label="账号额度" prop="quota">
-          <el-input v-model="form.quota" />
-        </el-form-item>
-        <el-form-item label="过期时间" prop="expire">
-          <el-input v-model="form.expire" />
-        </el-form-item>
-        <el-form-item label="绑定域名" prop="domain">
-          <el-input v-model="form.domain" />
+        <el-form-item label="小程序ID" prop="app_id">
+          <el-input v-model="form.app_id" />
         </el-form-item>
       </el-form>
       <div slot="footer">
@@ -127,10 +126,10 @@ export default {
       tableData: [],
       paginationBind: {
         currentPage: 1,
-        pageSizes: [100, 200, 300, 400],
         pageSize: 100,
-        layout: "total, sizes, prev, pager, next, jumper",
-        total: 400
+        total: 400,
+        pageSizes: [10, 20, 50, 100],
+        layout: "total, sizes, prev, pager, next, jumper"
       },
 
       DIALOG_CATEGORY, // for html
@@ -141,15 +140,16 @@ export default {
         name: "",
         contact: "",
         phone: "",
-        quota: "",
-        expire: "",
-        domain: ""
+        app_id: ""
       }
     };
   },
   created() {
     query().then(rsp => {
-      this.tableData = rsp.data;
+      this.tableData = rsp.data.records;
+      this.paginationBind.currentPage = rsp.data.current;
+      this.paginationBind.pageSize = rsp.data.size;
+      this.paginationBind.total = rsp.data.total;
     });
   },
   methods: {
@@ -194,7 +194,7 @@ export default {
 };
 </script>
 
-<style scope lang="scss">
+<style lang="scss" scoped>
 .el-button + span {
   margin-left: 10px;
 }
@@ -213,7 +213,7 @@ export default {
     padding-bottom: 10px;
   }
 
-  .data-table {
+  .table-container {
     min-height: 0px;
     flex-grow: 1;
   }

@@ -2,8 +2,10 @@ import request from "@/utils/request";
 
 export function query() {
   return request({
-    url: "/tenant/query",
+    url: "/role/query",
     method: "post",
-    data: {}
+    data: {
+      id: "1"
+    }
   });
 }

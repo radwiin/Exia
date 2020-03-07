@@ -11,10 +11,10 @@
         <el-input v-model="queryForm.deptName" placeholder="机构名称" />
       </el-form-item>
       <el-form-item label="所属租户" prop="tenantId">
-        <el-input v-model="queryForm.name" placeholder="所属租户" />
+        <el-input v-model="queryForm.tenantId" placeholder="所属租户" />
       </el-form-item>
       <el-form-item label="机构全称" prop="fullName">
-        <el-input v-model="queryForm.contact" placeholder="机构全称" />
+        <el-input v-model="queryForm.fullName" placeholder="机构全称" />
       </el-form-item>
       <el-form-item>
         <el-button
@@ -35,8 +35,8 @@
       <el-table
         :data="tableData"
         border
-        row-key="id"
         height="100%"
+        row-key="id"
         :tree-props="{ children: 'children' }"
       >
         <el-table-column
@@ -88,23 +88,23 @@
         label-width="auto"
         :disabled="dialogCategory === DIALOG_CATEGORY.VIEW"
       >
-        <el-form-item label="租户名称" prop="name">
-          <el-input v-model="form.name" />
+        <el-form-item label="机构名称" prop="deptName">
+          <el-input v-model="form.deptName" />
         </el-form-item>
-        <el-form-item label="联系人" prop="contact">
-          <el-input v-model="form.contact" />
+        <el-form-item label="机构全称" prop="fullName">
+          <el-input v-model="form.fullName" />
         </el-form-item>
-        <el-form-item label="联系电话" prop="phone">
-          <el-input v-model="form.phone" />
+        <el-form-item label="上级机构" prop="parentId">
+          <el-input v-model="form.parentId" />
         </el-form-item>
-        <el-form-item label="账号额度" prop="quota">
-          <el-input v-model="form.quota" />
+        <el-form-item label="机构类型" prop="deptCategoryName">
+          <el-input v-model="form.deptCategoryName" />
         </el-form-item>
-        <el-form-item label="过期时间" prop="expire">
-          <el-input v-model="form.expire" />
+        <el-form-item label="排序" prop="sort">
+          <el-input v-model="form.sort" />
         </el-form-item>
-        <el-form-item label="绑定域名" prop="domain">
-          <el-input v-model="form.domain" />
+        <el-form-item label="备注" prop="remark">
+          <el-input v-model="form.remark" />
         </el-form-item>
       </el-form>
       <div slot="footer">
@@ -129,9 +129,9 @@ export default {
   data() {
     return {
       queryForm: {
-        id: "",
-        name: "",
-        contact: ""
+        deptName: "",
+        tenantId: "",
+        fullName: ""
       },
       tableData: [],
 
@@ -140,12 +140,12 @@ export default {
       dialogCategory: "",
       formLoading: false,
       form: {
-        name: "",
-        contact: "",
-        phone: "",
-        quota: "",
-        expire: "",
-        domain: ""
+        deptName: "",
+        fullName: "",
+        parentId: "",
+        deptCategoryName: "",
+        sort: "",
+        remark: ""
       }
     };
   },
@@ -194,7 +194,7 @@ export default {
 };
 </script>
 
-<style scope lang="scss">
+<style lang="scss" scoped>
 .el-button + span {
   margin-left: 10px;
 }

@@ -25,12 +25,12 @@ service.interceptors.request.use(
 // response interceptor
 service.interceptors.response.use(
   response => {
-    const { config, data } = response;
+    const { status, config, data } = response;
     console.group(`-response-${config.url}-`);
     console.info("url: ", config.url);
     console.info("data: ", data);
     console.groupEnd();
-    if (data.code === 200) {
+    if (status === 200) {
       return data;
     } else {
       return Promise.reject(data);

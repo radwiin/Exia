@@ -5,6 +5,27 @@ import Layout from "@/layout";
 
 Vue.use(VueRouter);
 
+/**
+ * Note: sub-menu only appear when route children.length >= 1
+ * Detail see: https://panjiachen.github.io/vue-element-admin-site/guide/essentials/router-and-nav.html
+ *
+ * hidden: true                   if set true, item will not show in the sidebar(default is false)
+ * alwaysShow: true               if set true, will always show the root menu
+ *                                if not set alwaysShow, when item has more than one children route,
+ *                                it will becomes nested mode, otherwise not show the root menu
+ * redirect: noRedirect           if set noRedirect will no redirect in the breadcrumb
+ * name:'router-name'             the name is used by <keep-alive> (must set!!!)
+ * meta : {
+    roles: ['admin','editor']    control the page roles (you can set multiple roles)
+    title: 'title'               the name show in sidebar and breadcrumb (recommend set)
+    icon: 'svg-name'             the icon show in the sidebar
+    noCache: true                if set true, the page will no be cached(default is false)
+    affix: true                  if set true, the tag will affix in the tags-view
+    breadcrumb: false            if set false, the item will hidden in breadcrumb(default is true)
+    activeMenu: '/example/list'  if set path, the sidebar will highlight the path you set
+  }
+ */
+
 const routes = [
   {
     path: "/login",
@@ -16,102 +37,111 @@ const routes = [
     path: "/",
     component: Layout,
     redirect: "/dashboard",
-    meta: { title: "Dashboard", icon: "dashboard" },
     children: [
       {
         path: "dashboard",
         component: () => import("@/views/dashboard"),
         name: "dashboard",
-        meta: { title: "Dashboard", icon: "dashboard" }
+        meta: { title: "首页", icon: "dashboard" }
       }
     ]
   },
   {
-    path: "/jexl",
+    path: "/components-demo",
     component: Layout,
-    meta: { title: "Jexl", icon: "calculator", alwaysShow: true },
-    children: [
-      {
-        path: "operate",
-        component: () => import("@/views/jexl/operate"),
-        name: "operate",
-        meta: { title: "Operate", icon: "division" }
-      }
-    ]
-  },
-  {
-    path: "/baidu",
-    component: Layout,
-    meta: { title: "Baidu", icon: "baidu", alwaysShow: true },
+    redirect: "/components-demo/coordinate-select",
+    meta: { title: "组件库", icon: "bpmn-io", alwaysShow: true },
     children: [
       {
         path: "coordinate-select",
-        component: () => import("@/views/baidu/coordinate-select"),
+        component: () => import("@/views/components-demo/coordinate-select"),
         name: "coordinate-select",
-        meta: { title: "CoordinateSelect", icon: "locate" }
+        meta: { title: "坐标选择", icon: "locate" }
+      },
+      {
+        path: "modeler",
+        component: () => import("@/views/components-demo/modeler"),
+        name: "modeler",
+        meta: { title: "BPMN建模", icon: "build" }
+      },
+      {
+        path: "viewer",
+        component: () => import("@/views/components-demo/viewer"),
+        name: "viewer",
+        meta: { title: "BPMN查看", icon: "show" }
       }
     ]
   },
   {
-    path: "/bpmn",
+    path: "/utils-demo",
     component: Layout,
-    meta: { title: "Bpmn", icon: "bpmn-io", alwaysShow: true },
+    redirect: "/utils-demo/operate",
+    meta: { title: "工具库", icon: "bpmn-io", alwaysShow: true },
     children: [
       {
-        path: "modeler",
-        component: () => import("@/views/bpmn/modeler"),
-        name: "modeler",
-        meta: { title: "Modeler", icon: "build" }
-      },
+        path: "operate",
+        component: () => import("@/views/utils-demo/operate"),
+        name: "operate",
+        meta: { title: "算术优化", icon: "calculator" }
+      }
+    ]
+  },
+  {
+    path: "/auth",
+    component: Layout,
+    redirect: "/auth/role",
+    meta: { title: "权限管理", icon: "setting", alwaysShow: true },
+    children: [
       {
-        path: "viewer",
-        component: () => import("@/views/bpmn/viewer"),
-        name: "viewer",
-        meta: { title: "Viewer", icon: "show" }
+        path: "role",
+        component: () => import("@/views/auth/role"),
+        name: "role",
+        meta: { title: "角色管理", icon: "key" }
       }
     ]
   },
   {
     path: "/system",
     component: Layout,
-    meta: { title: "System", icon: "setting", alwaysShow: true },
+    redirect: "/system/tenant",
+    meta: { title: "系统管理", icon: "setting", alwaysShow: true },
     children: [
       {
         path: "tenant",
         component: () => import("@/views/system/tenant"),
         name: "tenant",
-        meta: { title: "Tenant", icon: "key" }
+        meta: { title: "租户管理", icon: "key" }
       },
-      {
-        path: "dept",
-        component: () => import("@/views/system/dept"),
-        name: "dept",
-        meta: { title: "Dept", icon: "key" }
-      },
+      // {
+      //   path: "dept",
+      //   component: () => import("@/views/system/dept"),
+      //   name: "dept",
+      //   meta: { title: "机构管理", icon: "key" }
+      // },
       {
         path: "user",
         component: () => import("@/views/system/user"),
         name: "user",
-        meta: { title: "User", icon: "key" }
+        meta: { title: "用户管理", icon: "key" }
       },
       {
         path: "menu",
         component: () => import("@/views/system/menu"),
         name: "menu",
-        meta: { title: "Menu", icon: "key" }
+        meta: { title: "菜单管理", icon: "key" }
       }
     ]
   },
   {
     path: "/about",
     component: Layout,
-    meta: { title: "About", icon: "info-circle" },
+    redirect: "/about/index",
     children: [
       {
         path: "index",
         component: () => import("@/views/about/index"),
         name: "about",
-        meta: { title: "About", icon: "info-circle" }
+        meta: { title: "关于EXIA", icon: "info-circle" }
       }
     ]
   }

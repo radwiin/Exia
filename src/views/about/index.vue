@@ -150,11 +150,9 @@ export default {
     }
   }),
   created() {
-    getGitHubUserInfo("radwiin")
-      .then(rsp => {
-        this.authorInfo = rsp.data;
-      })
-      .catch(console.error);
+    getGitHubUserInfo("radwiin").then(rsp => {
+      this.authorInfo = rsp;
+    });
   }
 };
 </script>

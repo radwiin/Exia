@@ -1,31 +1,65 @@
 import Mock from "mockjs";
 
-//获取表格数据
-Mock.mock("/menu/getMenu", "get", () => {
-  let list = [];
-  for (let i = 0; i < 5; i++) {
-    list.push(
-      Mock.mock({
-        id: "@increment",
-        name: Mock.mock("@cname"),
-        username: Mock.mock("@last"),
-        type: [0, 2],
-        checkbox: [0, 1],
-        "number|0-100": 0,
-        datetime: 1532932422071,
-        "sex|0-1": 0,
-        moreselect: [0, 1],
-        grade: 0,
-        address: Mock.mock("@cparagraph(1, 3)"),
-        check: [1, 3, 4]
-      })
-    );
+const records = [
+  {
+    id: "1",
+    sort: 1,
+    path: "/auth",
+    component: "Layout",
+    redirect: "/auth/role",
+    meta: { title: "权限管理", icon: "setting", alwaysShow: true },
+    children: [
+      {
+        id: "2",
+        sort: 1,
+        path: "role",
+        component: () => import("@/views/auth/role"),
+        name: "role",
+        meta: { title: "角色管理", icon: "key" }
+      }
+    ]
+  },
+  {
+    id: "3",
+    sort: 1,
+    path: "/system",
+    component: "Layout",
+    redirect: "/system/tenant",
+    meta: { title: "系统管理", icon: "setting", alwaysShow: true },
+    children: [
+      {
+        id: "4",
+        sort: 1,
+        path: "tenant",
+        component: () => import("@/views/system/tenant"),
+        name: "tenant",
+        meta: { title: "租户管理", icon: "key" }
+      },
+      {
+        id: "5",
+        sort: 1,
+        path: "user",
+        component: () => import("@/views/system/user"),
+        name: "user",
+        meta: { title: "用户管理", icon: "key" }
+      },
+      {
+        id: "6",
+        sort: 1,
+        path: "menu",
+        component: () => import("@/views/system/menu"),
+        name: "menu",
+        meta: { title: "菜单管理", icon: "key" }
+      }
+    ]
   }
+];
+
+Mock.mock("/menu/query", "post", () => {
   return {
-    data: {
-      total: 11,
-      pageSize: 10,
-      tableData: list
-    }
+    code: 200,
+    success: true,
+    msg: "操作成功",
+    data: records
   };
 });
