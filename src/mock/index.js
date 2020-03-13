@@ -1,4 +1,3 @@
-import "./system/tenant";
 import "./system/menu";
 import "./system/user";
 

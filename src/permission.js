@@ -1,24 +1,19 @@
+import NProgress from "nprogress";
+import "nprogress/nprogress.css";
 import router from "@/router";
 import store from "@/store";
 import { Message } from "element-ui";
-import NProgress from "nprogress"; // progress bar
-import "nprogress/nprogress.css"; // progress bar style
-import { getToken } from "@/utils/auth"; // get token from cookie
 
-NProgress.configure({ showSpinner: false }); // NProgress Configuration
+NProgress.configure({ showSpinner: false });
 
-const whiteList = ["/login", "/send-email", "/modify-password"]; // no redirect whitelist
+const whiteList = ["/login"]; // no redirect whitelist
 
 router.beforeEach(async (to, from, next) => {
-  console.info(to.path);
-  // start progress bar
   NProgress.start();
 
-  // set page title
-  document.title = to.meta.title;
+  document.title = to.meta.title; // set page title
 
-  // determine whether the user has logged in
-  const hasToken = getToken();
+  const hasToken = store.getters.token; // determine whether the user has logged in
 
   if (hasToken) {
     if (to.path === "/login") {
@@ -26,18 +21,17 @@ router.beforeEach(async (to, from, next) => {
       next({ path: "/" });
       NProgress.done();
     } else {
-      // determine whether the user has obtained his permission roles through getInfo
-      const hasRoles = store.getters.roles && store.getters.roles.length > 0;
-      console.info("hasRoles", hasRoles);
-      if (hasRoles) {
+      // determine whether the user has obtained his userInfo through getUserInfo
+      const hasUserInfo = store.getters.account;
+
+      if (hasUserInfo) {
         next();
       } else {
         try {
           // get user info
-          // note: roles must be a object array! such as: ['admin'] or ,['developer','editor']
           const rsp = await store.dispatch("app/getUserInfo");
 
-          // generate accessible routes smap based on roles
+          // generate accessible routes
           const asyncRoutes = await store.dispatch(
             "app/generateRoutes",
             rsp.data.menus
@@ -49,9 +43,10 @@ router.beforeEach(async (to, from, next) => {
           // set the replace: true, so the navigation will not leave a history record
           next({ ...to, replace: true });
         } catch (error) {
+          console.error(error);
           // remove token and go to login page to re-login
-          await store.dispatch("app/resetToken");
-          Message.error(error || "Has Error");
+          await store.dispatch("app/removeUserInfo");
+          Message.error(error || "位置错误");
           next(`/login?redirect=${to.path}`);
           NProgress.done();
         }
@@ -59,7 +54,6 @@ router.beforeEach(async (to, from, next) => {
     }
   } else {
     /* has no token*/
-
     if (whiteList.indexOf(to.path) !== -1) {
       // in the free login whitelist, go directly
       next();

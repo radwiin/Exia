@@ -1,47 +1,48 @@
 <template>
-  <div>login</div>
+  <div class="page-container">
+    <div class="left-container">
+      <div style="width:65%">
+        <div>EXIA</div>
+        <user-login />
+      </div>
+    </div>
+    <div class="right-container"></div>
+  </div>
 </template>
 
 <script>
+import UserLogin from "./components/Userlogin";
+
 export default {
   name: "login",
-  data() {
-    return {
-      redirect: undefined,
-      otherQuery: {}
-    };
-  },
-  watch: {
-    $route: {
-      handler: function(route) {
-        const query = route.query;
-        if (query) {
-          this.redirect = query.redirect;
-          this.otherQuery = this.getOtherQuery(query);
-        }
-      },
-      immediate: true
-    }
-  },
-  created() {
-    this.handleLogin();
-  },
-  methods: {
-    handleLogin() {
-      this.$store
-        .dispatch("app/signIn", {
-          account: "account",
-          password: "password"
-        })
-        .then(() => {
-          this.$router.push({
-            path: this.redirect || "/",
-            query: this.otherQuery
-          });
-        });
-    }
+  components: {
+    UserLogin
   }
 };
 </script>
 
-<style></style>
+<style lang="scss" scoped>
+.page-container {
+  width: 100%;
+  height: 100%;
+  display: flex;
+  flex-flow: row nowrap;
+  background-image: url("~@/assets/4.jpg");
+  background-size: cover;
+  background-position: center center;
+
+  .left-container {
+    width: 600px;
+    flex-shrink: 0;
+    display: flex;
+    flex-flow: column nowrap;
+    justify-content: center;
+    align-items: center;
+    background: #ffffffaa;
+  }
+
+  .right-container {
+    flex-grow: 1;
+  }
+}
+</style>

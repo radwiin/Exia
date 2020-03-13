@@ -1,55 +1,43 @@
 import Mock from "mockjs";
-
-const data = [
-  {
-    id: "1123598816738675201",
-    roleName: "超级管理员",
-    sort: 1,
-    roleAlias: "root-admin"
-  },
-  {
-    id: "1123598816738675202",
-    roleName: "小程序管理员",
-    sort: 2,
-    roleAlias: "mini-program-admin"
-  },
-  {
-    id: "1226473225100234753",
-    roleName: "门店管理员",
-    sort: 3,
-    roleAlias: "shop-admin"
-  }
-];
+import roles from "@/mock/data/roles";
 
 Mock.mock("/role/query", "post", () => {
   return {
     code: 200,
-    success: true,
     msg: "操作成功",
-    data
+    data: {
+      records: roles,
+      currentPage: 1,
+      pageSize: 10,
+      total: 1
+    }
   };
 });
 
 Mock.mock("/role/add", "post", () => {
   return {
-    code: 200,
-    success: true,
-    msg: "操作成功"
+    code: -1,
+    msg: "演示环境暂时无法操作！"
   };
 });
 
 Mock.mock("/role/update", "post", () => {
   return {
-    code: 200,
-    success: true,
-    msg: "操作成功"
+    code: -1,
+    msg: "演示环境暂时无法操作！"
   };
 });
 
 Mock.mock("/role/remove", "post", () => {
   return {
-    code: 200,
-    success: true,
-    msg: "操作成功"
+    code: -1,
+    msg: "演示环境暂时无法操作！"
+  };
+});
+
+Mock.mock("/role/setAuthority", "post", () => {
+  return {
+    code: -1,
+    msg: "演示环境暂时无法操作！"
   };
 });

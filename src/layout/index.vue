@@ -13,7 +13,7 @@
         text-color="#8492cf"
         active-text-color="#ffffff"
         :default-active="activeMenu"
-        :menu="routes"
+        :data="allRoutes"
       />
     </el-aside>
     <el-container>
@@ -33,12 +33,12 @@
           </el-tooltip>
           <el-popover
             placement="bottom"
-            width="280"
+            width="250"
             trigger="hover"
             popper-class="popper-wrapper"
           >
             <div slot="reference" class="menu-item" @click="handleUserClick">
-              <span>visitor</span>
+              <span>{{ account }}</span>
             </div>
             <div class="user-menu">
               <div class="user-info-item">
@@ -48,18 +48,18 @@
                   :size="50"
                   :src="require('@/assets/avator.jpg')"
                 />
-                <span class="user-name">visitor</span>
+                <span class="user-name">{{ account }}</span>
               </div>
               <div class="user-menu-item">
                 <svg-icon icon-class="user" class-name="user-menu-item-icon" />
-                <span class="user-menu-item-label">Self</span>
+                <span class="user-menu-item-label">{{ roles.join(",") }}</span>
               </div>
-              <div class="user-menu-item">
+              <div class="user-menu-item" @click="handleExitClick">
                 <svg-icon
                   icon-class="logout"
                   class-name="user-menu-item-icon"
                 />
-                <span class="user-menu-item-label">Exit</span>
+                <span class="user-menu-item-label">登出</span>
               </div>
             </div>
           </el-popover>
@@ -95,7 +95,7 @@ export default {
     settingDrawer: false
   }),
   computed: {
-    ...mapGetters(["routes"]),
+    ...mapGetters(["account", "roles", "allRoutes"]),
     activeMenu() {
       const route = this.$route;
       const { path } = route;
@@ -108,7 +108,12 @@ export default {
     handleSettingClick() {
       this.settingDrawer = true;
     },
-    handleUserClick() {}
+    handleUserClick() {},
+    handleExitClick() {
+      this.$store.dispatch("app/removeUserInfo").then(() => {
+        this.$router.push({ path: "/login" });
+      });
+    }
   }
 };
 </script>

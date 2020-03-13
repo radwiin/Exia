@@ -1,34 +1,11 @@
 <template>
   <div class="page-container">
-    <el-form
-      class="query-form"
-      ref="queryForm"
-      :model="queryForm"
-      label-width="auto"
-      inline
-    >
-      <el-form-item label="菜单名称" prop="deptName">
-        <el-input v-model="queryForm.deptName" placeholder="机构名称" />
-      </el-form-item>
-      <el-form-item label="所属租户" prop="tenantId">
-        <el-input v-model="queryForm.tenantId" placeholder="所属租户" />
-      </el-form-item>
-      <el-form-item label="机构全称" prop="fullName">
-        <el-input v-model="queryForm.fullName" placeholder="机构全称" />
-      </el-form-item>
-      <el-form-item>
-        <el-button
-          type="primary"
-          icon="el-icon-search"
-          @click="handleQueryClick"
-          >查询</el-button
-        >
-        <el-button icon="el-icon-delete">清空</el-button>
-      </el-form-item>
-    </el-form>
     <div class="function-container">
       <el-button type="primary" icon="el-icon-plus" @click="handleCreateClick"
         >新 增</el-button
+      >
+      <el-button icon="el-icon-refresh" @click="handleResetClick"
+        >刷 新</el-button
       >
     </div>
     <div class="table-container">
@@ -39,6 +16,7 @@
         row-key="id"
         :tree-props="{ children: 'children' }"
       >
+        <el-table-column fixed type="selection" width="50" align="center" />
         <el-table-column
           fixed
           type="index"
@@ -46,10 +24,14 @@
           width="50"
           align="center"
         />
-        <el-table-column prop="meta.title" label="菜单名称" />
-        <el-table-column prop="path" label="路由地址" />
-        <el-table-column prop="meta.icon" label="菜单图标" />
-        <el-table-column prop="redirect" label="跳转" />
+        <el-table-column prop="title" label="标题" />
+        <el-table-column prop="path" label="路由" />
+        <el-table-column prop="component" label="组件" />
+        <el-table-column prop="icon" label="图标" width="70" align="center">
+          <template slot-scope="scope">
+            <svg-icon v-if="scope.row.icon" :icon-class="scope.row.icon" />
+          </template>
+        </el-table-column>
         <el-table-column prop="sort" label="排序" width="50" align="center" />
         <el-table-column fixed="right" label="操作">
           <template slot-scope="scope">
@@ -65,9 +47,6 @@
             >
               <el-button slot="reference" type="text">删除</el-button>
             </el-popconfirm>
-            <el-button type="text" @click="handleEditClick(scope)">
-              新增子项
-            </el-button>
           </template>
         </el-table-column>
       </el-table>
@@ -77,7 +56,6 @@
       :visible.sync="dialogVisible"
       :title="dialogCategory"
       width="900px"
-      @open="handleDialogOpen"
       @close="handleDialogClose"
     >
       <el-form
@@ -88,23 +66,45 @@
         label-width="auto"
         :disabled="dialogCategory === DIALOG_CATEGORY.VIEW"
       >
-        <el-form-item label="机构名称" prop="deptName">
-          <el-input v-model="form.deptName" />
+        <el-form-item label="父级" prop="pId">
+          <el-cascader
+            v-model="form.pId"
+            :options="optionData"
+            :props="{ checkStrictly: true, emitPath: false }"
+            clearable
+            style="width:100%;"
+          ></el-cascader>
         </el-form-item>
-        <el-form-item label="机构全称" prop="fullName">
-          <el-input v-model="form.fullName" />
+        <el-form-item label="标题" prop="title">
+          <el-input v-model="form.title" />
         </el-form-item>
-        <el-form-item label="上级机构" prop="parentId">
-          <el-input v-model="form.parentId" />
+        <el-form-item label="路由" prop="path">
+          <el-input v-model="form.path" />
         </el-form-item>
-        <el-form-item label="机构类型" prop="deptCategoryName">
-          <el-input v-model="form.deptCategoryName" />
+        <el-form-item label="组件" prop="component">
+          <el-input v-model="form.component" />
+        </el-form-item>
+        <el-form-item label="名称" prop="name">
+          <el-input v-model="form.name" />
+        </el-form-item>
+        <el-form-item label="重定向" prop="redirect">
+          <el-input v-model="form.redirect" />
+        </el-form-item>
+        <el-form-item label="常置" prop="alwaysShow">
+          <el-select v-model="form.alwaysShow" clearable style="width:100%">
+            <el-option label="是" :value="true" />
+            <el-option label="否" :value="false" />
+          </el-select>
+        </el-form-item>
+        <el-form-item label="图标" prop="icon">
+          <el-input v-model="form.icon" />
         </el-form-item>
         <el-form-item label="排序" prop="sort">
-          <el-input v-model="form.sort" />
-        </el-form-item>
-        <el-form-item label="备注" prop="remark">
-          <el-input v-model="form.remark" />
+          <el-input-number
+            v-model="form.sort"
+            controls-position="right"
+            style="width:100%;"
+          />
         </el-form-item>
       </el-form>
       <div slot="footer">
@@ -118,7 +118,9 @@
 </template>
 
 <script>
-import { query } from "@/api/system/menu";
+import { query, add, update, remove } from "@/api/system/menu";
+import { mapTree } from "@/utils";
+import _ from "lodash";
 const DIALOG_CATEGORY = {
   CREATE: "新 增",
   VIEW: "查 看",
@@ -128,68 +130,111 @@ export default {
   name: "menu",
   data() {
     return {
-      queryForm: {
-        deptName: "",
-        tenantId: "",
-        fullName: ""
-      },
-      tableData: [],
-
       DIALOG_CATEGORY, // for html
+      tableData: [],
+      optionData: [],
       dialogVisible: false,
       dialogCategory: "",
       formLoading: false,
       form: {
-        deptName: "",
-        fullName: "",
-        parentId: "",
-        deptCategoryName: "",
-        sort: "",
-        remark: ""
+        id: "",
+        pId: "",
+        title: "",
+        path: "",
+        component: "",
+        name: "",
+        redirect: "",
+        alwaysShow: "",
+        icon: "",
+        sort: 0
       }
     };
   },
   created() {
-    query().then(rsp => {
-      this.tableData = rsp.data;
-    });
+    this.refreshTable();
   },
   methods: {
-    handleQueryClick() {
+    refreshTable() {
       query().then(rsp => {
-        rsp;
+        this.tableData = mapTree(_.cloneDeep(rsp.data), item => ({
+          ...item,
+          ...item.meta
+        }));
+        this.optionData = [
+          {
+            value: "root",
+            label: "根父级",
+            children: mapTree(_.cloneDeep(rsp.data), item => ({
+              value: item.id,
+              label: item.meta.title,
+              children: item.children
+            }))
+          }
+        ];
       });
+    },
+    handleQueryClick() {
+      this.refreshTable();
+    },
+    handleResetClick() {
+      this.refreshTable();
     },
     handleCreateClick() {
       this.dialogCategory = DIALOG_CATEGORY.CREATE;
       this.dialogVisible = true;
     },
-    handleViewClick(scope) {
+    handleViewClick({ row }) {
       this.dialogCategory = DIALOG_CATEGORY.VIEW;
       this.dialogVisible = true;
       this.$nextTick(() => {
-        Object.assign(this.form, scope.row);
+        Object.assign(this.form, row);
       });
     },
-    handleEditClick(scope) {
+    handleEditClick({ row }) {
       this.dialogCategory = DIALOG_CATEGORY.EDIT;
       this.dialogVisible = true;
       this.$nextTick(() => {
-        Object.assign(this.form, scope.row);
+        Object.assign(this.form, row);
       });
     },
-    handleDeleteConfirm(scope) {
-      console.info(scope);
+    handleDeleteConfirm({ row }) {
+      remove(row.id)
+        .then(() => {
+          this.refreshTable();
+        })
+        .catch(console.error);
     },
-
-    handleDialogOpen() {},
     handleDialogClose() {
       this.$refs.form.resetFields();
     },
     handleDialogCancelClick() {
       this.dialogVisible = false;
     },
-    handleDialogConfirmClick() {}
+    handleDialogConfirmClick() {
+      if (this.dialogCategory === DIALOG_CATEGORY.VIEW) {
+        this.dialogVisible = false;
+      } else {
+        this.$refs.form.validate(valid => {
+          if (valid) {
+            this.formLoading = true;
+            const promise = {
+              [DIALOG_CATEGORY.CREATE]: add,
+              [DIALOG_CATEGORY.EDIT]: update
+            }[this.dialogCategory];
+            promise(this.form)
+              .then(() => {
+                this.$refs.form.resetFields();
+                this.dialogVisible = false;
+                this.refreshTable();
+              })
+              .catch(console.error)
+              .finally(() => {
+                this.formLoading = false;
+              });
+          }
+        });
+      }
+    }
   }
 };
 </script>
@@ -199,18 +244,10 @@ export default {
   margin-left: 10px;
 }
 
-span + .el-button {
-  margin-left: 10px;
-}
-
 .page-container {
   padding: 20px;
   display: flex;
   flex-flow: column nowrap;
-
-  .query-form {
-    flex-shrink: 0;
-  }
 
   .function-container {
     flex-shrink: 0;

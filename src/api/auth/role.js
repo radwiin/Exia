@@ -7,13 +7,34 @@ export function query() {
   });
 }
 
-export function setAuthority() {
+export function add(role) {
+  return request({
+    url: "/role/add",
+    method: "post",
+    data: role
+  });
+}
+
+export function update(role) {
+  return request({
+    url: "/role/update",
+    method: "post",
+    data: role
+  });
+}
+
+export function remove(id) {
+  return request({
+    url: "/role/remove",
+    method: "post",
+    data: { id }
+  });
+}
+
+export function setAuthority(id, authMenus) {
   return request({
     url: "/role/setAuthority",
     method: "post",
-    data: {
-      menuAuthority: [],
-      apiAuthority: []
-    }
+    data: { id, authMenus }
   });
 }

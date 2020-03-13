@@ -1,33 +1,15 @@
-import { signIn, getUserInfo } from "@/api/app";
 import { getToken, setToken, removeToken } from "@/utils/auth";
-
-import { constantRoutes } from "@/router";
+import { signIn, getUserInfo } from "@/api/app";
+import { constantRoutes, resetRouter } from "@/router";
+import { mapTree } from "@/utils";
 import Layout from "@/layout";
-
-function generateAsyncRoutes(menus) {
-  return menus.map(menu => {
-    if (menu.component === null || menu.component.length === 0) {
-      delete menu.component;
-    } else if (menu.component === "Layout") {
-      menu.component = Layout;
-    } else {
-      menu.component = (component => () => import(`@/views${component}`))(
-        menu.component
-      );
-    }
-    if (menu.children && menu.children.length > 0) {
-      menu.children = generateAsyncRoutes(menu.children);
-    }
-    return menu;
-  });
-}
 
 const state = {
   token: getToken(),
-  account: "",
+  account: null,
   roles: [],
-  routes: [],
-  asyncRoutes: []
+  asyncRoutes: [],
+  allRoutes: []
 };
 
 const mutations = {
@@ -42,15 +24,15 @@ const mutations = {
   },
   SET_ASYNC_ROUTES: (state, asyncRoutes) => {
     state.asyncRoutes = asyncRoutes;
-    state.routes = constantRoutes.concat(asyncRoutes);
+    state.allRoutes = constantRoutes.concat(asyncRoutes);
   }
 };
 
 const actions = {
-  signIn({ commit }, userInfo) {
-    return signIn(userInfo).then(rsp => {
-      commit("SET_TOKEN", rsp.token);
-      setToken(rsp.token);
+  signIn({ commit }, loginForm) {
+    return signIn(loginForm).then(rsp => {
+      commit("SET_TOKEN", rsp.data.token);
+      setToken(rsp.data.token);
       return rsp;
     });
   },
@@ -61,22 +43,41 @@ const actions = {
       return rsp;
     });
   },
-  generateRoutes({ commit }, menus) {
+  generateRoutes({ commit }, menuTree) {
     return new Promise(resolve => {
-      const asyncRoutes = generateAsyncRoutes(menus);
+      const asyncRoutes = generateAsyncRoutes(menuTree);
       asyncRoutes.push({ path: "*", redirect: "/404", meta: { hidden: true } });
       commit("SET_ASYNC_ROUTES", asyncRoutes);
       resolve(asyncRoutes);
     });
   },
-  resetToken({ commit }) {
+  removeUserInfo({ commit }) {
     return new Promise(resolve => {
-      commit("SET_TOKEN", "");
+      commit("SET_TOKEN", null);
+      commit("SET_ACCOUNT", null);
+      commit("SET_ROLES", []);
+      commit("SET_ASYNC_ROUTES", []);
       removeToken();
+      resetRouter();
       resolve();
     });
   }
 };
+
+function generateAsyncRoutes(menuTree) {
+  return mapTree(menuTree, menu => {
+    if (!menu.component || menu.component.length === 0) {
+      delete menu.component;
+    } else if (menu.component === "Layout") {
+      menu.component = Layout;
+    } else {
+      menu.component = (component => () => import(`@/views${component}`))(
+        menu.component
+      );
+    }
+    return menu;
+  });
+}
 
 export default {
   namespaced: true,

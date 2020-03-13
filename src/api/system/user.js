@@ -34,3 +34,11 @@ export function remove(id) {
     data: { id }
   });
 }
+
+export function resetPassword(id) {
+  return request({
+    url: "/user/resetPassword",
+    method: "post",
+    data: { id }
+  });
+}

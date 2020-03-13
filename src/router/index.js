@@ -47,46 +47,6 @@ export const constantRoutes = [
     ]
   },
   {
-    path: "/components-demo",
-    component: Layout,
-    redirect: "/components-demo/coordinate-select",
-    meta: { title: "组件库", icon: "bpmn-io", alwaysShow: true },
-    children: [
-      {
-        path: "coordinate-select",
-        component: () => import("@/views/components-demo/coordinate-select"),
-        name: "coordinate-select",
-        meta: { title: "坐标选择", icon: "locate" }
-      },
-      {
-        path: "modeler",
-        component: () => import("@/views/components-demo/modeler"),
-        name: "modeler",
-        meta: { title: "BPMN建模", icon: "build" }
-      },
-      {
-        path: "viewer",
-        component: () => import("@/views/components-demo/viewer"),
-        name: "viewer",
-        meta: { title: "BPMN查看", icon: "show" }
-      }
-    ]
-  },
-  {
-    path: "/utils-demo",
-    component: Layout,
-    redirect: "/utils-demo/operate",
-    meta: { title: "工具库", icon: "bpmn-io", alwaysShow: true },
-    children: [
-      {
-        path: "operate",
-        component: () => import("@/views/utils-demo/operate"),
-        name: "operate",
-        meta: { title: "算术优化", icon: "calculator" }
-      }
-    ]
-  },
-  {
     path: "/about",
     component: Layout,
     redirect: "/about/index",

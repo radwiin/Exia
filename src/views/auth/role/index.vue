@@ -1,36 +1,21 @@
 <template>
   <div class="page-container">
-    <el-form
-      class="query-form"
-      ref="queryForm"
-      :model="queryForm"
-      label-width="auto"
-      inline
-    >
-      <el-form-item label="角色名称" prop="roleName">
-        <el-input v-model="queryForm.roleName" placeholder="机构名称" />
-      </el-form-item>
-      <el-form-item label="角色别名" prop="roleAlias">
-        <el-input v-model="queryForm.roleAlias" placeholder="机构全称" />
-      </el-form-item>
-      <el-form-item>
-        <el-button
-          type="primary"
-          icon="el-icon-search"
-          @click="handleQueryClick"
-          >查询</el-button
-        >
-        <el-button icon="el-icon-delete">清空</el-button>
-      </el-form-item>
-    </el-form>
     <div class="function-container">
       <el-button type="primary" icon="el-icon-plus" @click="handleCreateClick"
         >新 增</el-button
       >
-      <el-button icon="el-icon-setting">权限设置</el-button>
+      <el-button icon="el-icon-setting" @click="handleAuthClick"
+        >权限设置</el-button
+      >
     </div>
     <div class="table-container">
-      <el-table :data="tableData" border height="100%">
+      <el-table
+        class="data-table"
+        :data="tableData"
+        border
+        height="100%"
+        @selection-change="handleSelectionChange"
+      >
         <el-table-column fixed type="selection" width="50" align="center" />
         <el-table-column
           fixed
@@ -41,7 +26,6 @@
         />
         <el-table-column prop="roleName" label="角色名称" />
         <el-table-column prop="roleAlias" label="角色别名" />
-        <el-table-column prop="sort" label="排序" width="50" align="center" />
         <el-table-column fixed="right" label="操作">
           <template slot-scope="scope">
             <el-button type="text" @click="handleViewClick(scope)">
@@ -60,12 +44,16 @@
         </el-table-column>
       </el-table>
     </div>
-
+    <el-pagination
+      class="data-pagination"
+      v-bind="paginationBind"
+      @size-change="handleSizeChange"
+      @current-change="handleCurrentChange"
+    />
     <el-dialog
       :visible.sync="dialogVisible"
       :title="dialogCategory"
       width="900px"
-      @open="handleDialogOpen"
       @close="handleDialogClose"
     >
       <el-form
@@ -82,9 +70,6 @@
         <el-form-item label="角色别名" prop="roleAlias">
           <el-input v-model="form.roleAlias" />
         </el-form-item>
-        <el-form-item label="排序" prop="sort">
-          <el-input v-model="form.sort" />
-        </el-form-item>
       </el-form>
       <div slot="footer">
         <el-button @click="handleDialogCancelClick">取消</el-button>
@@ -93,11 +78,36 @@
         >
       </div>
     </el-dialog>
+    <el-drawer title="权限设置" :visible.sync="drawerVisible">
+      <div class="drawer-container" v-loading="drawerLoading">
+        <div class="drawer-function-container">
+          <el-button
+            type="primary"
+            icon="el-icon-check"
+            @click="handleDrawerSaveClick"
+            >保存</el-button
+          >
+        </div>
+        <div class="drawer-tree-container">
+          <el-tree
+            ref="menuTree"
+            :data="menuTree"
+            show-checkbox
+            node-key="value"
+          >
+          </el-tree>
+        </div>
+      </div>
+    </el-drawer>
   </div>
 </template>
 
 <script>
-import { query } from "@/api/auth/role";
+import { query as queryMenu } from "@/api/system/menu";
+import { query, add, update, remove, setAuthority } from "@/api/auth/role";
+import { mapTree } from "@/utils";
+import _ from "lodash";
+
 const DIALOG_CATEGORY = {
   CREATE: "新 增",
   VIEW: "查 看",
@@ -107,64 +117,163 @@ export default {
   name: "role",
   data() {
     return {
-      queryForm: {
-        roleName: "",
-        roleAlias: ""
-      },
-      tableData: [],
-
       DIALOG_CATEGORY, // for html
+      currentSelection: [],
+      tableData: [],
+      paginationBind: {
+        currentPage: 1,
+        pageSize: 10,
+        total: 1,
+        pageSizes: [10, 20, 50, 100],
+        layout: "total, sizes, prev, pager, next, jumper"
+      },
       dialogVisible: false,
       dialogCategory: "",
       formLoading: false,
       form: {
+        id: "",
         roleName: "",
-        roleAlias: "",
-        sort: ""
-      }
+        roleAlias: ""
+      },
+      drawerVisible: false,
+      drawerLoading: false,
+      menuTree: []
     };
   },
   created() {
-    query().then(rsp => {
-      this.tableData = rsp.data;
-    });
+    this.refreshTable();
+    this.refreshMenuTree();
   },
   methods: {
-    handleQueryClick() {
-      query().then(rsp => {
-        rsp;
+    refreshTable() {
+      const conditions = Object.assign({}, this.paginationBind);
+      query(conditions).then(rsp => {
+        this.tableData = rsp.data.records;
+        this.paginationBind.currentPage = rsp.data.currentPage;
+        this.paginationBind.pageSize = rsp.data.pageSize;
+        this.paginationBind.total = rsp.data.total;
       });
+    },
+    refreshMenuTree() {
+      queryMenu().then(rsp => {
+        this.menuTree = mapTree(_.cloneDeep(rsp.data), item => ({
+          label: item.meta.title,
+          value: item.id,
+          children: item.children
+        }));
+      });
+    },
+    resetPagination(pageSize) {
+      this.paginationBind.currentPage = 1;
+      this.paginationBind.pageSize =
+        pageSize || this.paginationBind.pageSizes[0];
+      this.paginationBind.total = 0;
+    },
+    handleSizeChange(pageSize) {
+      this.resetPagination(pageSize);
+      this.refreshTable();
+    },
+    handleCurrentChange() {
+      this.refreshTable();
+    },
+    handleQueryClick() {
+      this.resetPagination();
+      this.refreshTable();
+    },
+    handleResetClick() {
+      this.resetPagination();
+      this.refreshTable();
     },
     handleCreateClick() {
       this.dialogCategory = DIALOG_CATEGORY.CREATE;
       this.dialogVisible = true;
     },
-    handleViewClick(scope) {
+    handleSelectionChange(selection) {
+      this.currentSelection = selection;
+    },
+    handleAuthClick() {
+      if (this.currentSelection.length === 0) {
+        this.$message({
+          type: "warning",
+          message: "请选择至少一条数据"
+        });
+      } else if (this.currentSelection.length > 1) {
+        this.$message({
+          type: "warning",
+          message: "只能选择一条数据"
+        });
+      } else {
+        this.drawerVisible = true;
+        this.$nextTick(() => {
+          this.$refs.menuTree.setCheckedKeys(
+            this.currentSelection[0].authMenus,
+            true
+          );
+        });
+      }
+    },
+    handleViewClick({ row }) {
       this.dialogCategory = DIALOG_CATEGORY.VIEW;
       this.dialogVisible = true;
       this.$nextTick(() => {
-        Object.assign(this.form, scope.row);
+        Object.assign(this.form, row);
       });
     },
-    handleEditClick(scope) {
+    handleEditClick({ row }) {
       this.dialogCategory = DIALOG_CATEGORY.EDIT;
       this.dialogVisible = true;
       this.$nextTick(() => {
-        Object.assign(this.form, scope.row);
+        Object.assign(this.form, row);
       });
     },
-    handleDeleteConfirm(scope) {
-      console.info(scope);
+    handleDeleteConfirm({ row }) {
+      remove(row.id)
+        .then(() => {
+          this.refreshTable();
+        })
+        .catch(console.error);
     },
-
-    handleDialogOpen() {},
     handleDialogClose() {
       this.$refs.form.resetFields();
     },
     handleDialogCancelClick() {
       this.dialogVisible = false;
     },
-    handleDialogConfirmClick() {}
+    handleDialogConfirmClick() {
+      if (this.dialogCategory === DIALOG_CATEGORY.VIEW) {
+        this.dialogVisible = false;
+      } else {
+        this.$refs.form.validate(valid => {
+          if (valid) {
+            this.formLoading = true;
+            const promise = {
+              [DIALOG_CATEGORY.CREATE]: add,
+              [DIALOG_CATEGORY.EDIT]: update
+            }[this.dialogCategory];
+            promise(this.form)
+              .then(() => {
+                this.$refs.form.resetFields();
+                this.dialogVisible = false;
+                this.resetPagination();
+                this.refreshTable();
+              })
+              .catch(console.error)
+              .finally(() => {
+                this.formLoading = false;
+              });
+          }
+        });
+      }
+    },
+    handleDrawerSaveClick() {
+      const authMenus = this.$refs.menuTree.getCheckedKeys(true);
+      this.drawerLoading = true;
+      setAuthority(this.currentSelection[0].id, authMenus)
+        .catch(console.error)
+        .finally(() => {
+          this.drawerLoading = false;
+        });
+    }
   }
 };
 </script>
@@ -174,18 +283,10 @@ export default {
   margin-left: 10px;
 }
 
-span + .el-button {
-  margin-left: 10px;
-}
-
 .page-container {
   padding: 20px;
   display: flex;
   flex-flow: column nowrap;
-
-  .query-form {
-    flex-shrink: 0;
-  }
 
   .function-container {
     flex-shrink: 0;
@@ -195,6 +296,31 @@ span + .el-button {
   .table-container {
     min-height: 0px;
     flex-grow: 1;
+  }
+
+  .data-pagination {
+    flex-shrink: 0;
+    align-self: flex-end;
+    padding-top: 10px;
+  }
+}
+
+.drawer-container {
+  width: 100%;
+  height: 100%;
+  padding: 0 20px 20px;
+  display: flex;
+  flex-flow: column nowrap;
+
+  .drawer-function-container {
+    flex-shrink: 0;
+    padding-bottom: 10px;
+  }
+
+  .drawer-tree-container {
+    min-height: 0px;
+    flex-grow: 1;
+    overflow: auto;
   }
 }
 </style>

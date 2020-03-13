@@ -20,14 +20,14 @@ export default {
     defaultActive: {
       type: String
     },
-    menu: {
+    data: {
       type: Array,
       required: true
     }
   },
   data() {
     return {
-      theMenu: _.cloneDeep(this.menu)
+      theMenu: _.cloneDeep(this.data)
     };
   },
   render(h) {
