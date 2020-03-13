@@ -87,12 +87,7 @@
           <el-input v-model="form.realName" />
         </el-form-item>
         <el-form-item label="所属角色" prop="roles">
-          <el-select
-            v-model="form.roles"
-            multiple
-            clearable
-            style="width:100%"
-          >
+          <el-select v-model="form.roles" multiple clearable style="width:100%">
             <el-option
               v-for="option in roleOptions"
               :key="option.value"
