@@ -16,7 +16,7 @@
         auto-complete="on"
         placeholder="请输入账号"
       >
-        <svg-icon slot="prefix" icon-class="user" />
+        <i slot="prefix" class="el-icon-user el-input__icon" />
       </el-input>
     </el-form-item>
     <el-form-item prop="password">
@@ -27,7 +27,7 @@
         auto-complete="on"
         placeholder="请输入密码"
       >
-        <svg-icon slot="prefix" icon-class="password" />
+        <i slot="prefix" class="el-icon-lock el-input__icon" />
         <i
           class="el-icon-view el-input__icon"
           slot="suffix"

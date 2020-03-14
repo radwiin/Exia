@@ -84,7 +84,7 @@ import settingDrawer from "./components/SettingDrawer";
 import Breadcrumb from "@/components/Breadcrumb";
 
 export default {
-  name: "Layout",
+  name: "SideMenuLayout",
   components: {
     NavMenu,
     settingDrawer,

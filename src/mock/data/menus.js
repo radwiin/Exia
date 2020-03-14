@@ -13,9 +13,9 @@ const menus = [
         id: "10",
         pId: "8",
         sort: 1,
-        path: "coordinate-select",
-        component: "/components-demo/coordinate-select",
-        name: "coordinate-select",
+        path: "coordinate-select-demo",
+        component: "/components-demo/coordinate-select-demo",
+        name: "coordinate-select-demo",
         meta: { title: "坐标选择", icon: "locate" }
       },
       {
@@ -35,6 +35,15 @@ const menus = [
         component: "/components-demo/viewer",
         name: "viewer",
         meta: { title: "BPMN查看", icon: "show" }
+      },
+      {
+        id: "13",
+        pId: "8",
+        sort: 1,
+        path: "watermark-demo",
+        component: "/components-demo/watermark-demo",
+        name: "watermark-demo",
+        meta: { title: "水印", icon: "show" }
       }
     ]
   },

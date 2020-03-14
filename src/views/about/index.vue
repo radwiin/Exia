@@ -22,7 +22,7 @@
     <el-row :gutter="30" style="margin:0 20px;">
       <el-col v-bind="contentColSpan">
         <div style="padding: 30px 0">
-          <span style="font-size:20px;color:#707175">Framework</span>
+          <span style="font-size:20px;color:#707175">项目结构</span>
         </div>
         <el-collapse v-model="frameworkActiveNames">
           <el-collapse-item title="一致性 Consistency" name="1">
@@ -60,7 +60,7 @@
       </el-col>
       <el-col v-bind="contentColSpan">
         <div style="padding: 30px 0">
-          <span style="font-size:20px;color:#707175">Component</span>
+          <span style="font-size:20px;color:#707175">组件库</span>
         </div>
         <el-collapse v-model="contentActiveNames">
           <el-collapse-item title="一致性 Consistency" name="1">

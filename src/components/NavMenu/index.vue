@@ -6,7 +6,7 @@ export default {
   props: {
     collapse: {
       type: Boolean,
-      required: true
+      default: false
     },
     textColor: {
       type: String
@@ -23,6 +23,11 @@ export default {
     data: {
       type: Array,
       required: true
+    },
+    mode: {
+      //must be one of `horizontal / vertical`
+      type: String,
+      default: "vertical"
     }
   },
   data() {
@@ -35,6 +40,7 @@ export default {
       "el-menu",
       {
         props: {
+          mode: this.mode,
           collapse: this.collapse,
           textColor: this.textColor,
           activeTextColor: this.activeTextColor,
