@@ -7,7 +7,7 @@ const menus = [
     component: "Layout",
     redirect: "/components-demo/coordinate-select",
     name: "components-demo",
-    meta: { title: "组件库", icon: "bpmn-io", alwaysShow: true },
+    meta: { title: "组件库", icon: "build", alwaysShow: true },
     children: [
       {
         id: "10",
@@ -18,24 +18,7 @@ const menus = [
         name: "coordinate-select-demo",
         meta: { title: "坐标选择", icon: "locate" }
       },
-      {
-        id: "11",
-        pId: "8",
-        sort: 1,
-        path: "modeler",
-        component: "/components-demo/modeler",
-        name: "modeler",
-        meta: { title: "BPMN建模", icon: "build" }
-      },
-      {
-        id: "12",
-        pId: "8",
-        sort: 1,
-        path: "viewer",
-        component: "/components-demo/viewer",
-        name: "viewer",
-        meta: { title: "BPMN查看", icon: "show" }
-      },
+
       {
         id: "13",
         pId: "8",
@@ -44,6 +27,15 @@ const menus = [
         component: "/components-demo/watermark-demo",
         name: "watermark-demo",
         meta: { title: "水印", icon: "show" }
+      },
+      {
+        id: "14",
+        pId: "8",
+        sort: 1,
+        path: "icon-demo",
+        component: "/components-demo/icon-demo",
+        name: "icon-demo",
+        meta: { title: "图标", icon: "icon" }
       }
     ]
   },
@@ -55,7 +47,7 @@ const menus = [
     component: "Layout",
     redirect: "/utils-demo/operate",
     name: "utils-demo",
-    meta: { title: "工具库", icon: "bpmn-io", alwaysShow: true },
+    meta: { title: "工具库", icon: "component", alwaysShow: true },
     children: [
       {
         id: "13",
@@ -65,6 +57,36 @@ const menus = [
         component: "/utils-demo/operate",
         name: "operate",
         meta: { title: "算术优化", icon: "calculator" }
+      }
+    ]
+  },
+  {
+    id: "4",
+    pId: "root",
+    sort: 1,
+    path: "/workflow",
+    component: "Layout",
+    redirect: "/workflow/modeler",
+    name: "workflow",
+    meta: { title: "工作流", icon: "bpmn-io", alwaysShow: true },
+    children: [
+      {
+        id: "11",
+        pId: "4",
+        sort: 1,
+        path: "modeler",
+        component: "/workflow/modeler",
+        name: "modeler",
+        meta: { title: "BPMN建模", icon: "edit" }
+      },
+      {
+        id: "12",
+        pId: "4",
+        sort: 1,
+        path: "viewer",
+        component: "/workflow/viewer",
+        name: "viewer",
+        meta: { title: "BPMN查看", icon: "show" }
       }
     ]
   },

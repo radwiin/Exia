@@ -14,6 +14,7 @@
     "bpmn-js": "^6.1.2",
     "bpmn-js-properties-panel": "^0.33.1",
     "camunda-bpmn-moddle": "^4.3.0",
+    "clipboard": "^2.0.6",
     "core-js": "^3.4.4",
     "element-ui": "^2.13.0",
     "jexl": "^2.2.2",
