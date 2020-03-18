@@ -1,6 +1,6 @@
 const menus = [
   {
-    id: "8",
+    id: "1",
     pId: "root",
     sort: 1,
     path: "/components-demo",
@@ -10,8 +10,8 @@ const menus = [
     meta: { title: "组件库", icon: "build", alwaysShow: true },
     children: [
       {
-        id: "10",
-        pId: "8",
+        id: "1-1",
+        pId: "1",
         sort: 1,
         path: "coordinate-select-demo",
         component: "/components-demo/coordinate-select-demo",
@@ -20,8 +20,8 @@ const menus = [
       },
 
       {
-        id: "13",
-        pId: "8",
+        id: "1-2",
+        pId: "1",
         sort: 1,
         path: "watermark-demo",
         component: "/components-demo/watermark-demo",
@@ -29,8 +29,8 @@ const menus = [
         meta: { title: "水印", icon: "show" }
       },
       {
-        id: "14",
-        pId: "8",
+        id: "1-3",
+        pId: "1",
         sort: 1,
         path: "icon-demo",
         component: "/components-demo/icon-demo",
@@ -40,7 +40,7 @@ const menus = [
     ]
   },
   {
-    id: "9",
+    id: "2",
     pId: "root",
     sort: 1,
     path: "/utils-demo",
@@ -50,8 +50,8 @@ const menus = [
     meta: { title: "工具库", icon: "component", alwaysShow: true },
     children: [
       {
-        id: "13",
-        pId: "9",
+        id: "2-1",
+        pId: "2",
         sort: 1,
         path: "operate",
         component: "/utils-demo/operate",
@@ -61,7 +61,7 @@ const menus = [
     ]
   },
   {
-    id: "4",
+    id: "3",
     pId: "root",
     sort: 1,
     path: "/workflow",
@@ -71,8 +71,8 @@ const menus = [
     meta: { title: "工作流", icon: "bpmn-io", alwaysShow: true },
     children: [
       {
-        id: "11",
-        pId: "4",
+        id: "3-1",
+        pId: "3",
         sort: 1,
         path: "modeler",
         component: "/workflow/modeler",
@@ -80,8 +80,8 @@ const menus = [
         meta: { title: "BPMN建模", icon: "edit" }
       },
       {
-        id: "12",
-        pId: "4",
+        id: "3-2",
+        pId: "3",
         sort: 1,
         path: "viewer",
         component: "/workflow/viewer",
@@ -91,7 +91,28 @@ const menus = [
     ]
   },
   {
-    id: "1",
+    id: "4",
+    pId: "root",
+    sort: 1,
+    path: "/draggable",
+    component: "Layout",
+    redirect: "/draggable/todo",
+    name: "draggable",
+    meta: { title: "拖拽", icon: "setting", alwaysShow: true },
+    children: [
+      {
+        id: "4-1",
+        pId: "4",
+        sort: 1,
+        path: "todo",
+        component: "/draggable/todo",
+        name: "todo",
+        meta: { title: "待办", icon: "key" }
+      }
+    ]
+  },
+  {
+    id: "100",
     pId: "root",
     sort: 1,
     path: "/auth",
@@ -101,8 +122,8 @@ const menus = [
     meta: { title: "权限管理", icon: "setting", alwaysShow: true },
     children: [
       {
-        id: "2",
-        pId: "1",
+        id: "100-1",
+        pId: "100",
         sort: 1,
         path: "role",
         component: "/auth/role",
@@ -112,7 +133,7 @@ const menus = [
     ]
   },
   {
-    id: "3",
+    id: "101",
     pId: "root",
     sort: 1,
     path: "/system",
@@ -122,8 +143,8 @@ const menus = [
     meta: { title: "系统管理", icon: "setting", alwaysShow: true },
     children: [
       {
-        id: "6",
-        pId: "3",
+        id: "101-1",
+        pId: "101",
         sort: 1,
         path: "user",
         component: "/system/user",
@@ -131,8 +152,8 @@ const menus = [
         meta: { title: "用户管理", icon: "key" }
       },
       {
-        id: "7",
-        pId: "3",
+        id: "101-2",
+        pId: "101",
         sort: 1,
         path: "menu",
         component: "/system/menu",
