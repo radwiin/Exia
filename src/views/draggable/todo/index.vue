@@ -1,61 +1,79 @@
 <template>
   <div class="page-container">
-    <draggable
-      class="list-group"
-      tag="ul"
-      v-model="list"
-      v-bind="dragOptions"
-      @start="onStart"
-      @end="onEnd"
-      :move="onMove"
-      group="people"
-    >
-      <transition-group type="transition" :name="!drag ? 'flip-list' : null">
-        <li
-          class="list-group-item"
-          v-for="element in list"
-          :key="element.order"
+    <div class="list-wrapper">
+      <div class="list">
+        <div class="list-header">
+          todo
+        </div>
+        <draggable
+          class="list-content"
+          v-model="list"
+          v-bind="dragOptions"
+          @start="onStart"
+          @end="onEnd"
         >
-          <i
-            :class="
-              element.fixed ? 'fa fa-anchor' : 'glyphicon glyphicon-pushpin'
-            "
-            @click="element.fixed = !element.fixed"
-            aria-hidden="true"
-          ></i>
-          {{ element.name }}
-        </li>
-      </transition-group>
-    </draggable>
-
-    <!-- <draggable
-      class="list-group"
-      tag="ul"
-      v-model="list2"
-      v-bind="dragOptions"
-      @start="drag = true"
-      @end="drag = false"
-      group="people"
-    >
-      <transition-group type="transition" :name="!drag ? 'flip-list' : null">
-        <li
-          class="list-group-item"
-          v-for="element in list2"
-          :key="element.order"
+          <div
+            class="list-card-wrapper"
+            v-for="element in list"
+            :key="element.order"
+          >
+            <div class="list-card">{{ element.name }}</div>
+          </div>
+        </draggable>
+        <div class="list-footer">
+          footer
+        </div>
+      </div>
+    </div>
+    <div class="list-wrapper">
+      <div class="list">
+        <div class="list-header">
+          doing
+        </div>
+        <draggable
+          class="list-content"
+          v-model="list2"
+          v-bind="dragOptions"
+          @start="onStart"
+          @end="onEnd"
         >
-          <i
-            :class="
-              element.fixed ? 'fa fa-anchor' : 'glyphicon glyphicon-pushpin'
-            "
-            @click="element.fixed = !element.fixed"
-            aria-hidden="true"
-          ></i>
-          {{ element.name }}
-        </li>
-      </transition-group>
-    </draggable> -->
-    <div ref="ui-draggable-helper" class="ui-draggable-helper">
-      <div ref="ui-draggable-helper-placeholder"></div>
+          <div
+            class="list-card-wrapper"
+            v-for="element in list2"
+            :key="element.order"
+          >
+            <div class="list-card">{{ element.name }}</div>
+          </div>
+        </draggable>
+        <div class="list-footer">
+          footer
+        </div>
+      </div>
+    </div>
+    <div class="list-wrapper">
+      <div class="list">
+        <div class="list-header">
+          done
+        </div>
+        <draggable
+          class="list-content"
+          v-model="list3"
+          v-bind="dragOptions"
+          @start="onStart"
+          @end="onEnd"
+        >
+          <div
+            class="list-card-wrapper"
+            v-for="element in list3"
+            :key="element.order"
+          >
+            <div class="list-card">{{ element.name }}</div>
+          </div>
+        </draggable>
+        <div class="list-footer">
+          footer
+        </div>
+      </div>
     </div>
   </div>
 </template>
@@ -74,77 +92,29 @@ const message = [
   "Sortablejs"
 ];
 export default {
-  name: "todo",
+  name: "todo-native",
   components: {
     draggable
   },
   data() {
     return {
+      dragOptions: {
+        group: "description",
+        animation: 200,
+        forceFallback: true,
+        ghostClass: "ghost",
+        dragClass: "drag"
+      },
       list: message.map((name, index) => {
         return { name, order: index + 1 };
       }),
       list2: message.map((name, index) => {
-        return { name, order: index + 999 };
+        return { name, order: index + 100 };
       }),
-      drag: false,
-      uiDraggableHelper: null,
-      uiDraggableHelperPlaceholder: null,
-      currentDraggingItem: null,
-      listenerTrigger: false
+      list3: message.map((name, index) => {
+        return { name, order: index + 200 };
+      })
     };
-  },
-  mounted() {
-    this.uiDraggableHelper = this.$refs["ui-draggable-helper"];
-    this.uiDraggableHelperPlaceholder = this.$refs[
-      "ui-draggable-helper-placeholder"
-    ];
-    document.addEventListener("drag", this.onMouseMove);
-  },
-  methods: {
-    onMouseMove(mouseEvent) {
-      if (this.listenerTrigger) {
-        this.uiDraggableHelper.style.top = mouseEvent.clientY - 50 + "px";
-        this.uiDraggableHelper.style.left = mouseEvent.clientX - 50 + "px";
-      }
-    },
-    onStart(evt) {
-      console.info("start", evt);
-      this.drag = true;
-
-      this.currentDraggingItem = evt.item.cloneNode(true);
-      this.uiDraggableHelper.replaceChild(
-        this.currentDraggingItem,
-        this.uiDraggableHelperPlaceholder
-      );
-      this.listenerTrigger = true;
-    },
-    onEnd(evt) {
-      console.info("end", evt);
-      this.drag = false;
-
-      this.uiDraggableHelper.replaceChild(
-        this.uiDraggableHelperPlaceholder,
-        this.currentDraggingItem
-      );
-      this.listenerTrigger = false;
-    },
-    onMove(evt) {
-      console.info("move", evt);
-    },
-    sort() {
-      this.list = this.list.sort((a, b) => a.order - b.order);
-    }
-  },
-  computed: {
-    dragOptions() {
-      return {
-        animation: 200,
-        group: "description",
-        disabled: false,
-        ghostClass: "ghost",
-        dragClass: "drag"
-      };
-    }
   }
 };
 </script>
@@ -152,59 +122,83 @@ export default {
 <style lang="scss" scoped>
 .page-container {
   padding: 20px;
-  display: flex;
-  flex-flow: row nowrap;
-  justify-content: space-between;
+  overflow-x: auto;
+  white-space: nowrap;
+}
 
-  .list-group {
-    min-height: 20px;
+.list-wrapper {
+  width: 272px;
+  margin: 0 4px;
+  height: 100%;
+  display: inline-block;
+  white-space: nowrap;
+
+  &:first-child {
+    margin-left: 8px;
+  }
+
+  .list {
     display: flex;
-    list-style-type: none;
-    padding-left: 0px;
+    flex-flow: column nowrap;
+    max-height: 100%;
+    border-radius: 3px;
+    white-space: normal;
+    background-color: #ebecf0;
+
+    .list-header {
+      flex: 0 0 auto;
+      height: 40px;
+      text-align: center;
+      line-height: 40px;
+    }
+
+    .list-content {
+      flex: 1 1 auto;
+      min-height: 0;
+      overflow-y: auto;
+      overflow-x: hidden;
+      margin: 0 4px;
+      padding: 0 4px;
+
+      .list-card-wrapper {
+        margin-bottom: 8px;
+        border-radius: 3px;
+        background-color: #e2e4ea;
+
+        .list-card {
+          background-color: #fff;
+          border-radius: 3px;
+          box-shadow: 0 1px 0 rgba(9, 30, 66, 0.25);
+          cursor: pointer;
+
+          height: 60px;
+          text-align: center;
+          line-height: 60px;
+
+          &:hover {
+            background-color: #f4f5f7;
+          }
+        }
+      }
+    }
+
+    .list-footer {
+      flex: 0 0 auto;
+      height: 38px;
+      text-align: center;
+      line-height: 38px;
+    }
   }
 }
 
-.button {
-  margin-top: 35px;
-}
-
-.flip-list-move {
-  transition: transform 0.5s;
-}
-
-.no-move {
-  transition: transform 0s;
-}
-
 .ghost {
-  // opacity: 0;
-  background: #c8ebfb;
+  & > .list-card {
+    opacity: 0;
+  }
 }
 
 .drag {
-  opacity: 0;
-}
-
-.list-group-item {
-  cursor: move;
-  padding: 0.75rem 1.25rem;
-  border: 1px solid rgba(0, 0, 0, 0.125);
-}
-
-.list-group-item i {
-  cursor: pointer;
-}
-
-.ui-draggable-helper {
-  min-height: 20px;
-  display: flex;
-  list-style-type: none;
-  padding-left: 0px;
-  z-index: 1000;
-  position: fixed;
-  top: 100px;
-  left: 100px;
-  background: red;
-  transform: translateZ(0px) rotate(9deg);
+  opacity: 1 !important;
+  transform: rotate(7deg);
 }
 </style>
