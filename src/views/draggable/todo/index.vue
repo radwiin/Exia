@@ -10,13 +10,7 @@
             maxlength="512"
           />
         </div>
-        <draggable
-          class="list-content"
-          v-model="list"
-          v-bind="dragOptions"
-          @start="onStart"
-          @end="onEnd"
-        >
+        <draggable class="list-content" v-model="list" v-bind="dragOptions">
           <div
             class="list-card-wrapper"
             v-for="element in list"
@@ -26,22 +20,46 @@
           </div>
         </draggable>
         <div class="list-footer">
-          footer
+          <div v-if="showAdd" class="list-footer-new-container">
+            <div class="list-footer-input-wrapper">
+              <textarea
+                class="list-footer-input"
+                v-model="listHeaderName"
+                spellcheck="false"
+                maxlength="512"
+              />
+            </div>
+            <div class="list-footer-function-container">
+              <input
+                class="list-footer-new-confirm"
+                type="submit"
+                value="添加卡片"
+              />
+              <svg-icon
+                icon-class="close"
+                class-name="icon-close"
+                @click="showAdd = false"
+              />
+            </div>
+          </div>
+          <div v-else class="list-footer-add" @click="showAdd = true">
+            <svg-icon icon-class="add" class-name="icon-add" />
+            <span>添加卡片</span>
+          </div>
         </div>
       </div>
     </div>
     <div class="list-wrapper">
       <div class="list">
         <div class="list-header">
-          doing
+          <textarea
+            v-model="listHeaderName2"
+            class="list-header-name"
+            spellcheck="false"
+            maxlength="512"
+          />
         </div>
-        <draggable
-          class="list-content"
-          v-model="list2"
-          v-bind="dragOptions"
-          @start="onStart"
-          @end="onEnd"
-        >
+        <draggable class="list-content" v-model="list2" v-bind="dragOptions">
           <div
             class="list-card-wrapper"
             v-for="element in list2"
@@ -51,22 +69,24 @@
           </div>
         </draggable>
         <div class="list-footer">
-          footer
+          <div class="list-footer-add">
+            <svg-icon icon-class="add" class-name="icon-add" />
+            <span>添加卡片</span>
+          </div>
         </div>
       </div>
     </div>
     <div class="list-wrapper">
       <div class="list">
         <div class="list-header">
-          done
+          <textarea
+            v-model="listHeaderName3"
+            class="list-header-name"
+            spellcheck="false"
+            maxlength="512"
+          />
         </div>
-        <draggable
-          class="list-content"
-          v-model="list3"
-          v-bind="dragOptions"
-          @start="onStart"
-          @end="onEnd"
-        >
+        <draggable class="list-content" v-model="list3" v-bind="dragOptions">
           <div
             class="list-card-wrapper"
             v-for="element in list3"
@@ -76,7 +96,10 @@
           </div>
         </draggable>
         <div class="list-footer">
-          footer
+          <div class="list-footer-add">
+            <svg-icon icon-class="add" class-name="icon-add" />
+            <span>添加卡片</span>
+          </div>
         </div>
       </div>
     </div>
@@ -103,7 +126,16 @@ export default {
   },
   data() {
     return {
-      listHeaderName: "todo",
+      showAdd: false,
+      board: {
+        name: "exia",
+        lists: [
+          {
+            name: "todo",
+            cards: []
+          }
+        ]
+      },
       dragOptions: {
         group: "description",
         animation: 200,
@@ -111,6 +143,10 @@ export default {
         ghostClass: "ghost",
         dragClass: "drag"
       },
+      listHeaderName: "todo",
+      listHeaderName2: "doing",
+      listHeaderName3: "done",
+
       list: message.map((name, index) => {
         return { name, order: index + 1 };
       }),
@@ -156,6 +192,7 @@ export default {
       padding: 10px 8px;
       position: relative;
       min-height: 20px;
+      // display: table;
 
       .list-header-name {
         width: 100%;
@@ -167,7 +204,7 @@ export default {
         border-radius: 3px;
         box-shadow: none;
         font-weight: 600;
-        margin: -8px 0;
+        margin: -4px 0;
         min-height: 20px;
         max-height: 256px;
         padding: 4px 8px;
@@ -175,6 +212,7 @@ export default {
         line-height: 20px;
         font-size: 14px;
         color: #172b4d;
+        display: block;
 
         &:focus {
           background: #fff;
@@ -216,9 +254,111 @@ export default {
 
     .list-footer {
       flex: 0 0 auto;
-      height: 38px;
-      text-align: center;
-      line-height: 38px;
+      min-height: 38px;
+
+      .list-footer-add {
+        height: 28px;
+        margin: 2px 8px 8px;
+        padding: 4px 8px;
+
+        display: flex;
+        align-items: center;
+
+        cursor: pointer;
+        color: #5e6c84;
+
+        &:hover {
+          background-color: rgba(9, 30, 66, 0.08);
+          color: #172b4d;
+        }
+
+        .icon-add {
+          width: 20px;
+          height: 20px;
+          margin-right: 2px;
+        }
+
+        span {
+          font-size: 14px;
+          line-height: 20px;
+          font-weight: 400;
+        }
+      }
+
+      .list-footer-new-container {
+        padding-bottom: 8px;
+        margin: 0 8px;
+
+        .list-footer-input-wrapper {
+          padding: 6px 8px 2px;
+          background-color: #fff;
+          border-radius: 3px;
+          box-shadow: 0 1px 0 rgba(9, 30, 66, 0.25);
+          margin: 0 0 8px;
+
+          .list-footer-input {
+            display: block;
+            width: 100%;
+            height: 54px;
+            overflow: hidden;
+            overflow-wrap: break-word;
+            resize: none;
+            background: transparent;
+            border-radius: 3px;
+            box-shadow: none;
+            min-height: 20px;
+            max-height: 256px;
+            border: none;
+            outline: none;
+            line-height: 20px;
+            font-size: 14px;
+            font-weight: 400;
+            color: #172b4d;
+            padding: 0px;
+            margin-bottom: 4px;
+          }
+        }
+
+        .list-footer-function-container {
+          display: flex;
+          align-items: center;
+
+          .list-footer-new-confirm {
+            background-color: #5aac44;
+            box-shadow: none;
+            border: none;
+            color: #fff;
+            cursor: pointer;
+            display: inline-block;
+            font-size: 14px;
+            font-weight: 400;
+            line-height: 20px;
+            margin: 0 4px 0 0;
+            padding: 6px 12px;
+            text-align: center;
+            border-radius: 3px;
+
+            &:hover {
+              background-color: #61bd4f;
+              box-shadow: none;
+              border: none;
+              color: #fff;
+            }
+          }
+
+          .icon-close {
+            width: 20px;
+            height: 20px;
+            margin-left: 6px;
+            cursor: pointer;
+            color: #6b778c;
+
+            &:hover {
+              color: #172b4d;
+            }
+          }
+        }
+      }
     }
   }
 }
