@@ -3,7 +3,12 @@
     <div class="list-wrapper">
       <div class="list">
         <div class="list-header">
-          todo
+          <textarea
+            v-model="listHeaderName"
+            class="list-header-name"
+            spellcheck="false"
+            maxlength="512"
+          />
         </div>
         <draggable
           class="list-content"
@@ -98,6 +103,7 @@ export default {
   },
   data() {
     return {
+      listHeaderName: "todo",
       dragOptions: {
         group: "description",
         animation: 200,
@@ -147,9 +153,35 @@ export default {
 
     .list-header {
       flex: 0 0 auto;
-      height: 40px;
-      text-align: center;
-      line-height: 40px;
+      padding: 10px 8px;
+      position: relative;
+      min-height: 20px;
+
+      .list-header-name {
+        width: 100%;
+        height: 28px;
+        overflow: hidden;
+        overflow-wrap: break-word;
+        resize: none;
+        background: transparent;
+        border-radius: 3px;
+        box-shadow: none;
+        font-weight: 600;
+        margin: -8px 0;
+        min-height: 20px;
+        max-height: 256px;
+        padding: 4px 8px;
+        border: none;
+        line-height: 20px;
+        font-size: 14px;
+        color: #172b4d;
+
+        &:focus {
+          background: #fff;
+          border: none;
+          box-shadow: inset 0 0 0 2px #0079bf;
+        }
+      }
     }
 
     .list-content {
