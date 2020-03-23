@@ -43,7 +43,6 @@
             <div class="user-menu">
               <div class="user-info-item">
                 <el-avatar
-                  class="user-avatar"
                   shape="square"
                   :size="50"
                   :src="require('@/assets/avator.jpg')"
@@ -79,8 +78,8 @@
 
 <script>
 import { mapGetters } from "vuex";
-import NavMenu from "./components/NavMenu";
-import settingDrawer from "./components/SettingDrawer";
+import NavMenu from "@/layout/components/NavMenu";
+import settingDrawer from "@/layout/components/SettingDrawer";
 import Breadcrumb from "./components/Breadcrumb";
 
 export default {
@@ -234,9 +233,6 @@ $HeaderHeight: 50px;
 
     &:hover {
       background: rgba(0, 0, 0, 0.05);
-    }
-
-    .user-avatar {
     }
 
     .user-name {
