@@ -2,14 +2,17 @@
   <el-drawer
     title="Setting"
     direction="rtl"
-    size="260px"
+    size="300px"
     :visible="visible"
     @update:visible="handleVisibleUpdate"
   >
     <div class="drawer-container">
       <div class="drawer-item">
         <span>Open Tags-View</span>
-        <el-switch v-model="tagsView" class="drawer-switch" />
+        <el-radio-group v-model="tagsView">
+          <el-radio-button label="上海"></el-radio-button>
+          <el-radio-button label="北京"></el-radio-button>
+        </el-radio-group>
       </div>
 
       <div class="drawer-item">

@@ -15,7 +15,24 @@
         :default-active="activeMenu"
         :data="allRoutes"
       />
-      <div class="bottom-menu"></div>
+      <div :class="`bottom-menu ${collapse ? 'is-collapse' : ''}`">
+        <div class="avatar-wrapper">
+          <el-avatar
+            shape="circle"
+            :size="40"
+            :src="require('@/assets/avator.jpg')"
+          />
+        </div>
+        <div class="setting-wrapper" @click="handleSettingClick">
+          <svg-icon icon-class="setting" class-name="setting" />
+        </div>
+        <div class="hamburger-wrapper" @click="collapse = !collapse">
+          <svg-icon
+            icon-class="hamburger"
+            :class-name="`hamburger ${collapse ? '' : 'is-active'}`"
+          />
+        </div>
+      </div>
     </el-aside>
     <el-main class="main-wrapper">
       <transition name="fade-transform" mode="out-in">
@@ -69,6 +86,7 @@ export default {
 
 <style lang="scss" scoped>
 $MenuWidth: 241px;
+$MenuWidthCollapse: 64px;
 $HeaderHeight: 50px;
 
 .app-wrapper {
@@ -97,6 +115,7 @@ $HeaderHeight: 50px;
     .nav-menu {
       flex: auto;
       min-height: 0px;
+      overflow-y: auto;
 
       &:not(.el-menu--collapse) {
         width: $MenuWidth;
@@ -104,6 +123,77 @@ $HeaderHeight: 50px;
     }
 
     .bottom-menu {
+      flex: none;
+      width: $MenuWidth;
+      height: $MenuWidthCollapse;
+      background: #253ca4;
+      border-right: solid 1px #e6e6e6;
+      display: flex;
+      justify-content: flex-end;
+      transition: width 0.3s ease-in-out;
+
+      &.is-collapse {
+        width: $MenuWidthCollapse;
+      }
+
+      .hamburger-wrapper {
+        width: $MenuWidthCollapse;
+        height: $MenuWidthCollapse;
+        flex: 0 0 auto;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        cursor: pointer;
+        transition: background-color 0.3s;
+        -webkit-tap-highlight-color: transparent;
+
+        &:hover {
+          background-color: rgba(0, 0, 0, 0.05);
+        }
+
+        .hamburger {
+          width: 20px;
+          height: 20px;
+          color: #fff;
+          transition: transform 0.3s;
+
+          &.is-active {
+            transform: rotate(180deg);
+          }
+        }
+      }
+
+      .setting-wrapper {
+        width: $MenuWidthCollapse;
+        height: $MenuWidthCollapse;
+        flex: 0 1 auto;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        cursor: pointer;
+        transition: background-color 0.3s;
+        -webkit-tap-highlight-color: transparent;
+
+        &:hover {
+          background-color: rgba(0, 0, 0, 0.05);
+        }
+
+        .setting {
+          width: 20px;
+          height: 20px;
+          color: #fff;
+        }
+      }
+
+      .avatar-wrapper {
+        height: $MenuWidthCollapse;
+        flex: 1 1 auto;
+        display: flex;
+        align-items: center;
+        cursor: pointer;
+        -webkit-tap-highlight-color: transparent;
+        padding-left: 8px;
+      }
     }
   }
 
@@ -121,11 +211,11 @@ $HeaderHeight: 50px;
       align-items: center;
       justify-content: center;
       cursor: pointer;
-      transition: background 0.3s;
+      transition: background-color 0.3s;
       -webkit-tap-highlight-color: transparent;
 
       &:hover {
-        background: rgba(0, 0, 0, 0.05);
+        background-color: rgba(0, 0, 0, 0.05);
       }
 
       .hamburger {
@@ -219,11 +309,5 @@ $HeaderHeight: 50px;
       vertical-align: middle;
     }
   }
-}
-</style>
-
-<style lang="scss">
-.popper-wrapper {
-  padding: 0px;
 }
 </style>
