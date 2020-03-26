@@ -112,6 +112,27 @@ const menus = [
     ]
   },
   {
+    id: "5",
+    pId: "root",
+    sort: 1,
+    path: "/scrollmagic",
+    component: "Layout",
+    redirect: "/scrollmagic/pagescroll",
+    name: "scrollmagic",
+    meta: { title: "滚动", icon: "setting", alwaysShow: true },
+    children: [
+      {
+        id: "5-1",
+        pId: "5",
+        sort: 1,
+        path: "pagescroll",
+        component: "/scrollmagic/pagescroll",
+        name: "pagescroll",
+        meta: { title: "翻页", icon: "key" }
+      }
+    ]
+  },
+  {
     id: "100",
     pId: "root",
     sort: 1,
