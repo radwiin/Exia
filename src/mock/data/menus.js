@@ -98,7 +98,7 @@ const menus = [
     component: "Layout",
     redirect: "/draggable/todo",
     name: "draggable",
-    meta: { title: "拖拽", icon: "setting", alwaysShow: true },
+    meta: { title: "拖拽", icon: "trello", alwaysShow: true },
     children: [
       {
         id: "4-1",
@@ -107,7 +107,7 @@ const menus = [
         path: "todo",
         component: "/draggable/todo",
         name: "todo",
-        meta: { title: "待办", icon: "key" }
+        meta: { title: "待办", icon: "trello" }
       }
     ]
   },
@@ -119,7 +119,7 @@ const menus = [
     component: "Layout",
     redirect: "/scrollmagic/pagescroll",
     name: "scrollmagic",
-    meta: { title: "滚动", icon: "setting", alwaysShow: true },
+    meta: { title: "滚动", icon: "scrollmagic", alwaysShow: true },
     children: [
       {
         id: "5-1",
@@ -128,7 +128,7 @@ const menus = [
         path: "pagescroll",
         component: "/scrollmagic/pagescroll",
         name: "pagescroll",
-        meta: { title: "翻页", icon: "key" }
+        meta: { title: "翻页", icon: "scrollmagic" }
       }
     ]
   },

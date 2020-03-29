@@ -1,18 +1,22 @@
 <template>
-  <div class="page-container" id="myContainer" style="overflow-y:auto">
-    <section style="height:100%">header</section>
-    <section class="panel blue">
-      <b>ONE</b>
-    </section>
-    <section class="panel turquoise">
-      <b>TWO</b>
-    </section>
-    <section class="panel green">
-      <b>THREE</b>
-    </section>
-    <section class="panel bordeaux">
-      <b>FOUR</b>
-    </section>
+  <div class="page-container">
+    <div style="height:100%">
+      HEADER
+    </div>
+    <div id="pin-container">
+      <section class="panel one">
+        <b>ONE</b>
+      </section>
+      <section class="panel two">
+        <b>TWO</b>
+      </section>
+      <section class="panel three">
+        <b>THREE</b>
+      </section>
+      <section class="panel four">
+        <b>FOUR</b>
+      </section>
+    </div>
   </div>
 </template>
 
@@ -20,55 +24,89 @@
 import ScrollMagic from "scrollmagic";
 import { TweenMax, TimelineMax } from "gsap";
 import { ScrollMagicPluginGsap } from "scrollmagic-plugin-gsap";
+import { ScrollMagicPluginDebug } from "./scrollmagic-plugin-debug";
 
 export default {
   name: "pagescroll",
   mounted() {
+    console.info("mounted");
     ScrollMagicPluginGsap(ScrollMagic, TweenMax, TimelineMax);
+    ScrollMagicPluginDebug(ScrollMagic);
     var controller = new ScrollMagic.Controller({
-      container: "#myContainer",
-      globalSceneOptions: {
-        triggerHook: "onLeave",
-        duration: "100%" // this works just fine with duration 0 as well
-        // However with large numbers (>20) of pinned sections display errors can occur so every section should be unpinned once it's covered by the next section.
-        // Normally 100% would work for this, but here 200% is used, as Panel 3 is shown for more than 100% of scrollheight due to the pause.
-      }
+      container: ".page-container"
     });
 
-    // get all slides
-    var slides = document.querySelectorAll("section.panel");
+    var wipeAnimation = new TimelineMax()
+      .fromTo(
+        "section.panel.two",
+        1,
+        { x: "-100%" },
+        { x: "0%", ease: "Linear.easeNone" }
+      ) // in from left
+      .fromTo(
+        "section.panel.three",
+        1,
+        { x: "100%" },
+        { x: "0%", ease: "Linear.easeNone" }
+      ) // in from right
+      .fromTo(
+        "section.panel.four",
+        1,
+        { y: "-100%" },
+        { y: "0%", ease: "Linear.easeNone" }
+      ); // in from top
 
-    // create scene for every slide
-    for (var i = 0; i < slides.length; i++) {
-      new ScrollMagic.Scene({
-        triggerElement: slides[i]
-      })
-        .setPin(slides[i], { pushFollowers: false })
-        .addTo(controller);
-    }
+    new ScrollMagic.Scene({
+      triggerElement: "#pin-container",
+      triggerHook: "onLeave",
+      duration: "300%"
+    })
+      .setPin("#pin-container")
+      .setTween(wipeAnimation)
+      .addIndicators() // add indicators (requires plugin)
+      .addTo(controller);
   }
 };
 </script>
 
 <style lang="scss" scoped>
+.page-container {
+  overflow-y: auto;
+}
+
+#pin-container {
+  height: 100%;
+  width: 100%;
+  overflow: hidden;
+}
+
 .panel {
   height: 100%;
   width: 100%;
+  position: absolute;
+
+  b {
+    position: relative;
+    display: block;
+    top: 50%;
+    text-align: center;
+    color: white;
+  }
 }
 
-.blue {
+.one {
   background-color: blue;
 }
 
-.turquoise {
+.two {
   background-color: turquoise;
 }
 
-.green {
+.three {
   background-color: green;
 }
 
-.bordeaux {
+.four {
   background-color: brown;
 }
 </style>
