@@ -1,108 +1,68 @@
 <template>
   <div class="page-container">
-    <div class="list-wrapper">
-      <div class="list">
-        <div class="list-header">
-          <textarea
-            v-model="listHeaderName"
-            class="list-header-name"
-            spellcheck="false"
-            maxlength="512"
-          />
-        </div>
-        <draggable class="list-content" v-model="list" v-bind="dragOptions">
-          <div
-            class="list-card-wrapper"
-            v-for="element in list"
-            :key="element.order"
-          >
-            <div class="list-card">{{ element.name }}</div>
+    <draggable class="board" v-model="board.columns" v-bind="boardDragOptions">
+      <div
+        class="list-wrapper"
+        v-for="(column, index) in board.columns"
+        :key="index"
+      >
+        <div class="list">
+          <div class="list-header">
+            <textarea
+              v-model="column.name"
+              class="list-header-name"
+              spellcheck="false"
+              maxlength="512"
+            />
           </div>
-        </draggable>
-        <div class="list-footer">
-          <div v-if="showAdd" class="list-footer-new-container">
-            <div class="list-footer-input-wrapper">
-              <textarea
-                class="list-footer-input"
-                v-model="listHeaderName"
-                spellcheck="false"
-                maxlength="512"
-              />
+          <draggable
+            class="list-content"
+            v-model="column.cards"
+            v-bind="dragOptions"
+          >
+            <div
+              class="list-card-wrapper"
+              v-for="card in column.cards"
+              :key="card.id"
+            >
+              <div class="list-card">{{ card.name }}</div>
             </div>
-            <div class="list-footer-function-container">
-              <input
-                class="list-footer-new-confirm"
-                type="submit"
-                value="添加卡片"
-              />
-              <svg-icon
-                icon-class="close"
-                class-name="icon-close"
-                @click="showAdd = false"
-              />
+          </draggable>
+          <div class="list-footer">
+            <div v-if="column.add.showInput" class="list-footer-new-container">
+              <div class="list-footer-input-wrapper">
+                <textarea
+                  class="list-footer-input"
+                  v-model="column.add.input"
+                  spellcheck="false"
+                  maxlength="512"
+                />
+              </div>
+              <div class="list-footer-function-container">
+                <input
+                  class="list-footer-new-confirm"
+                  type="submit"
+                  value="添加卡片"
+                />
+                <svg-icon
+                  icon-class="close"
+                  class-name="icon-close"
+                  @click="column.add.showInput = false"
+                />
+              </div>
+            </div>
+            <div
+              v-else
+              class="list-footer-add"
+              @click="column.add.showInput = true"
+            >
+              <svg-icon icon-class="add" class-name="icon-add" />
+              <span>添加卡片</span>
             </div>
           </div>
-          <div v-else class="list-footer-add" @click="showAdd = true">
-            <svg-icon icon-class="add" class-name="icon-add" />
-            <span>添加卡片</span>
-          </div>
         </div>
       </div>
-    </div>
-    <div class="list-wrapper">
-      <div class="list">
-        <div class="list-header">
-          <textarea
-            v-model="listHeaderName2"
-            class="list-header-name"
-            spellcheck="false"
-            maxlength="512"
-          />
-        </div>
-        <draggable class="list-content" v-model="list2" v-bind="dragOptions">
-          <div
-            class="list-card-wrapper"
-            v-for="element in list2"
-            :key="element.order"
-          >
-            <div class="list-card">{{ element.name }}</div>
-          </div>
-        </draggable>
-        <div class="list-footer">
-          <div class="list-footer-add">
-            <svg-icon icon-class="add" class-name="icon-add" />
-            <span>添加卡片</span>
-          </div>
-        </div>
-      </div>
-    </div>
-    <div class="list-wrapper">
-      <div class="list">
-        <div class="list-header">
-          <textarea
-            v-model="listHeaderName3"
-            class="list-header-name"
-            spellcheck="false"
-            maxlength="512"
-          />
-        </div>
-        <draggable class="list-content" v-model="list3" v-bind="dragOptions">
-          <div
-            class="list-card-wrapper"
-            v-for="element in list3"
-            :key="element.order"
-          >
-            <div class="list-card">{{ element.name }}</div>
-          </div>
-        </draggable>
-        <div class="list-footer">
-          <div class="list-footer-add">
-            <svg-icon icon-class="add" class-name="icon-add" />
-            <span>添加卡片</span>
-          </div>
-        </div>
-      </div>
-    </div>
+    </draggable>
   </div>
 </template>
 
@@ -128,16 +88,72 @@ export default {
     return {
       showAdd: false,
       board: {
-        name: "exia",
-        lists: [
+        name: "EXIA",
+        columns: [
           {
-            name: "todo",
-            cards: []
+            name: "TODO",
+            cards: [
+              { name: "A", id: "A" },
+              { name: "B", id: "B" },
+              { name: "C", id: "C" },
+              { name: "D", id: "D" },
+              { name: "E", id: "E" },
+              { name: "F", id: "F" },
+              { name: "G", id: "G" },
+              { name: "H", id: "H" },
+              { name: "I", id: "I" }
+            ],
+            add: {
+              showInput: false,
+              input: ""
+            }
+          },
+          {
+            name: "DOING",
+            cards: [
+              { name: "J", id: "J" },
+              { name: "K", id: "K" },
+              { name: "L", id: "L" },
+              { name: "M", id: "M" },
+              { name: "N", id: "N" },
+              { name: "O", id: "O" },
+              { name: "P", id: "P" },
+              { name: "Q", id: "Q" },
+              { name: "R", id: "R" }
+            ],
+            add: {
+              showInput: false,
+              input: ""
+            }
+          },
+          {
+            name: "DONE",
+            cards: [
+              { name: "S", id: "S" },
+              { name: "T", id: "T" },
+              { name: "U", id: "U" },
+              { name: "V", id: "V" },
+              { name: "W", id: "W" },
+              { name: "X", id: "X" },
+              { name: "Y", id: "Y" },
+              { name: "Z", id: "Z" }
+            ],
+            add: {
+              showInput: false,
+              input: ""
+            }
           }
         ]
       },
+      boardDragOptions: {
+        group: "board",
+        animation: 200,
+        forceFallback: true,
+        dragClass: "drag",
+        touchStartThreshold: 30
+      },
       dragOptions: {
-        group: "description",
+        group: "column",
         animation: 200,
         forceFallback: true,
         ghostClass: "ghost",
@@ -192,7 +208,6 @@ export default {
       padding: 10px 8px;
       position: relative;
       min-height: 20px;
-      // display: table;
 
       .list-header-name {
         width: 100%;
@@ -213,6 +228,7 @@ export default {
         font-size: 14px;
         color: #172b4d;
         display: block;
+        cursor: pointer;
 
         &:focus {
           background: #fff;

@@ -96,7 +96,7 @@ const menus = [
     sort: 1,
     path: "/draggable",
     component: "Layout",
-    redirect: "/draggable/todo",
+    redirect: "/draggable/board",
     name: "draggable",
     meta: { title: "拖拽", icon: "trello", alwaysShow: true },
     children: [
@@ -104,10 +104,10 @@ const menus = [
         id: "4-1",
         pId: "4",
         sort: 1,
-        path: "todo",
-        component: "/draggable/todo",
-        name: "todo",
-        meta: { title: "待办", icon: "trello" }
+        path: "board",
+        component: "/draggable/board",
+        name: "board",
+        meta: { title: "看板", icon: "trello" }
       }
     ]
   },
