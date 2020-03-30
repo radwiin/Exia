@@ -8,7 +8,13 @@
       >
         <div class="list">
           <div class="list-header">
+            <div
+              class="list-header-target"
+              v-if="!column.editTitle"
+              @click="onTitleClick($event, column)"
+            ></div>
             <textarea
+              ref="list-header-name"
               v-model="column.name"
               class="list-header-name"
               spellcheck="false"
@@ -68,17 +74,6 @@
 
 <script>
 import draggable from "vuedraggable";
-
-const message = [
-  "vue.draggable",
-  "draggable",
-  "component",
-  "for",
-  "vue.js 2.0",
-  "based",
-  "on",
-  "Sortablejs"
-];
 export default {
   name: "todo-native",
   components: {
@@ -86,12 +81,12 @@ export default {
   },
   data() {
     return {
-      showAdd: false,
       board: {
         name: "EXIA",
         columns: [
           {
             name: "TODO",
+            editTitle: false,
             cards: [
               { name: "A", id: "A" },
               { name: "B", id: "B" },
@@ -158,21 +153,16 @@ export default {
         forceFallback: true,
         ghostClass: "ghost",
         dragClass: "drag"
-      },
-      listHeaderName: "todo",
-      listHeaderName2: "doing",
-      listHeaderName3: "done",
-
-      list: message.map((name, index) => {
-        return { name, order: index + 1 };
-      }),
-      list2: message.map((name, index) => {
-        return { name, order: index + 100 };
-      }),
-      list3: message.map((name, index) => {
-        return { name, order: index + 200 };
-      })
+      }
     };
+  },
+  methods: {
+    onTitleClick(e, column) {
+      // let parentNode = e.target.offsetParent.cloneNode(true);
+      // console.info(parentNode);
+      column.editTitle = true;
+      this.$refs["list-header-name"][0].focus();
+    }
   }
 };
 </script>
@@ -208,6 +198,15 @@ export default {
       padding: 10px 8px;
       position: relative;
       min-height: 20px;
+
+      .list-header-target {
+        cursor: pointer;
+        position: absolute;
+        top: 0;
+        left: 0;
+        right: 0;
+        bottom: 0;
+      }
 
       .list-header-name {
         width: 100%;
