@@ -12,6 +12,7 @@
         <el-radio-group v-model="layout">
           <el-radio-button label="SideMenuLayout">布局A</el-radio-button>
           <el-radio-button label="SideAllLayout">布局B</el-radio-button>
+          <el-radio-button label="TopMenuLayout">布局C</el-radio-button>
         </el-radio-group>
       </div>
     </div>

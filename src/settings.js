@@ -6,10 +6,10 @@ const settings = {
   showSettings: true,
 
   /**
-   * @type {string} SideMenuLayout | SideAllLayout
+   * @type {string} SideMenuLayout | SideAllLayout | TopMenuLayout
    * @description which layout to use
    */
-  layout: "SideAllLayout"
+  layout: "TopMenuLayout"
 };
 
 export default settings;
