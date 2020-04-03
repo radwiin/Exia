@@ -114,8 +114,8 @@ $HeaderHeight: 60px;
         }
 
         .setting {
-          width: 20px;
-          height: 20px;
+          width: 1rem;
+          height: 1rem;
           color: #fff;
         }
       }

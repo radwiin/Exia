@@ -19,7 +19,7 @@
         <div class="avatar-wrapper">
           <el-avatar
             shape="circle"
-            :size="40"
+            :size="30"
             :src="require('@/assets/avator.jpg')"
           />
         </div>
@@ -152,8 +152,8 @@ $HeaderHeight: 50px;
         }
 
         .hamburger {
-          width: 20px;
-          height: 20px;
+          width: 1rem;
+          height: 1rem;
           color: #fff;
           transition: transform 0.3s;
 
@@ -179,8 +179,8 @@ $HeaderHeight: 50px;
         }
 
         .setting {
-          width: 20px;
-          height: 20px;
+          width: 1rem;
+          height: 1rem;
           color: #fff;
         }
       }
@@ -260,54 +260,6 @@ $HeaderHeight: 50px;
 
   .main-wrapper {
     padding: unset;
-  }
-}
-
-.user-menu {
-  padding: 4px 0;
-
-  .user-info-item {
-    height: 70px;
-    padding: 4px 8px;
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-    cursor: pointer;
-    transition: background 0.3s;
-    -webkit-tap-highlight-color: transparent;
-
-    &:hover {
-      background: rgba(0, 0, 0, 0.05);
-    }
-
-    .user-name {
-      font-size: 20px;
-      margin-right: 16px;
-      color: #000000;
-    }
-  }
-
-  .user-menu-item {
-    height: 42px;
-    padding: 8px 16px;
-    cursor: pointer;
-    transition: background 0.3s;
-    -webkit-tap-highlight-color: transparent;
-
-    &:hover {
-      background: rgba(0, 0, 0, 0.05);
-    }
-
-    &-icon {
-      width: 24px;
-      height: 24px;
-      vertical-align: middle;
-    }
-
-    &-label {
-      margin-left: 16px;
-      vertical-align: middle;
-    }
   }
 }
 </style>
