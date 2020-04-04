@@ -15,6 +15,10 @@
           <el-radio-button label="TopMenuLayout">布局C</el-radio-button>
         </el-radio-group>
       </div>
+      <div class="drawer-item">
+        <span>定宽</span>
+        <el-switch v-model="fixWidth" :disabled="layout !== 'TopMenuLayout'" />
+      </div>
     </div>
   </el-drawer>
 </template>
@@ -36,6 +40,17 @@ export default {
       set(val) {
         this.$store.dispatch("settings/changeSetting", {
           key: "layout",
+          value: val
+        });
+      }
+    },
+    fixWidth: {
+      get() {
+        return this.$store.state.settings.fixWidth;
+      },
+      set(val) {
+        this.$store.dispatch("settings/changeSetting", {
+          key: "fixWidth",
           value: val
         });
       }

@@ -19,7 +19,10 @@
         </div>
       </div>
     </el-header>
-    <el-main class="main-wrapper">
+    <el-main
+      class="main-wrapper"
+      :class="{ 'fix-width': layout === 'TopMenuLayout' && fixWidth }"
+    >
       <transition name="fade-transform" mode="out-in">
         <keep-alive>
           <router-view />
@@ -35,9 +38,10 @@ import { mapGetters } from "vuex";
 import Logo from "@/layout/components/Logo";
 import NavMenu from "@/layout/components/NavMenu";
 import settingDrawer from "@/layout/components/SettingDrawer";
+import { mapState } from "vuex";
 
 export default {
-  name: "SideMenuLayout",
+  name: "TopMenuLayout",
   components: {
     Logo,
     NavMenu,
@@ -48,6 +52,10 @@ export default {
   }),
   computed: {
     ...mapGetters(["account", "roles", "allRoutes"]),
+    ...mapState({
+      layout: state => state.settings.layout,
+      fixWidth: state => state.settings.fixWidth
+    }),
     activeMenu() {
       const route = this.$route;
       const { path } = route;
@@ -71,13 +79,13 @@ export default {
 </script>
 
 <style lang="scss" scoped>
-$HeaderHeight: 60px;
+$HeaderHeight: 44px;
 
 .app-wrapper {
   height: 100%;
 
   .header-wrapper {
-    height: $HeaderHeight;
+    height: $HeaderHeight !important;
     padding: unset;
     background-color: rgb(37, 60, 164);
     display: flex;
@@ -93,6 +101,16 @@ $HeaderHeight: 60px;
     .nav-menu {
       flex: none;
       height: $HeaderHeight;
+
+      ::v-deep .el-menu-item {
+        height: $HeaderHeight;
+        line-height: $HeaderHeight;
+      }
+
+      ::v-deep .el-submenu__title {
+        height: $HeaderHeight;
+        line-height: $HeaderHeight;
+      }
     }
 
     .right-menu {
@@ -124,6 +142,12 @@ $HeaderHeight: 60px;
 
   .main-wrapper {
     padding: unset;
+
+    &.fix-width {
+      width: 100%;
+      padding: 0 calc(50% - 600px);
+      margin: 0 auto;
+    }
   }
 }
 </style>

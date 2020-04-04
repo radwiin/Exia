@@ -1,10 +1,11 @@
 import defaultSettings from "@/settings";
 
-const { showSettings, layout } = defaultSettings;
+const { showSettings, layout, fixWidth } = defaultSettings;
 
 const state = {
   showSettings: showSettings,
-  layout: layout
+  layout: layout,
+  fixWidth: fixWidth
 };
 
 const mutations = {

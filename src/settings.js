@@ -9,7 +9,13 @@ const settings = {
    * @type {string} SideMenuLayout | SideAllLayout | TopMenuLayout
    * @description which layout to use
    */
-  layout: "TopMenuLayout"
+  layout: "TopMenuLayout",
+
+  /**
+   * @type {boolean} true | false
+   * @description Whether fix the content width
+   */
+  fixWidth: false
 };
 
 export default settings;
