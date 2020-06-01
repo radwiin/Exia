@@ -9,7 +9,7 @@ const settings = {
    * @type {string} SideMenuLayout | SideAllLayout | TopMenuLayout
    * @description which layout to use
    */
-  layout: "TopMenuLayout",
+  layout: "SideAllLayout",
 
   /**
    * @type {boolean} true | false

@@ -64,6 +64,10 @@ const actions = {
   }
 };
 
+function loadView(view) {
+  return resolve => require([`@/views${view}`], resolve);
+}
+
 function generateAsyncRoutes(menuTree) {
   return mapTree(menuTree, menu => {
     if (!menu.component || menu.component.length === 0) {
@@ -71,9 +75,7 @@ function generateAsyncRoutes(menuTree) {
     } else if (menu.component === "Layout") {
       menu.component = Layout;
     } else {
-      menu.component = (component => () => import(`@/views${component}`))(
-        menu.component
-      );
+      menu.component = loadView(menu.component);
     }
     return menu;
   });
