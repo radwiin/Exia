@@ -7,29 +7,17 @@
         name="username"
         type="text"
         auto-complete="on"
-        placeholder="Account"
-        clearable
+        placeholder="请输入账号"
       >
-        <i slot="prefix" class="el-input__icon el-icon-user" />
+        <i slot="prefix" class="el-icon-user el-input__icon" />
       </el-input>
     </el-form-item>
     <el-form-item prop="password">
-      <el-input
-        @keyup.enter.native="handleLogin"
-        :type="passwordType"
-        v-model="loginForm.password"
-        auto-complete="on"
-        placeholder="Password"
-        clearable
-      >
-        <i slot="prefix" class="el-input__icon el-icon-lock" />
-        <i class="el-input__icon el-icon-view" slot="suffix" @click="showPassword"></i>
+      <el-input @keyup.enter.native="handleLogin" :type="passwordType" v-model="loginForm.password" auto-complete="on" placeholder="请输入密码">
+        <i slot="prefix" class="el-icon-lock el-input__icon" />
+        <i class="el-icon-view el-input__icon" slot="suffix" @click="showPassword"></i>
       </el-input>
     </el-form-item>
-    <div style="margin-bottom: 10px">
-      <el-checkbox v-model="checked" style="color: #000;font-weight: 400;">Remember me</el-checkbox>
-      <a href="#">Forgot Password?</a>
-    </div>
     <el-form-item>
       <el-button type="primary" @click.native.prevent="handleLogin" class="login-submit">{{ 'Sign In' }}</el-button>
     </el-form-item>
@@ -41,14 +29,13 @@ export default {
   name: 'Userlogin',
   data() {
     return {
-      checked: false,
       loginForm: {
         username: 'root',
         password: 'root'
       },
       loginRules: {
-        username: [{ required: true, message: 'Account required', trigger: 'blur' }],
-        password: [{ required: true, message: 'Password required', trigger: 'blur' }]
+        username: [{ required: true, message: '请输入用户名', trigger: 'blur' }],
+        password: [{ required: true, message: '请输入密码', trigger: 'blur' }]
       },
       passwordType: 'password'
     }
@@ -60,9 +47,9 @@ export default {
     handleLogin() {
       this.$refs.loginForm.validate(valid => {
         if (valid) {
-          let loading = this.$loading({
+          const loading = this.$loading({
             lock: true,
-            text: 'Sign In...',
+            text: '登录中,请稍后...',
             spinner: 'el-icon-loading'
           })
           this.$store
@@ -83,22 +70,6 @@ export default {
 <style lang="scss" scoped>
 .login-form {
   margin: 10px 0;
-
-  ::v-deep i,
-  ::v-deep .el-checkbox__label {
-    color: #000 !important;
-  }
-
-  a {
-    font-size: 0.8rem;
-    opacity: 0.5;
-    color: #000;
-    float: right;
-
-    &:hover {
-      opacity: 1;
-    }
-  }
 
   .login-submit {
     width: 100%;
