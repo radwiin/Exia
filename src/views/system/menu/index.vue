@@ -1,29 +1,13 @@
 <template>
   <div class="page-container">
     <div class="function-container">
-      <el-button type="primary" icon="el-icon-plus" @click="handleCreateClick"
-        >新 增</el-button
-      >
-      <el-button icon="el-icon-refresh" @click="handleResetClick"
-        >刷 新</el-button
-      >
+      <el-button type="primary" icon="el-icon-plus" @click="handleCreateClick">新 增</el-button>
+      <el-button icon="el-icon-refresh" @click="handleResetClick">刷 新</el-button>
     </div>
     <div class="table-container">
-      <el-table
-        :data="tableData"
-        border
-        height="100%"
-        row-key="id"
-        :tree-props="{ children: 'children' }"
-      >
+      <el-table :data="tableData" border height="100%" row-key="id" :tree-props="{ children: 'children' }">
         <el-table-column fixed type="selection" width="50" align="center" />
-        <el-table-column
-          fixed
-          type="index"
-          label="#"
-          width="50"
-          align="center"
-        />
+        <el-table-column fixed type="index" label="#" width="50" align="center" />
         <el-table-column prop="title" label="标题" />
         <el-table-column prop="path" label="路由" />
         <el-table-column prop="component" label="组件" />
@@ -41,10 +25,7 @@
             <el-button type="text" @click="handleEditClick(scope)">
               编辑
             </el-button>
-            <el-popconfirm
-              title="确定删除?"
-              @onConfirm="handleDeleteConfirm(scope)"
-            >
+            <el-popconfirm title="确定删除?" @onConfirm="handleDeleteConfirm(scope)">
               <el-button slot="reference" type="text">删除</el-button>
             </el-popconfirm>
           </template>
@@ -52,12 +33,7 @@
       </el-table>
     </div>
 
-    <el-dialog
-      :visible.sync="dialogVisible"
-      :title="dialogCategory"
-      width="900px"
-      @close="handleDialogClose"
-    >
+    <el-dialog :visible.sync="dialogVisible" :title="dialogCategory" width="900px" @close="handleDialogClose">
       <el-form
         v-loading="formLoading"
         ref="form"
@@ -100,58 +76,52 @@
           <el-input v-model="form.icon" />
         </el-form-item>
         <el-form-item label="排序" prop="sort">
-          <el-input-number
-            v-model="form.sort"
-            controls-position="right"
-            style="width:100%;"
-          />
+          <el-input-number v-model="form.sort" controls-position="right" style="width:100%;" />
         </el-form-item>
       </el-form>
       <div slot="footer">
         <el-button @click="handleDialogCancelClick">取消</el-button>
-        <el-button type="primary" @click="handleDialogConfirmClick"
-          >确定</el-button
-        >
+        <el-button type="primary" @click="handleDialogConfirmClick">确定</el-button>
       </div>
     </el-dialog>
   </div>
 </template>
 
 <script>
-import { query, add, update, remove } from "@/api/system/menu";
-import { mapTree } from "@/utils";
-import _ from "lodash";
+import { query, add, update, remove } from '@/api/system/menu'
+import { mapTree } from '@/utils'
+import _ from 'lodash'
 const DIALOG_CATEGORY = {
-  CREATE: "新 增",
-  VIEW: "查 看",
-  EDIT: "编 辑"
-};
+  CREATE: '新 增',
+  VIEW: '查 看',
+  EDIT: '编 辑'
+}
 export default {
-  name: "menu",
+  name: 'menu',
   data() {
     return {
       DIALOG_CATEGORY, // for html
       tableData: [],
       optionData: [],
       dialogVisible: false,
-      dialogCategory: "",
+      dialogCategory: '',
       formLoading: false,
       form: {
-        id: "",
-        pId: "",
-        title: "",
-        path: "",
-        component: "",
-        name: "",
-        redirect: "",
-        alwaysShow: "",
-        icon: "",
+        id: '',
+        pId: '',
+        title: '',
+        path: '',
+        component: '',
+        name: '',
+        redirect: '',
+        alwaysShow: '',
+        icon: '',
         sort: 0
       }
-    };
+    }
   },
   created() {
-    this.refreshTable();
+    this.refreshTable()
   },
   methods: {
     refreshTable() {
@@ -159,84 +129,84 @@ export default {
         this.tableData = mapTree(_.cloneDeep(rsp.data), item => ({
           ...item,
           ...item.meta
-        }));
+        }))
         this.optionData = [
           {
-            value: "root",
-            label: "根父级",
+            value: 'root',
+            label: '根父级',
             children: mapTree(_.cloneDeep(rsp.data), item => ({
               value: item.id,
               label: item.meta.title,
               children: item.children
             }))
           }
-        ];
-      });
+        ]
+      })
     },
     handleQueryClick() {
-      this.refreshTable();
+      this.refreshTable()
     },
     handleResetClick() {
-      this.refreshTable();
+      this.refreshTable()
     },
     handleCreateClick() {
-      this.dialogCategory = DIALOG_CATEGORY.CREATE;
-      this.dialogVisible = true;
+      this.dialogCategory = DIALOG_CATEGORY.CREATE
+      this.dialogVisible = true
     },
     handleViewClick({ row }) {
-      this.dialogCategory = DIALOG_CATEGORY.VIEW;
-      this.dialogVisible = true;
+      this.dialogCategory = DIALOG_CATEGORY.VIEW
+      this.dialogVisible = true
       this.$nextTick(() => {
-        Object.assign(this.form, row);
-      });
+        Object.assign(this.form, row)
+      })
     },
     handleEditClick({ row }) {
-      this.dialogCategory = DIALOG_CATEGORY.EDIT;
-      this.dialogVisible = true;
+      this.dialogCategory = DIALOG_CATEGORY.EDIT
+      this.dialogVisible = true
       this.$nextTick(() => {
-        Object.assign(this.form, row);
-      });
+        Object.assign(this.form, row)
+      })
     },
     handleDeleteConfirm({ row }) {
       remove(row.id)
         .then(() => {
-          this.refreshTable();
+          this.refreshTable()
         })
-        .catch(console.error);
+        .catch(console.error)
     },
     handleDialogClose() {
-      this.$refs.form.resetFields();
+      this.$refs.form.resetFields()
     },
     handleDialogCancelClick() {
-      this.dialogVisible = false;
+      this.dialogVisible = false
     },
     handleDialogConfirmClick() {
       if (this.dialogCategory === DIALOG_CATEGORY.VIEW) {
-        this.dialogVisible = false;
+        this.dialogVisible = false
       } else {
         this.$refs.form.validate(valid => {
           if (valid) {
-            this.formLoading = true;
+            this.formLoading = true
             const promise = {
               [DIALOG_CATEGORY.CREATE]: add,
               [DIALOG_CATEGORY.EDIT]: update
-            }[this.dialogCategory];
+            }[this.dialogCategory]
             promise(this.form)
               .then(() => {
-                this.$refs.form.resetFields();
-                this.dialogVisible = false;
-                this.refreshTable();
+                this.$refs.form.resetFields()
+                this.dialogVisible = false
+                this.refreshTable()
               })
               .catch(console.error)
               .finally(() => {
-                this.formLoading = false;
-              });
+                this.formLoading = false
+              })
           }
-        });
+        })
       }
     }
   }
-};
+}
 </script>
 
 <style lang="scss" scoped>

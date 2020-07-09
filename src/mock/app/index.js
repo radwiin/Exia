@@ -1,24 +1,24 @@
-import Mock from "mockjs";
-import menus from "@/mock/data/menus";
+import Mock from 'mockjs'
+import menus from '@/mock/data/menus'
 
-Mock.mock("/app/signIn", "post", () => {
+Mock.mock('/app/signIn', 'post', () => {
   return {
     code: 200,
-    msg: "操作成功",
+    msg: '操作成功',
     data: {
-      token: "EXIA_TOKEN_0"
+      token: 'EXIA_TOKEN_0'
     }
-  };
-});
+  }
+})
 
-Mock.mock("/app/userInfo", "post", () => {
+Mock.mock('/app/userInfo', 'post', () => {
   return {
     code: 200,
-    msg: "操作成功",
+    msg: '操作成功',
     data: {
-      account: "root",
-      roles: ["root"],
+      account: 'root',
+      roles: ['root'],
       menus
     }
-  };
-});
+  }
+})

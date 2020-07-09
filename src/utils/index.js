@@ -5,10 +5,10 @@
  */
 export function mapTree(tree, method) {
   return tree.map(item => {
-    item = method(item);
+    item = method(item)
     if (item.children && item.children.length > 0) {
-      item.children = mapTree(item.children, method);
+      item.children = mapTree(item.children, method)
     }
-    return item;
-  });
+    return item
+  })
 }

@@ -17,20 +17,13 @@
       />
       <div :class="`bottom-menu ${collapse ? 'is-collapse' : ''}`">
         <div class="avatar-wrapper">
-          <el-avatar
-            shape="circle"
-            :size="30"
-            :src="require('@/assets/avator.jpg')"
-          />
+          <el-avatar shape="circle" :size="30" :src="require('@/assets/avator.jpg')" />
         </div>
         <div class="setting-wrapper" @click="handleSettingClick">
           <svg-icon icon-class="setting" class-name="setting" />
         </div>
         <div class="hamburger-wrapper" @click="collapse = !collapse">
-          <svg-icon
-            icon-class="hamburger"
-            :class-name="`hamburger ${collapse ? '' : 'is-active'}`"
-          />
+          <svg-icon icon-class="hamburger" :class-name="`hamburger ${collapse ? '' : 'is-active'}`" />
         </div>
       </div>
     </el-aside>
@@ -46,12 +39,12 @@
 </template>
 
 <script>
-import { mapGetters } from "vuex";
-import NavMenu from "@/layout/components/NavMenu";
-import settingDrawer from "@/layout/components/SettingDrawer";
+import { mapGetters } from 'vuex'
+import NavMenu from '@/layout/components/NavMenu'
+import settingDrawer from '@/layout/components/SettingDrawer'
 
 export default {
-  name: "SideAllLayout",
+  name: 'SideAllLayout',
   components: {
     NavMenu,
     settingDrawer
@@ -61,27 +54,27 @@ export default {
     settingDrawer: false
   }),
   computed: {
-    ...mapGetters(["account", "roles", "allRoutes"]),
+    ...mapGetters(['account', 'roles', 'allRoutes']),
     activeMenu() {
-      const route = this.$route;
-      const { path } = route;
-      return path;
+      const route = this.$route
+      const { path } = route
+      return path
     }
   },
   methods: {
     handleOpen() {},
     handleClose() {},
     handleSettingClick() {
-      this.settingDrawer = true;
+      this.settingDrawer = true
     },
     handleUserClick() {},
     handleExitClick() {
-      this.$store.dispatch("app/removeUserInfo").then(() => {
-        this.$router.push({ path: "/login" });
-      });
+      this.$store.dispatch('app/removeUserInfo').then(() => {
+        this.$router.push({ path: '/login' })
+      })
     }
   }
-};
+}
 </script>
 
 <style lang="scss" scoped>

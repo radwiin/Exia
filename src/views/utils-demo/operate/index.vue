@@ -17,15 +17,15 @@
 </template>
 
 <script>
-import operate from "@/utils/operate";
+import operate from '@/utils/operate'
 export default {
-  name: "operate",
+  name: 'operate',
   data: () => ({
     eval: global.eval,
     operate,
-    equationList: ["0.1 - 0.01"]
+    equationList: ['0.1 - 0.01']
   })
-};
+}
 </script>
 
 <style></style>

@@ -19,10 +19,7 @@
         </div>
       </div>
     </el-header>
-    <el-main
-      class="main-wrapper"
-      :class="{ 'fix-width': layout === 'TopMenuLayout' && fixWidth }"
-    >
+    <el-main class="main-wrapper" :class="{ 'fix-width': layout === 'TopMenuLayout' && fixWidth }">
       <transition name="fade-transform" mode="out-in">
         <keep-alive>
           <router-view />
@@ -34,14 +31,14 @@
 </template>
 
 <script>
-import { mapGetters } from "vuex";
-import Logo from "@/layout/components/Logo";
-import NavMenu from "@/layout/components/NavMenu";
-import settingDrawer from "@/layout/components/SettingDrawer";
-import { mapState } from "vuex";
+import { mapGetters } from 'vuex'
+import Logo from '@/layout/components/Logo'
+import NavMenu from '@/layout/components/NavMenu'
+import settingDrawer from '@/layout/components/SettingDrawer'
+import { mapState } from 'vuex'
 
 export default {
-  name: "TopMenuLayout",
+  name: 'TopMenuLayout',
   components: {
     Logo,
     NavMenu,
@@ -51,31 +48,31 @@ export default {
     settingDrawer: false
   }),
   computed: {
-    ...mapGetters(["account", "roles", "allRoutes"]),
+    ...mapGetters(['account', 'roles', 'allRoutes']),
     ...mapState({
       layout: state => state.settings.layout,
       fixWidth: state => state.settings.fixWidth
     }),
     activeMenu() {
-      const route = this.$route;
-      const { path } = route;
-      return path;
+      const route = this.$route
+      const { path } = route
+      return path
     }
   },
   methods: {
     handleOpen() {},
     handleClose() {},
     handleSettingClick() {
-      this.settingDrawer = true;
+      this.settingDrawer = true
     },
     handleUserClick() {},
     handleExitClick() {
-      this.$store.dispatch("app/removeUserInfo").then(() => {
-        this.$router.push({ path: "/login" });
-      });
+      this.$store.dispatch('app/removeUserInfo').then(() => {
+        this.$router.push({ path: '/login' })
+      })
     }
   }
-};
+}
 </script>
 
 <style lang="scss" scoped>

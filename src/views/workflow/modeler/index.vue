@@ -9,18 +9,18 @@
 
 <script>
 // import BpmnViewer from 'bpmn-js'
-import BpmnModeler from "bpmn-js/lib/Modeler";
+import BpmnModeler from 'bpmn-js/lib/Modeler'
 
-import propertiesPanelModule from "bpmn-js-properties-panel";
-import propertiesProviderModule from "bpmn-js-properties-panel/lib/provider/camunda";
-import camundaModdleDescriptor from "camunda-bpmn-moddle/resources/camunda.json";
+import propertiesPanelModule from 'bpmn-js-properties-panel'
+import propertiesProviderModule from 'bpmn-js-properties-panel/lib/provider/camunda'
+import camundaModdleDescriptor from 'camunda-bpmn-moddle/resources/camunda.json'
 
-import customTranslate from "./customTranslate/customTranslate";
+import customTranslate from './customTranslate/customTranslate'
 
 export default {
-  name: "BPMN",
+  name: 'BPMN',
   mounted() {
-    this.createNewDiagram();
+    this.createNewDiagram()
   },
   methods: {
     createNewDiagram() {
@@ -29,25 +29,21 @@ export default {
       // 	container: '#canvas'
       // })
       var customTranslateModule = {
-        translate: ["value", customTranslate]
-      };
+        translate: ['value', customTranslate]
+      }
       var modeler = new BpmnModeler({
-        container: "#js-canvas",
+        container: '#js-canvas',
         propertiesPanel: {
-          parent: "#js-properties-panel"
+          parent: '#js-properties-panel'
         },
-        additionalModules: [
-          propertiesPanelModule,
-          propertiesProviderModule,
-          customTranslateModule
-        ],
+        additionalModules: [propertiesPanelModule, propertiesProviderModule, customTranslateModule],
         keyboard: {
           bindTo: document.body
         },
         moddleExtensions: {
           camunda: camundaModdleDescriptor
         }
-      });
+      })
       const bpmnXmlStr = `
 			<?xml version="1.0" standalone="yes"?>
 			<semantic:definitions id="_1275940932088" targetNamespace="http://www.trisotech.com/definitions/_1275940932088" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:di="http://www.omg.org/spec/DD/20100524/DI" xmlns:bpmndi="http://www.omg.org/spec/BPMN/20100524/DI" xmlns:dc="http://www.omg.org/spec/DD/20100524/DC" xmlns:semantic="http://www.omg.org/spec/BPMN/20100524/MODEL">
@@ -432,32 +428,32 @@ export default {
 							</bpmndi:BPMNPlane>
 					</bpmndi:BPMNDiagram>
 			</semantic:definitions>
-			`;
+			`
 
       // 将字符串转换成图显示出来
       modeler.importXML(bpmnXmlStr, function(err) {
         if (err) {
-          console.error(err);
+          console.error(err)
         } else {
           // 这里还没用到这个，先注释掉吧
           // that.success()
-          console.log("rendered");
+          console.log('rendered')
           // container.removeClass('with-error').addClass('with-diagram')
         }
-      });
+      })
     }
   }
-};
+}
 </script>
 
 <style lang="scss" scoped>
 /*左边工具栏以及编辑节点的样式*/
-@import "~bpmn-js/dist/assets/diagram-js.css";
-@import "~bpmn-js/dist/assets/bpmn-font/css/bpmn.css";
-@import "~bpmn-js/dist/assets/bpmn-font/css/bpmn-codes.css";
-@import "~bpmn-js/dist/assets/bpmn-font/css/bpmn-embedded.css";
+@import '~bpmn-js/dist/assets/diagram-js.css';
+@import '~bpmn-js/dist/assets/bpmn-font/css/bpmn.css';
+@import '~bpmn-js/dist/assets/bpmn-font/css/bpmn-codes.css';
+@import '~bpmn-js/dist/assets/bpmn-font/css/bpmn-embedded.css';
 /*右边工具栏样式*/
-@import "~bpmn-js-properties-panel/dist/assets/bpmn-js-properties-panel.css";
+@import '~bpmn-js-properties-panel/dist/assets/bpmn-js-properties-panel.css';
 .canvas {
   height: 100%;
 }

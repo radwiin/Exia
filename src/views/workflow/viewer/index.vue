@@ -3,18 +3,18 @@
 </template>
 
 <script>
-import BpmnViewer from "bpmn-js";
+import BpmnViewer from 'bpmn-js'
 
 export default {
-  name: "BPMN",
+  name: 'BPMN',
   mounted() {
-    this.showDiagram();
+    this.showDiagram()
   },
   methods: {
     showDiagram() {
       var viewer = new BpmnViewer({
-        container: "#canvas"
-      });
+        container: '#canvas'
+      })
       const bpmnXmlStr = `
 			<?xml version="1.0" standalone="yes"?>
 			<semantic:definitions id="_1275940932088" targetNamespace="http://www.trisotech.com/definitions/_1275940932088" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:di="http://www.omg.org/spec/DD/20100524/DI" xmlns:bpmndi="http://www.omg.org/spec/BPMN/20100524/DI" xmlns:dc="http://www.omg.org/spec/DD/20100524/DC" xmlns:semantic="http://www.omg.org/spec/BPMN/20100524/MODEL">
@@ -399,18 +399,18 @@ export default {
 							</bpmndi:BPMNPlane>
 					</bpmndi:BPMNDiagram>
 			</semantic:definitions>
-			`;
+			`
       // 将字符串转换成图显示出来
       viewer.importXML(bpmnXmlStr, function(err) {
         if (err) {
-          console.error(err);
+          console.error(err)
         } else {
-          console.log("rendered");
+          console.log('rendered')
         }
-      });
+      })
     }
   }
-};
+}
 </script>
 
 <style scoped></style>

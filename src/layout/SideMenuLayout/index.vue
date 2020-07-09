@@ -19,10 +19,7 @@
     <el-container>
       <el-header class="header-wrapper">
         <div class="hamburger-wrapper" @click="collapse = !collapse">
-          <svg-icon
-            icon-class="hamburger"
-            :class-name="`hamburger ${collapse ? '' : 'is-active'}`"
-          />
+          <svg-icon icon-class="hamburger" :class-name="`hamburger ${collapse ? '' : 'is-active'}`" />
         </div>
         <breadcrumb class="breadcrumb-container" />
         <div class="right-menu-wrapper">
@@ -31,33 +28,21 @@
               <svg-icon icon-class="setting" />
             </div>
           </el-tooltip>
-          <el-popover
-            placement="bottom"
-            width="250"
-            trigger="hover"
-            popper-class="popper-wrapper"
-          >
+          <el-popover placement="bottom" width="250" trigger="hover" popper-class="popper-wrapper">
             <div slot="reference" class="menu-item" @click="handleUserClick">
               <span>{{ account }}</span>
             </div>
             <div class="user-menu">
               <div class="user-info-item">
-                <el-avatar
-                  shape="square"
-                  :size="50"
-                  :src="require('@/assets/avator.jpg')"
-                />
+                <el-avatar shape="square" :size="50" :src="require('@/assets/avator.jpg')" />
                 <span class="user-name">{{ account }}</span>
               </div>
               <div class="user-menu-item">
                 <svg-icon icon-class="user" class-name="user-menu-item-icon" />
-                <span class="user-menu-item-label">{{ roles.join(",") }}</span>
+                <span class="user-menu-item-label">{{ roles.join(',') }}</span>
               </div>
               <div class="user-menu-item" @click="handleExitClick">
-                <svg-icon
-                  icon-class="logout"
-                  class-name="user-menu-item-icon"
-                />
+                <svg-icon icon-class="logout" class-name="user-menu-item-icon" />
                 <span class="user-menu-item-label">登出</span>
               </div>
             </div>
@@ -77,13 +62,13 @@
 </template>
 
 <script>
-import { mapGetters } from "vuex";
-import NavMenu from "@/layout/components/NavMenu";
-import settingDrawer from "@/layout/components/SettingDrawer";
-import Breadcrumb from "./components/Breadcrumb";
+import { mapGetters } from 'vuex'
+import NavMenu from '@/layout/components/NavMenu'
+import settingDrawer from '@/layout/components/SettingDrawer'
+import Breadcrumb from './components/Breadcrumb'
 
 export default {
-  name: "SideMenuLayout",
+  name: 'SideMenuLayout',
   components: {
     NavMenu,
     settingDrawer,
@@ -94,27 +79,27 @@ export default {
     settingDrawer: false
   }),
   computed: {
-    ...mapGetters(["account", "roles", "allRoutes"]),
+    ...mapGetters(['account', 'roles', 'allRoutes']),
     activeMenu() {
-      const route = this.$route;
-      const { path } = route;
-      return path;
+      const route = this.$route
+      const { path } = route
+      return path
     }
   },
   methods: {
     handleOpen() {},
     handleClose() {},
     handleSettingClick() {
-      this.settingDrawer = true;
+      this.settingDrawer = true
     },
     handleUserClick() {},
     handleExitClick() {
-      this.$store.dispatch("app/removeUserInfo").then(() => {
-        this.$router.push({ path: "/login" });
-      });
+      this.$store.dispatch('app/removeUserInfo').then(() => {
+        this.$router.push({ path: '/login' })
+      })
     }
   }
-};
+}
 </script>
 
 <style lang="scss" scoped>

@@ -1,19 +1,19 @@
-import request from "@/utils/request";
+import request from '@/utils/request'
 
 export function signIn({ account, password }) {
   return request({
-    url: "/app/signIn",
-    method: "post",
+    url: '/app/signIn',
+    method: 'post',
     data: {
       account,
       password
     }
-  });
+  })
 }
 
 export function getUserInfo() {
   return request({
-    url: "/app/userInfo",
-    method: "post"
-  });
+    url: '/app/userInfo',
+    method: 'post'
+  })
 }

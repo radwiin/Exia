@@ -11,14 +11,14 @@
 </template>
 
 <script>
-import UserLogin from "./components/Userlogin";
+import UserLogin from './components/Userlogin'
 
 export default {
-  name: "login",
+  name: 'login',
   components: {
     UserLogin
   }
-};
+}
 </script>
 
 <style lang="scss" scoped>
@@ -27,7 +27,7 @@ export default {
   height: 100%;
   display: flex;
   flex-flow: row nowrap;
-  background-image: url("~@/assets/4.jpg");
+  background-image: url('~@/assets/4.jpg');
   background-size: cover;
   background-position: center center;
 

@@ -21,52 +21,37 @@
 </template>
 
 <script>
-import ScrollMagic from "scrollmagic";
-import { TweenMax, TimelineMax } from "gsap";
-import { ScrollMagicPluginGsap } from "scrollmagic-plugin-gsap";
-import { ScrollMagicPluginDebug } from "./scrollmagic-plugin-debug";
+import ScrollMagic from 'scrollmagic'
+import { TweenMax, TimelineMax } from 'gsap'
+import { ScrollMagicPluginGsap } from 'scrollmagic-plugin-gsap'
+import { ScrollMagicPluginDebug } from './scrollmagic-plugin-debug'
 
 export default {
-  name: "pagescroll",
+  name: 'pagescroll',
   mounted() {
-    console.info("mounted");
-    ScrollMagicPluginGsap(ScrollMagic, TweenMax, TimelineMax);
-    ScrollMagicPluginDebug(ScrollMagic);
+    console.info('mounted')
+    ScrollMagicPluginGsap(ScrollMagic, TweenMax, TimelineMax)
+    ScrollMagicPluginDebug(ScrollMagic)
     var controller = new ScrollMagic.Controller({
-      container: ".page-container"
-    });
+      container: '.page-container'
+    })
 
     var wipeAnimation = new TimelineMax()
-      .fromTo(
-        "section.panel.two",
-        1,
-        { x: "-100%" },
-        { x: "0%", ease: "Linear.easeNone" }
-      ) // in from left
-      .fromTo(
-        "section.panel.three",
-        1,
-        { x: "100%" },
-        { x: "0%", ease: "Linear.easeNone" }
-      ) // in from right
-      .fromTo(
-        "section.panel.four",
-        1,
-        { y: "-100%" },
-        { y: "0%", ease: "Linear.easeNone" }
-      ); // in from top
+      .fromTo('section.panel.two', 1, { x: '-100%' }, { x: '0%', ease: 'Linear.easeNone' }) // in from left
+      .fromTo('section.panel.three', 1, { x: '100%' }, { x: '0%', ease: 'Linear.easeNone' }) // in from right
+      .fromTo('section.panel.four', 1, { y: '-100%' }, { y: '0%', ease: 'Linear.easeNone' }) // in from top
 
     new ScrollMagic.Scene({
-      triggerElement: "#pin-container",
-      triggerHook: "onLeave",
-      duration: "300%"
+      triggerElement: '#pin-container',
+      triggerHook: 'onLeave',
+      duration: '300%'
     })
-      .setPin("#pin-container")
+      .setPin('#pin-container')
       .setTween(wipeAnimation)
       .addIndicators() // add indicators (requires plugin)
-      .addTo(controller);
+      .addTo(controller)
   }
-};
+}
 </script>
 
 <style lang="scss" scoped>

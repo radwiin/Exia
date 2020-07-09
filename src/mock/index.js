@@ -1,6 +1,6 @@
-import "./system/menu";
-import "./system/user";
+import './system/menu'
+import './system/user'
 
-import "./auth/role";
+import './auth/role'
 
-import "./app/index";
+import './app/index'

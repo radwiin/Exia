@@ -6,13 +6,13 @@
 
 <script>
 export default {
-  name: "BoardCard",
+  name: 'BoardCard',
   props: {
     card: {
       type: Object
     }
   }
-};
+}
 </script>
 
 <style lang="scss" scoped>

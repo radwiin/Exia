@@ -1,23 +1,23 @@
-import Vue from "vue";
+import Vue from 'vue'
 
-import ElementUI from "element-ui";
-import "element-ui/lib/theme-chalk/index.css";
-import "@/styles/index.scss";
+import ElementUI from 'element-ui'
+import 'element-ui/lib/theme-chalk/index.css'
+import '@/styles/index.scss'
 
-import App from "./App.vue";
-import router from "./router";
-import store from "./store";
+import App from './App.vue'
+import router from './router'
+import store from './store'
 
-import "./icons";
+import './icons'
 
-import "@/permission";
+import '@/permission'
 
-Vue.config.productionTip = false;
+Vue.config.productionTip = false
 
-Vue.use(ElementUI, { size: "small" });
+Vue.use(ElementUI, { size: 'small' })
 
 new Vue({
   router,
   store,
   render: h => h(App)
-}).$mount("#app");
+}).$mount('#app')

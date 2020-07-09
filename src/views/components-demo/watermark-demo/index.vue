@@ -11,12 +11,12 @@
 </template>
 
 <script>
-import watermark from "@/directive/watermark";
+import watermark from '@/directive/watermark'
 
 export default {
-  name: "watermark-demo",
+  name: 'watermark-demo',
   directives: { watermark }
-};
+}
 </script>
 
 <style lang="scss" scoped>

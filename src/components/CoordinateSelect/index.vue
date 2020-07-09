@@ -14,23 +14,16 @@
         style="width:300px"
         @change="handleSearchResultSelect"
       >
-        <el-option
-          v-for="item in searchResultOptions"
-          :key="item.uid"
-          :label="item.title"
-          :value="item"
-        >
+        <el-option v-for="item in searchResultOptions" :key="item.uid" :label="item.title" :value="item">
           <span style="float: left; padding-right: 1rem">{{ item.title }}</span>
-          <span style="float: right; color: #8492a6; font-size: 13px">{{
-            item.address
-          }}</span>
+          <span style="float: right; color: #8492a6; font-size: 13px">{{ item.address }}</span>
         </el-option>
       </el-select>
     </div>
     <div class="info-container">
       <div>
         <div>地址</div>
-        <span>{{ theLocation.address || "无数据" }}</span>
+        <span>{{ theLocation.address || '无数据' }}</span>
       </div>
       <div>
         <div>坐标</div>
@@ -42,19 +35,19 @@
 
 <script>
 export default {
-  name: "CoordinateSelect",
+  name: 'CoordinateSelect',
   props: {
     value: {
       type: Object,
       default: () => ({
-        longitude: "", // 经度
-        latitude: "", // 纬度
-        address: "" // 地址说明
+        longitude: '', // 经度
+        latitude: '', // 纬度
+        address: '' // 地址说明
       })
     },
     ak: {
       type: String,
-      default: "IZ6VQxuV12p9N8muj3dPOwwgZ0HbMBvz"
+      default: 'IZ6VQxuV12p9N8muj3dPOwwgZ0HbMBvz'
     }
   },
   data() {
@@ -66,36 +59,31 @@ export default {
 
       theLocation: { ...this.value },
 
-      searchValue: "",
+      searchValue: '',
       searchLoading: false,
       searchResultOptions: []
-    };
+    }
   },
   watch: {
     value: {
       handler(newVal) {
-        this.theLocation = { ...newVal };
+        this.theLocation = { ...newVal }
       },
       immediate: true,
       deep: true
     }
   },
   created() {
-    this.init();
+    this.init()
   },
   methods: {
     locate(location = this.theLocation, beCenter = true, zoom = 15) {
       const {
         BMap: { Point, Marker, LocalCity },
         map
-      } = this;
-      let promise;
-      if (
-        !location ||
-        !location.longitude ||
-        !location.latitude ||
-        !location.address
-      ) {
+      } = this
+      let promise
+      if (!location || !location.longitude || !location.latitude || !location.address) {
         // 数据不满足，将默认定位到本地城市
         promise = new Promise(resolve => {
           new LocalCity().get(res => {
@@ -103,104 +91,104 @@ export default {
               longitude: res.center.lng,
               latitude: res.center.lat,
               address: res.name
-            };
-            resolve(location);
-          });
-        });
+            }
+            resolve(location)
+          })
+        })
       } else {
         // 数据满足，按数据进行定位
-        promise = Promise.resolve(location);
+        promise = Promise.resolve(location)
       }
       promise.then(location => {
-        const thePoint = new Point(location.longitude, location.latitude);
-        const theMarker = new Marker(thePoint);
-        map.clearOverlays();
-        map.addOverlay(theMarker);
-        beCenter && map.centerAndZoom(thePoint, zoom);
-        this.$emit("input", location);
-      });
+        const thePoint = new Point(location.longitude, location.latitude)
+        const theMarker = new Marker(thePoint)
+        map.clearOverlays()
+        map.addOverlay(theMarker)
+        beCenter && map.centerAndZoom(thePoint, zoom)
+        this.$emit('input', location)
+      })
     },
     remoteMethod(query) {
-      if (query !== "") {
-        this.loading = true;
-        this.localSearch.search(query);
+      if (query !== '') {
+        this.loading = true
+        this.localSearch.search(query)
       } else {
-        this.searchResultOptions = [];
+        this.searchResultOptions = []
       }
     },
     handleSearchResultSelect(item) {
-      if (item !== undefined && item !== "") {
+      if (item !== undefined && item !== '') {
         let location = {
           longitude: item.point.lng,
           latitude: item.point.lat,
           address: item.address
-        };
-        this.locate(location);
+        }
+        this.locate(location)
       }
     },
     handleSearchComplete(localResult) {
-      this.searchLoading = false;
-      this.searchResultOptions = localResult.Uq;
+      this.searchLoading = false
+      this.searchResultOptions = localResult.Uq
     },
     handleMapClick(e) {
       const {
         BMap: { Point },
         geocoder,
         locate
-      } = this;
+      } = this
       geocoder.getLocation(new Point(e.point.lng, e.point.lat), res => {
         let location = {
           longitude: res.point.lng,
           latitude: res.point.lat,
           address: res.address
-        };
-        locate(location, false);
-      });
+        }
+        locate(location, false)
+      })
     },
     init() {
       this.getMapScript().then(BMap => {
-        this.BMap = BMap;
+        this.BMap = BMap
 
-        const { Map, Point, LocalSearch, Geocoder } = BMap;
-        const { handleSearchComplete, handleMapClick } = this;
+        const { Map, Point, LocalSearch, Geocoder } = BMap
+        const { handleSearchComplete, handleMapClick } = this
 
-        this.map = new Map(this.$refs.map, { enableMapClick: false }); // 创建地图实例
-        this.map.enableScrollWheelZoom();
-        this.map.centerAndZoom(new Point(116.404, 39.915), 15); // 初始化地图，设置中心点坐标和地图缩放级别
+        this.map = new Map(this.$refs.map, { enableMapClick: false }) // 创建地图实例
+        this.map.enableScrollWheelZoom()
+        this.map.centerAndZoom(new Point(116.404, 39.915), 15) // 初始化地图，设置中心点坐标和地图缩放级别
 
-        this.map.addEventListener("click", handleMapClick); // 添加地图点击事件
+        this.map.addEventListener('click', handleMapClick) // 添加地图点击事件
 
-        this.localSearch = new LocalSearch(this.map); // 用于地址查询
-        this.localSearch.setSearchCompleteCallback(handleSearchComplete);
+        this.localSearch = new LocalSearch(this.map) // 用于地址查询
+        this.localSearch.setSearchCompleteCallback(handleSearchComplete)
 
-        this.geocoder = new Geocoder(); // 用于坐标反查
+        this.geocoder = new Geocoder() // 用于坐标反查
 
-        this.locate();
-      });
+        this.locate()
+      })
     },
     getMapScript() {
       if (!global.BMap) {
-        global.BMap = {};
+        global.BMap = {}
         global.BMap._preloader = new Promise(resolve => {
           global._initBaiduMap = function() {
-            resolve(global.BMap);
-            global.document.body.removeChild($script);
-            global.BMap._preloader = null;
-            global._initBaiduMap = null;
-          };
-          const $script = document.createElement("script");
-          global.document.body.appendChild($script);
-          $script.src = `https://api.map.baidu.com/api?v=3.0&ak=${this.ak}&callback=_initBaiduMap`;
-        });
-        return global.BMap._preloader;
+            resolve(global.BMap)
+            global.document.body.removeChild($script)
+            global.BMap._preloader = null
+            global._initBaiduMap = null
+          }
+          const $script = document.createElement('script')
+          global.document.body.appendChild($script)
+          $script.src = `https://api.map.baidu.com/api?v=3.0&ak=${this.ak}&callback=_initBaiduMap`
+        })
+        return global.BMap._preloader
       } else if (!global.BMap._preloader) {
-        return Promise.resolve(global.BMap);
+        return Promise.resolve(global.BMap)
       } else {
-        return global.BMap._preloader;
+        return global.BMap._preloader
       }
     }
   }
-};
+}
 </script>
 
 <style lang="scss" scoped>

@@ -1,9 +1,9 @@
-import Vue from "vue";
-import VueRouter from "vue-router";
+import Vue from 'vue'
+import VueRouter from 'vue-router'
 
-import Layout from "@/layout";
+import Layout from '@/layout'
 
-Vue.use(VueRouter);
+Vue.use(VueRouter)
 
 /**
  * Note: sub-menu only appear when route children.length >= 1
@@ -28,52 +28,52 @@ Vue.use(VueRouter);
 
 export const constantRoutes = [
   {
-    path: "/login",
-    component: () => import("@/views/login"),
-    name: "login",
-    meta: { title: "登录", hidden: true }
+    path: '/login',
+    component: () => import('@/views/login'),
+    name: 'login',
+    meta: { title: '登录', hidden: true }
   },
   {
-    path: "/",
+    path: '/',
     component: Layout,
-    redirect: "/dashboard",
+    redirect: '/dashboard',
     children: [
       {
-        path: "dashboard",
-        component: () => import("@/views/dashboard"),
-        name: "dashboard",
-        meta: { title: "首页", icon: "dashboard" }
+        path: 'dashboard',
+        component: () => import('@/views/dashboard'),
+        name: 'dashboard',
+        meta: { title: '首页', icon: 'dashboard' }
       }
     ]
   },
   {
-    path: "/about",
+    path: '/about',
     component: Layout,
-    redirect: "/about/index",
+    redirect: '/about/index',
     children: [
       {
-        path: "index",
-        component: () => import("@/views/about/index"),
-        name: "about",
-        meta: { title: "关于EXIA", icon: "info-circle" }
+        path: 'index',
+        component: () => import('@/views/about/index'),
+        name: 'about',
+        meta: { title: '关于EXIA', icon: 'info-circle' }
       }
     ]
   }
-];
+]
 
 const createRouter = () =>
   new VueRouter({
     // mode: 'history', // require service support
     scrollBehavior: () => ({ y: 0 }),
     routes: constantRoutes
-  });
+  })
 
-const router = createRouter();
+const router = createRouter()
 
 // Detail see: https://github.com/vuejs/vue-router/issues/1234#issuecomment-357941465
 export function resetRouter() {
-  const newRouter = createRouter();
-  router.matcher = newRouter.matcher; // reset router
+  const newRouter = createRouter()
+  router.matcher = newRouter.matcher // reset router
 }
 
-export default router;
+export default router

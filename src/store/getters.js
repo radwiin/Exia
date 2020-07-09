@@ -3,5 +3,5 @@ const getters = {
   account: state => state.app.account,
   roles: state => state.app.roles,
   allRoutes: state => state.app.allRoutes
-};
-export default getters;
+}
+export default getters

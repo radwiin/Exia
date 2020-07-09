@@ -1,11 +1,5 @@
 <template>
-  <el-drawer
-    title="设置"
-    direction="rtl"
-    size="300px"
-    :visible="visible"
-    @update:visible="handleVisibleUpdate"
-  >
+  <el-drawer title="设置" direction="rtl" size="300px" :visible="visible" @update:visible="handleVisibleUpdate">
     <div class="drawer-container">
       <div class="drawer-item">
         <span>布局</span>
@@ -25,7 +19,7 @@
 
 <script>
 export default {
-  name: "SettingDrawer",
+  name: 'SettingDrawer',
   props: {
     visible: {
       type: Boolean,
@@ -35,33 +29,33 @@ export default {
   computed: {
     layout: {
       get() {
-        return this.$store.state.settings.layout;
+        return this.$store.state.settings.layout
       },
       set(val) {
-        this.$store.dispatch("settings/changeSetting", {
-          key: "layout",
+        this.$store.dispatch('settings/changeSetting', {
+          key: 'layout',
           value: val
-        });
+        })
       }
     },
     fixWidth: {
       get() {
-        return this.$store.state.settings.fixWidth;
+        return this.$store.state.settings.fixWidth
       },
       set(val) {
-        this.$store.dispatch("settings/changeSetting", {
-          key: "fixWidth",
+        this.$store.dispatch('settings/changeSetting', {
+          key: 'fixWidth',
           value: val
-        });
+        })
       }
     }
   },
   methods: {
     handleVisibleUpdate(val) {
-      this.$emit("update:visible", val); // 桥接
+      this.$emit('update:visible', val) // 桥接
     }
   }
-};
+}
 </script>
 
 <style lang="scss" scoped>

@@ -5,15 +5,15 @@
 </template>
 
 <script>
-import CoordinateSelect from "@/components/CoordinateSelect";
+import CoordinateSelect from '@/components/CoordinateSelect'
 
 export default {
-  name: "coordinate-select-demo",
+  name: 'coordinate-select-demo',
   components: { CoordinateSelect },
   data: () => ({
     location: null
   })
-};
+}
 </script>
 
 <style lang="scss" scoped>

@@ -1,10 +1,5 @@
 <template>
-  <div
-    v-if="isExternal"
-    :style="styleExternalIcon"
-    class="svg-external-icon svg-icon"
-    v-on="$listeners"
-  />
+  <div v-if="isExternal" :style="styleExternalIcon" class="svg-external-icon svg-icon" v-on="$listeners" />
   <svg v-else :class="svgClass" aria-hidden="true" v-on="$listeners">
     <use :href="iconName" />
   </svg>
@@ -14,7 +9,7 @@
 // doc: https://panjiachen.github.io/vue-element-admin-site/feature/component/svg-icon.html#usage
 
 export default {
-  name: "SvgIcon",
+  name: 'SvgIcon',
   props: {
     iconClass: {
       type: String,
@@ -22,31 +17,31 @@ export default {
     },
     className: {
       type: String,
-      default: ""
+      default: ''
     }
   },
   computed: {
     isExternal() {
-      return /^https?:/.test(this.iconClass);
+      return /^https?:/.test(this.iconClass)
     },
     iconName() {
-      return `#icon-${this.iconClass}`;
+      return `#icon-${this.iconClass}`
     },
     svgClass() {
       if (this.className) {
-        return "svg-icon " + this.className;
+        return 'svg-icon ' + this.className
       } else {
-        return "svg-icon";
+        return 'svg-icon'
       }
     },
     styleExternalIcon() {
       return {
         mask: `url(${this.iconClass}) no-repeat 50% 50%`,
-        "-webkit-mask": `url(${this.iconClass}) no-repeat 50% 50%`
-      };
+        '-webkit-mask': `url(${this.iconClass}) no-repeat 50% 50%`
+      }
     }
   }
-};
+}
 </script>
 
 <style scoped>

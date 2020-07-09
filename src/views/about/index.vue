@@ -2,11 +2,7 @@
   <div class="page-container">
     <div style="padding:30px;">
       <span style="font-size:32px;vertical-align:middle">EXIA</span>
-      <el-tag
-        color="#36c2cf"
-        effect="dark"
-        style="vertical-align:middle;border-color:#36c2cf;margin-left:8px;"
-      >
+      <el-tag color="#36c2cf" effect="dark" style="vertical-align:middle;border-color:#36c2cf;margin-left:8px;">
         v0.1.0
       </el-tag>
 
@@ -15,9 +11,7 @@
       </div>
     </div>
     <div style="padding:30px 0 0 30px;">
-      <span style="font-size:24px;vertical-align:middle"
-        >EXIA主要包括以下内容：</span
-      >
+      <span style="font-size:24px;vertical-align:middle">EXIA主要包括以下内容：</span>
     </div>
     <el-row :gutter="30" style="margin:0 20px;">
       <el-col v-bind="contentColSpan">
@@ -75,19 +69,10 @@
           <span style="font-size:20px;color:#707175">作者</span>
         </div>
         <div class="author-wrapper">
-          <el-avatar
-            class="author-avatar"
-            shape="square"
-            :size="50"
-            :src="authorInfo.avatar_url"
-          />
+          <el-avatar class="author-avatar" shape="square" :size="50" :src="authorInfo.avatar_url" />
           <div class="author-main">
             <span class="author-name">{{ authorInfo.name }}</span>
-            <a
-              class="author-github"
-              :href="authorInfo.html_url"
-              target="_blank"
-            >
+            <a class="author-github" :href="authorInfo.html_url" target="_blank">
               {{ authorInfo.html_url }}
             </a>
           </div>
@@ -101,13 +86,13 @@
 </template>
 
 <script>
-import { getGitHubUserInfo } from "@/api";
+import { getGitHubUserInfo } from '@/api'
 export default {
-  name: "dashboard",
+  name: 'dashboard',
   data: () => ({
     authorInfo: {},
-    frameworkActiveNames: ["1", "2", "3", "4"],
-    contentActiveNames: ["1", "2", "3", "4"],
+    frameworkActiveNames: ['1', '2', '3', '4'],
+    contentActiveNames: ['1', '2', '3', '4'],
     contentColSpan: {
       xs: 24,
       sm: 24,
@@ -124,11 +109,11 @@ export default {
     }
   }),
   created() {
-    getGitHubUserInfo("radwiin").then(rsp => {
-      this.authorInfo = rsp;
-    });
+    getGitHubUserInfo('radwiin').then(rsp => {
+      this.authorInfo = rsp
+    })
   }
-};
+}
 </script>
 
 <style lang="scss" scoped>

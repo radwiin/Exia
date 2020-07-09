@@ -2,11 +2,7 @@
   <div class="column-wrapper">
     <div class="column">
       <div class="column-header">
-        <div
-          class="column-header-target"
-          v-if="!isEditing"
-          @click="onHeaderTargetClick"
-        />
+        <div class="column-header-target" v-if="!isEditing" @click="onHeaderTargetClick" />
         <textarea
           ref="column-header-title"
           v-model="column.title"
@@ -16,42 +12,21 @@
           @blur="onHeaderTitleBlur"
         />
       </div>
-      <draggable
-        class="column-content"
-        v-model="column.cards"
-        v-bind="dragOptions"
-      >
+      <draggable class="column-content" v-model="column.cards" v-bind="dragOptions">
         <board-card v-for="card in column.cards" :key="card.id" :card="card" />
       </draggable>
       <div class="column-footer">
-        <div
-          v-if="!isInputing"
-          class="column-footer-add"
-          @click="isInputing = true"
-        >
+        <div v-if="!isInputing" class="column-footer-add" @click="isInputing = true">
           <svg-icon icon-class="add" class-name="icon-add" />
           <span>添加卡片</span>
         </div>
         <div v-else class="column-footer-new-container">
           <div class="column-footer-input-wrapper">
-            <textarea
-              class="column-footer-input"
-              v-model="inputContent"
-              spellcheck="false"
-              maxlength="512"
-            />
+            <textarea class="column-footer-input" v-model="inputContent" spellcheck="false" maxlength="512" />
           </div>
           <div class="column-footer-function-container">
-            <input
-              class="column-footer-new-confirm"
-              type="submit"
-              value="添加卡片"
-            />
-            <svg-icon
-              icon-class="close"
-              class-name="icon-close"
-              @click="isInputing = false"
-            />
+            <input class="column-footer-new-confirm" type="submit" value="添加卡片" />
+            <svg-icon icon-class="close" class-name="icon-close" @click="isInputing = false" />
           </div>
         </div>
       </div>
@@ -60,10 +35,10 @@
 </template>
 
 <script>
-import draggable from "vuedraggable";
-import BoardCard from "./BoardCard";
+import draggable from 'vuedraggable'
+import BoardCard from './BoardCard'
 export default {
-  name: "BoardColumn",
+  name: 'BoardColumn',
   props: {
     column: {
       type: Object
@@ -77,26 +52,26 @@ export default {
     return {
       isEditing: false,
       dragOptions: {
-        group: "column",
+        group: 'column',
         animation: 200,
         forceFallback: true,
-        ghostClass: "ghost",
-        dragClass: "drag"
+        ghostClass: 'ghost',
+        dragClass: 'drag'
       },
       isInputing: false,
-      inputContent: ""
-    };
+      inputContent: ''
+    }
   },
   methods: {
     onHeaderTargetClick() {
-      this.isEditing = true;
-      this.$refs["column-header-title"].focus();
+      this.isEditing = true
+      this.$refs['column-header-title'].focus()
     },
     onHeaderTitleBlur() {
-      this.isEditing = false;
+      this.isEditing = false
     }
   }
-};
+}
 </script>
 
 <style lang="scss" scoped>
