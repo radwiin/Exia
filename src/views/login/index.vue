@@ -10,7 +10,7 @@
       <footer class="login-footer">
         <div class="new">
           New Here?
-          <a href="/" class="router-link-active">Create New Account</a>
+          <a class="router-link-active">Create New Account</a>
         </div>
       </footer>
     </div>

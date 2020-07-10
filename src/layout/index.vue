@@ -6,6 +6,7 @@
 import SideMenuLayout from './SideMenuLayout'
 import SideAllLayout from './SideAllLayout'
 import TopMenuLayout from './TopMenuLayout'
+import StyleLayout from './StyleLayout'
 import { mapState } from 'vuex'
 
 export default {
@@ -13,7 +14,8 @@ export default {
   components: {
     SideMenuLayout,
     SideAllLayout,
-    TopMenuLayout
+    TopMenuLayout,
+    StyleLayout
   },
   computed: {
     ...mapState({

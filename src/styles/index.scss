@@ -1,6 +1,16 @@
 @import './transition.scss';
 @import './element-ui.scss';
 
+:root {
+  --vs-primary: 26,92,255;
+  --vs-theme-bg: #f4f7f8;
+  --vs-theme-color: #2c3e50;
+  --vs-theme-layout: #fff;
+  --vs-theme-bg2: #eef2f5;
+  --vs-theme-code: #3f3d56;
+  --vs-theme-code2: #363449;
+}
+
 html {
   height: 100%;
   box-sizing: border-box;
@@ -28,15 +38,16 @@ body {
   width: 5px;
   height: 5px;
   display: block;
+  background: var(--vs-theme-layout);
 }
 
 ::-webkit-scrollbar-thumb {
-  background: #e4eaf5;
+  background: var(--vs-theme-color);
   border-radius: 5px;
 }
 
-::-webkit-scrollbar-thumb:hover {
-  background: #c4c9d3;
+::selection {
+  background: rgba(37,100,255,.15);
 }
 
 img {

@@ -27,8 +27,8 @@
       </el-input>
     </el-form-item>
     <div style="margin-bottom: 10px">
-      <el-checkbox v-model="checked" style="color: #000;font-weight: 400;">Remember me</el-checkbox>
-      <a href="#">Forgot Password?</a>
+      <el-checkbox v-model="checked" style="color: #000;font-weight: 400; font-size: 0.8rem;">Remember me</el-checkbox>
+      <a>Forgot Password?</a>
     </div>
     <el-form-item>
       <el-button type="primary" @click.native.prevent="handleLogin" class="login-submit">{{ 'Sign In' }}</el-button>
