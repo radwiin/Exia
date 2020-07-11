@@ -39,6 +39,9 @@ export default {
     return h(
       'el-menu',
       {
+        class: {
+          'app-menu': true
+        },
         props: {
           mode: this.mode,
           collapse: this.collapse,
@@ -80,7 +83,8 @@ export default {
           'el-submenu',
           {
             props: {
-              index: item.path
+              index: item.path,
+              'popper-class': 'r-popper-class'
             }
           },
           [
@@ -145,3 +149,24 @@ export default {
   }
 }
 </script>
+
+<style lang="scss" scoped>
+.app-menu {
+  ::v-deep .el-menu-item.is-active,
+  ::v-deep .el-submenu.is-active .el-submenu__title {
+    background: #1e2023 !important;
+    color: #fff !important;
+  }
+}
+</style>
+
+<style lang="scss">
+.r-popper-class {
+  color: #000;
+
+  .el-menu-item.is-active {
+    background: #1e2023 !important;
+    color: #fff !important;
+  }
+}
+</style>

@@ -65,7 +65,7 @@
 import { mapGetters } from 'vuex'
 import NavMenu from '@/layout/components/NavMenu'
 import settingDrawer from '@/layout/components/SettingDrawer'
-import Breadcrumb from './components/Breadcrumb'
+import Breadcrumb from '@/layout/components/Breadcrumb'
 
 export default {
   name: 'SideMenuLayout',

@@ -11,21 +11,18 @@
   --vs-theme-code2: #363449;
 }
 
-html {
-  height: 100%;
-  box-sizing: border-box;
-}
-
-body {
+html,
+body,
+#app {
   height: 100%;
   margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  // background: var(--vs-theme-bg);
+  background: #fff;
   font-family: "Avenir", Helvetica, Arial, sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
-}
-
-#app {
-  height: 100%;
 }
 
 *,
