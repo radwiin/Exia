@@ -149,6 +149,7 @@ $MenuWidthCollapse: 64px;
         height: 27px;
         margin: 18px;
         flex: 0 0 auto;
+        color: #000;
       }
 
       .title {
