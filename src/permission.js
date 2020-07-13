@@ -6,7 +6,7 @@ import { Message } from 'element-ui'
 
 NProgress.configure({ showSpinner: false })
 
-const whiteList = ['/login'] // no redirect whitelist
+const whiteList = ['/login', '/forgot-password'] // no redirect whitelist
 
 router.beforeEach(async (to, from, next) => {
   NProgress.start()

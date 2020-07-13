@@ -34,6 +34,12 @@ export const constantRoutes = [
     meta: { title: '登录', hidden: true }
   },
   {
+    path: '/forgot-password',
+    component: () => import('@/views/forgot-password'),
+    name: 'forgot-password',
+    meta: { title: 'Forgot Password', hidden: true }
+  },
+  {
     path: '/',
     component: Layout,
     redirect: '/dashboard',

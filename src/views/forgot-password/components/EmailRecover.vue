@@ -7,47 +7,30 @@
         name="username"
         type="text"
         auto-complete="off"
-        placeholder="Account"
+        placeholder="Email"
         clearable
       >
-        <i slot="prefix" class="el-input__icon el-icon-user" />
+        <i slot="prefix" class="el-input__icon el-icon-message" />
       </el-input>
     </el-form-item>
-    <el-form-item prop="password">
-      <el-input
-        @keyup.enter.native="handleLogin"
-        :type="passwordType"
-        v-model="loginForm.password"
-        auto-complete="off"
-        placeholder="Password"
-        clearable
-      >
-        <i slot="prefix" class="el-input__icon el-icon-lock" />
-        <i class="el-input__icon el-icon-view" slot="suffix" @click="showPassword"></i>
-      </el-input>
-    </el-form-item>
-    <div style="margin-bottom: 16px">
-      <el-checkbox v-model="checked" style="color: #000;font-weight: 400; font-size: 0.8rem;">Remember me</el-checkbox>
-      <a @click="$router.push('/forgot-password')">Forgot Password?</a>
-    </div>
     <el-form-item>
-      <el-button type="primary" @click.native.prevent="handleLogin" class="login-submit">{{ 'Sign In' }}</el-button>
+      <el-button type="primary" @click.native.prevent="handleLogin" class="login-submit">{{ 'Recover Password' }}</el-button>
     </el-form-item>
   </el-form>
 </template>
 
 <script>
 export default {
-  name: 'UserLogin',
+  name: 'EmailRecover',
   data() {
     return {
       checked: false,
       loginForm: {
-        username: 'root',
+        username: '',
         password: 'root'
       },
       loginRules: {
-        username: [{ required: true, message: 'Account required', trigger: 'blur' }],
+        username: [{ required: true, message: 'Email required', trigger: 'blur' }],
         password: [{ required: true, message: 'Password required', trigger: 'blur' }]
       },
       passwordType: 'password'
