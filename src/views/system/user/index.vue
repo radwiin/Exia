@@ -31,7 +31,7 @@
       </el-table>
     </div>
     <el-pagination class="data-pagination" v-bind="paginationBind" @size-change="handleSizeChange" @current-change="handleCurrentChange" />
-    <el-dialog :visible.sync="dialogVisible" :title="dialogCategory" width="900px" @close="handleDialogClose">
+    <el-dialog :visible.sync="dialogVisible" :title="dialogCategory" width="500px" @close="handleDialogClose">
       <el-form
         v-loading="formLoading"
         ref="form"
