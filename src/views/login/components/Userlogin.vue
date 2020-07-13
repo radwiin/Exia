@@ -6,7 +6,7 @@
         v-model="loginForm.username"
         name="username"
         type="text"
-        auto-complete="on"
+        auto-complete="off"
         placeholder="Account"
         clearable
       >
@@ -18,7 +18,7 @@
         @keyup.enter.native="handleLogin"
         :type="passwordType"
         v-model="loginForm.password"
-        auto-complete="on"
+        auto-complete="off"
         placeholder="Password"
         clearable
       >

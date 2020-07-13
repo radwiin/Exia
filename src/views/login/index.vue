@@ -18,7 +18,9 @@
               <el-tab-pane label="Phone" name="Phone">
                 <phone-login />
               </el-tab-pane>
-              <el-tab-pane label="Other" name="Other">Other</el-tab-pane>
+              <el-tab-pane label="Other" name="Other">
+                <other-login />
+              </el-tab-pane>
             </el-tabs>
           </div>
           <footer class="login-footer">
@@ -36,11 +38,13 @@
 <script>
 import UserLogin from './components/UserLogin'
 import PhoneLogin from './components/PhoneLogin'
+import OtherLogin from './components/OtherLogin'
 export default {
   name: 'login',
   components: {
     UserLogin,
-    PhoneLogin
+    PhoneLogin,
+    OtherLogin
   },
   data() {
     return {
@@ -60,6 +64,7 @@ export default {
   align-items: center;
 
   .card-wrapper {
+    flex: none;
     width: 800px;
     min-height: 450px;
     display: flex;
@@ -128,7 +133,7 @@ export default {
             color: #409eff;
 
             &:hover {
-              text-decoration: underline;
+              color: #66b1ff;
             }
           }
         }

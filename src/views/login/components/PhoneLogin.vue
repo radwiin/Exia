@@ -6,25 +6,31 @@
         v-model="loginForm.username"
         name="username"
         type="text"
-        auto-complete="on"
-        placeholder="Account"
+        auto-complete="off"
+        placeholder="Phone"
         clearable
       >
         <i slot="prefix" class="el-input__icon el-icon-phone-outline" />
       </el-input>
     </el-form-item>
     <el-form-item prop="password">
-      <el-input
-        @keyup.enter.native="handleLogin"
-        :type="passwordType"
-        v-model="loginForm.password"
-        auto-complete="on"
-        placeholder="Password"
-        clearable
-      >
-        <i slot="prefix" class="el-input__icon el-icon-message" />
-        <i class="el-input__icon el-icon-view" slot="suffix" @click="showPassword"></i>
-      </el-input>
+      <div style="display:flex">
+        <el-input
+          @keyup.enter.native="handleLogin"
+          :type="passwordType"
+          v-model="loginForm.password"
+          auto-complete="off"
+          placeholder="Code"
+          clearable
+          style="flex-grow:1"
+        >
+          <i slot="prefix" class="el-input__icon el-icon-message" />
+          <i class="el-input__icon el-icon-view" slot="suffix" @click="showPassword"></i>
+        </el-input>
+        <div style="flex:none;display:inline-block;width:70px;height:32px">
+          <span class="msg-text" :class="[{ display: false }]">{{ 'Send Code' }}</span>
+        </div>
+      </div>
     </el-form-item>
     <el-form-item>
       <el-button type="primary" @click.native.prevent="handleLogin" class="login-submit">{{ 'Sign In' }}</el-button>
@@ -39,8 +45,8 @@ export default {
     return {
       checked: false,
       loginForm: {
-        username: 'root',
-        password: 'root'
+        username: '15550001555',
+        password: '111111'
       },
       loginRules: {
         username: [{ required: true, message: 'Phone required', trigger: 'blur' }],
@@ -77,6 +83,19 @@ export default {
 </script>
 
 <style lang="scss" scoped>
+.msg-text {
+  display: block;
+  width: 100%;
+  font-size: 12px;
+  text-align: right;
+  cursor: pointer;
+  color: #909399;
+}
+
+.msg-text.display {
+  color: #ccc;
+}
+
 .login-form {
   margin: 10px 0;
 
