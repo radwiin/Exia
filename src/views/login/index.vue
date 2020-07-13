@@ -11,7 +11,15 @@
             <div class="login-header-sub-title">Welcome back, please login to your account.</div>
           </header>
           <div class="login-content">
-            <user-login />
+            <el-tabs v-model="activeName">
+              <el-tab-pane label="Account" name="Account">
+                <user-login />
+              </el-tab-pane>
+              <el-tab-pane label="Phone" name="Phone">
+                <phone-login />
+              </el-tab-pane>
+              <el-tab-pane label="Other" name="Other">Other</el-tab-pane>
+            </el-tabs>
           </div>
           <footer class="login-footer">
             <div class="new">
@@ -26,11 +34,18 @@
 </template>
 
 <script>
-import UserLogin from './components/Userlogin'
+import UserLogin from './components/UserLogin'
+import PhoneLogin from './components/PhoneLogin'
 export default {
   name: 'login',
   components: {
-    UserLogin
+    UserLogin,
+    PhoneLogin
+  },
+  data() {
+    return {
+      activeName: 'Account'
+    }
   }
 }
 </script>
@@ -74,11 +89,13 @@ export default {
       border-bottom-right-radius: 10px;
 
       .login-wrapper {
+        min-height: 100%;
         display: flex;
         flex-flow: column nowrap;
         align-items: center;
 
         .login-header {
+          flex: none;
           width: 100%;
           padding: 28px 28px 0;
 
@@ -96,11 +113,13 @@ export default {
         }
 
         .login-content {
+          flex: auto;
           width: 100%;
-          padding: 10px 16px 0;
+          padding: 10px 28px 0;
         }
 
         .login-footer {
+          flex: none;
           margin: 0 0 10px;
           padding: 0;
           font-size: 0.7rem;

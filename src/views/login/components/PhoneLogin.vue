@@ -10,7 +10,7 @@
         placeholder="Account"
         clearable
       >
-        <i slot="prefix" class="el-input__icon el-icon-user" />
+        <i slot="prefix" class="el-input__icon el-icon-phone-outline" />
       </el-input>
     </el-form-item>
     <el-form-item prop="password">
@@ -22,14 +22,10 @@
         placeholder="Password"
         clearable
       >
-        <i slot="prefix" class="el-input__icon el-icon-lock" />
+        <i slot="prefix" class="el-input__icon el-icon-message" />
         <i class="el-input__icon el-icon-view" slot="suffix" @click="showPassword"></i>
       </el-input>
     </el-form-item>
-    <div style="margin-bottom: 16px">
-      <el-checkbox v-model="checked" style="color: #000;font-weight: 400; font-size: 0.8rem;">Remember me</el-checkbox>
-      <a>Forgot Password?</a>
-    </div>
     <el-form-item>
       <el-button type="primary" @click.native.prevent="handleLogin" class="login-submit">{{ 'Sign In' }}</el-button>
     </el-form-item>
@@ -38,7 +34,7 @@
 
 <script>
 export default {
-  name: 'UserLogin',
+  name: 'PhoneLogin',
   data() {
     return {
       checked: false,
@@ -47,8 +43,8 @@ export default {
         password: 'root'
       },
       loginRules: {
-        username: [{ required: true, message: 'Account required', trigger: 'blur' }],
-        password: [{ required: true, message: 'Password required', trigger: 'blur' }]
+        username: [{ required: true, message: 'Phone required', trigger: 'blur' }],
+        password: [{ required: true, message: 'Code required', trigger: 'blur' }]
       },
       passwordType: 'password'
     }
