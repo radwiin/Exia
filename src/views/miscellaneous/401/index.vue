@@ -1,0 +1,42 @@
+<template>
+  <div class="page-container">
+    <svg-icon class="logo" icon-class="vue" class-name="vue" />
+    <h1 class="title">You are not authorized!</h1>
+    <p class="content">
+      paraphonic unassessable foramination Caulopteris worral Spirophyton encrimson esparcet aggerate chondrule restate whistler shallopy biosystematy
+      area bertram plotting unstarting quarterstaff.
+    </p>
+  </div>
+</template>
+
+<script>
+export default {}
+</script>
+
+<style lang="scss" scoped>
+.page-container {
+  background: #1e2023;
+  display: flex;
+  flex-flow: column nowrap;
+  justify-content: center;
+  align-items: center;
+
+  .logo {
+    width: 200px;
+    height: 200px;
+    color: #fff;
+  }
+
+  .title {
+    width: 400px;
+    text-align: center;
+    color: #fff;
+  }
+
+  .content {
+    width: 600px;
+    text-align: center;
+    color: #fff;
+  }
+}
+</style>

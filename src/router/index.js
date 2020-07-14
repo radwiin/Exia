@@ -31,13 +31,43 @@ export const constantRoutes = [
     path: '/login',
     component: () => import('@/views/login'),
     name: 'login',
-    meta: { title: '登录', hidden: true }
+    meta: { title: 'Sign In', hidden: true }
   },
   {
     path: '/forgot-password',
     component: () => import('@/views/forgot-password'),
     name: 'forgot-password',
     meta: { title: 'Forgot Password', hidden: true }
+  },
+  {
+    path: '/404',
+    component: () => import('@/views/miscellaneous/404'),
+    name: '404',
+    meta: { title: 'Page Not Found', hidden: true }
+  },
+  {
+    path: '/401',
+    component: () => import('@/views/miscellaneous/401'),
+    name: '401',
+    meta: { title: 'Not Authorized', hidden: true }
+  },
+  {
+    path: '/500',
+    component: () => import('@/views/miscellaneous/401'),
+    name: '500',
+    meta: { title: 'Internal Server Error', hidden: true }
+  },
+  {
+    path: '/maintenance',
+    component: () => import('@/views/miscellaneous/maintenance'),
+    name: 'maintenance',
+    meta: { title: 'Under Maintenance', hidden: true }
+  },
+  {
+    path: '/coming-soon',
+    component: () => import('@/views/miscellaneous/coming-soon'),
+    name: 'coming-soon',
+    meta: { title: 'Coming Soon', hidden: true }
   },
   {
     path: '/',
