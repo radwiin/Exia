@@ -6,6 +6,7 @@
       paraphonic unassessable foramination Caulopteris worral Spirophyton encrimson esparcet aggerate chondrule restate whistler shallopy biosystematy
       area bertram plotting unstarting quarterstaff.
     </p>
+    <el-button type="primary" class="back" size="default">{{ 'Back To Home' }}</el-button>
   </div>
 </template>
 
@@ -37,6 +38,13 @@ export default {}
     width: 600px;
     text-align: center;
     color: #fff;
+    margin-bottom: 3rem;
+  }
+
+  .back {
+    width: 200px;
+    letter-spacing: 2px;
+    font-weight: 300;
   }
 }
 </style>
