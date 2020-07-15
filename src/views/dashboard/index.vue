@@ -28,17 +28,34 @@
     </el-row>
 
     <div style="padding: 50px 30px">
-      <line-chart />
+      <div style="margin: 10px 0">
+        <cube-card style="width:170px"></cube-card>
+      </div>
+      <div style="margin: 10px 0">
+        <rect-card style="width:305px" />
+      </div>
+      <div style="margin: 10px 0">
+        <area-card style="width:305px" />
+      </div>
+      <div style="margin: 10px 0">
+        <line-card style="width:400px" />
+      </div>
     </div>
   </div>
 </template>
 
 <script>
-import LineChart from './components/LineChart'
+import CubeCard from './components/CubeCard'
+import RectCard from './components/RectCard'
+import AreaCard from './components/AreaCard'
+import LineCard from './components/LineCard'
 export default {
   name: 'dashboard',
   components: {
-    LineChart
+    CubeCard,
+    RectCard,
+    AreaCard,
+    LineCard
   },
   data: () => ({
     frameworkActiveNames: ['1', '2', '3', '4'],
