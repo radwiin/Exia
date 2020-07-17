@@ -10,7 +10,7 @@
         <span>Welcome, vistor.</span>
       </div>
     </div>
-    <el-row :gutter="20" style="margin:0 20px;">
+    <!-- <el-row :gutter="20" style="margin:0 20px;">
       <el-col v-bind="cardColSpan" v-for="(item, index) in cardList" :key="index">
         <el-card shadow="hover" style="margin: 10px 0; cursor: pointer;" :body-style="{ padding: '0px' }">
           <div class="card" :style="{ background: item.background }">
@@ -25,9 +25,12 @@
           </div>
         </el-card>
       </el-col>
-    </el-row>
+    </el-row> -->
 
-    <div style="padding: 50px 30px">
+    <div style="padding: 30px 30px">
+      <div style="margin: 10px 0">
+        <weather-card style="width:400px"></weather-card>
+      </div>
       <div style="margin: 10px 0">
         <cube-card style="width:170px"></cube-card>
       </div>
@@ -49,13 +52,16 @@ import CubeCard from './components/CubeCard'
 import RectCard from './components/RectCard'
 import AreaCard from './components/AreaCard'
 import LineCard from './components/LineCard'
+import WeatherCard from './components/WeatherCard'
+
 export default {
   name: 'dashboard',
   components: {
     CubeCard,
     RectCard,
     AreaCard,
-    LineCard
+    LineCard,
+    WeatherCard
   },
   data: () => ({
     frameworkActiveNames: ['1', '2', '3', '4'],
