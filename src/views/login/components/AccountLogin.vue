@@ -38,7 +38,7 @@
 
 <script>
 export default {
-  name: 'UserLogin',
+  name: 'AccountLogin',
   data() {
     return {
       checked: false,

@@ -13,7 +13,7 @@
           <div class="login-content">
             <el-tabs v-model="activeName">
               <el-tab-pane label="Account" name="Account">
-                <user-login />
+                <account-login />
               </el-tab-pane>
               <el-tab-pane label="Phone" name="Phone">
                 <phone-login />
@@ -36,13 +36,13 @@
 </template>
 
 <script>
-import UserLogin from './components/UserLogin'
+import AccountLogin from './components/AccountLogin'
 import PhoneLogin from './components/PhoneLogin'
 import OtherLogin from './components/OtherLogin'
 export default {
   name: 'login',
   components: {
-    UserLogin,
+    AccountLogin,
     PhoneLogin,
     OtherLogin
   },
