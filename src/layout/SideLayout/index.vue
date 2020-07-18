@@ -1,6 +1,6 @@
 <template>
   <div class="app-wrapper">
-    <div class="aside-wrapper" tabindex="1" @blur="collapse = true">
+    <div class="aside-wrapper">
       <div :class="`menu-header ${collapse ? 'is-collapse' : ''}`">
         <svg-icon class="logo" icon-class="vue" class-name="vue" />
         <span class="title">Exia Admin</span>
@@ -77,7 +77,7 @@ import settingDrawer from '@/layout/components/SettingDrawer'
 import Breadcrumb from '@/layout/components/Breadcrumb'
 
 export default {
-  name: 'SideMenuLayout',
+  name: 'SideLayout',
   components: {
     NavMenu,
     settingDrawer,

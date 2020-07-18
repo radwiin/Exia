@@ -3,19 +3,15 @@
 </template>
 
 <script>
-import SideMenuLayout from './SideMenuLayout'
-import SideAllLayout from './SideAllLayout'
-import TopMenuLayout from './TopMenuLayout'
-import StyleLayout from './StyleLayout'
+import SideLayout from './SideLayout'
+import TopLayout from './TopLayout'
 import { mapState } from 'vuex'
 
 export default {
   name: 'layout',
   components: {
-    SideMenuLayout,
-    SideAllLayout,
-    TopMenuLayout,
-    StyleLayout
+    SideLayout,
+    TopLayout
   },
   computed: {
     ...mapState({

@@ -19,7 +19,7 @@
         </div>
       </div>
     </el-header>
-    <el-main class="main-wrapper" :class="{ 'fix-width': layout === 'TopMenuLayout' && fixWidth }">
+    <el-main class="main-wrapper" :class="{ 'fix-width': fixWidth }">
       <transition name="fade-transform" mode="out-in">
         <keep-alive>
           <router-view />
@@ -38,7 +38,7 @@ import settingDrawer from '@/layout/components/SettingDrawer'
 import { mapState } from 'vuex'
 
 export default {
-  name: 'TopMenuLayout',
+  name: 'TopLayout',
   components: {
     Logo,
     NavMenu,
@@ -50,7 +50,6 @@ export default {
   computed: {
     ...mapGetters(['account', 'roles', 'allRoutes']),
     ...mapState({
-      layout: state => state.settings.layout,
       fixWidth: state => state.settings.fixWidth
     }),
     activeMenu() {

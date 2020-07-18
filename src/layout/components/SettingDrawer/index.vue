@@ -1,17 +1,16 @@
 <template>
-  <el-drawer title="设置" direction="rtl" size="300px" :visible="visible" @update:visible="handleVisibleUpdate">
+  <el-drawer title="Setting" direction="rtl" size="300px" :visible="visible" @update:visible="handleVisibleUpdate">
     <div class="drawer-container">
       <div class="drawer-item">
-        <span>布局</span>
+        <span>Layout</span>
         <el-radio-group v-model="layout">
-          <el-radio-button label="SideMenuLayout">布局A</el-radio-button>
-          <el-radio-button label="SideAllLayout">布局B</el-radio-button>
-          <el-radio-button label="TopMenuLayout">布局C</el-radio-button>
+          <el-radio-button label="SideLayout">SideLayout</el-radio-button>
+          <el-radio-button label="TopLayout">TopLayout</el-radio-button>
         </el-radio-group>
       </div>
       <div class="drawer-item">
-        <span>定宽</span>
-        <el-switch v-model="fixWidth" :disabled="layout !== 'TopMenuLayout'" />
+        <span>Fix Width</span>
+        <el-switch v-model="fixWidth" :disabled="layout !== 'TopLayout'" />
       </div>
     </div>
   </el-drawer>
