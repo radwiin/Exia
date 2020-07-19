@@ -32,9 +32,7 @@ export default {
 <style lang="scss" scoped>
 .card-wrapper {
   border-radius: 10px;
-  background-image: url('~@/assets/cloudy.jpg');
-  background-size: cover;
-  background-position: center center;
+  background: url('~@/assets/cloudy.jpg') center center/cover;
   color: #fff;
 
   .row-1 {

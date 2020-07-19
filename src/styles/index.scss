@@ -1,15 +1,7 @@
+@import './fonts.scss';
 @import './transition.scss';
+@import './element-variables.scss';
 @import './element-ui.scss';
-
-:root {
-  --vs-primary: 26,92,255;
-  --vs-theme-bg: #f4f7f8;
-  --vs-theme-color: #2c3e50;
-  --vs-theme-layout: #fff;
-  --vs-theme-bg2: #eef2f5;
-  --vs-theme-code: #3f3d56;
-  --vs-theme-code2: #363449;
-}
 
 html,
 body,
@@ -20,7 +12,7 @@ body,
   box-sizing: border-box;
   // background: var(--vs-theme-bg);
   background: #fff;
-  font-family: "Avenir", Helvetica, Arial, sans-serif;
+  font-family: "Poppins", "Avenir", Helvetica, Arial, sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
 }
@@ -71,4 +63,3 @@ a:hover {
   height: 100%;
   position: relative;
 }
-

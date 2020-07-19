@@ -34,9 +34,7 @@ export default {
   display: flex;
   justify-content: center;
   align-items: center;
-  background-image: url('~@/assets/login-bg.jpg');
-  background-size: cover;
-  background-position: center center;
+  background: url('~@/assets/login-bg.jpg') center center/cover;
 
   .login-wrapper {
     width: 400px;
