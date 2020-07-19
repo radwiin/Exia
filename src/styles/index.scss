@@ -10,8 +10,7 @@ body,
   margin: 0;
   padding: 0;
   box-sizing: border-box;
-  // background: var(--vs-theme-bg);
-  background: #fff;
+  background: $--background-color-base;
   font-family: "Poppins", "Avenir", Helvetica, Arial, sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
