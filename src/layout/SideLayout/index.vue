@@ -1,21 +1,12 @@
 <template>
   <div class="app-wrapper">
-    <div class="aside-wrapper">
+    <side-navbar></side-navbar>
+    <!-- <div class="aside-wrapper">
       <div :class="`menu-header ${collapse ? 'is-collapse' : ''}`">
         <svg-icon class="logo" icon-class="vue" class-name="vue" />
         <span class="title">Exia Admin</span>
       </div>
-      <nav-menu
-        class="nav-menu"
-        :collapse="collapse"
-        @open="handleOpen"
-        @close="handleClose"
-        background-color="#fff"
-        text-color="#2c3e50"
-        active-text-color="#fff"
-        :default-active="activeMenu"
-        :data="allRoutes"
-      />
+      <auto-el-menu class="nav-menu" :collapse="collapse" @open="handleOpen" @close="handleClose" :default-active="activeMenu"></auto-el-menu>
       <div :class="`menu-footer ${collapse ? 'is-collapse' : ''}`">
         <div class="avatar-wrapper">
           <el-avatar shape="circle" :size="30" :src="require('@/assets/avator.jpg')" />
@@ -27,7 +18,7 @@
           <svg-icon icon-class="hamburger" :class-name="`hamburger ${collapse ? '' : 'is-active'}`" />
         </div>
       </div>
-    </div>
+    </div> -->
     <div class="main-wrapper">
       <div class="header-wrapper">
         <breadcrumb class="breadcrumb-container" />
@@ -71,15 +62,17 @@
 </template>
 
 <script>
+import AutoElMenu from '@/components/AutoElMenu'
 import { mapGetters } from 'vuex'
-import NavMenu from '@/layout/components/NavMenu'
 import settingDrawer from '@/layout/components/SettingDrawer'
 import Breadcrumb from '@/layout/components/Breadcrumb'
+import SideNavbar from './components/SideNavbar'
 
 export default {
   name: 'SideLayout',
   components: {
-    NavMenu,
+    SideNavbar,
+    AutoElMenu,
     settingDrawer,
     Breadcrumb
   },
@@ -162,7 +155,7 @@ $MenuWidthCollapse: 64px;
     .nav-menu {
       flex: auto;
       min-height: 0px;
-      overflow-y: auto;
+      // overflow-y: auto;
 
       &::-webkit-scrollbar {
         width: 0px;

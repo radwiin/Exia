@@ -2,7 +2,7 @@
   <el-container class="app-wrapper">
     <el-header class="header-wrapper">
       <logo class="logo" />
-      <nav-menu
+      <!-- <nav-menu
         class="nav-menu"
         @open="handleOpen"
         @close="handleClose"
@@ -12,7 +12,7 @@
         :default-active="activeMenu"
         :data="allRoutes"
         mode="horizontal"
-      />
+      /> -->
       <div class="right-menu">
         <div class="setting-wrapper" @click="handleSettingClick">
           <svg-icon icon-class="setting" class-name="setting" />
@@ -33,7 +33,6 @@
 <script>
 import { mapGetters } from 'vuex'
 import Logo from '@/layout/components/Logo'
-import NavMenu from '@/layout/components/NavMenu'
 import settingDrawer from '@/layout/components/SettingDrawer'
 import { mapState } from 'vuex'
 
@@ -41,7 +40,6 @@ export default {
   name: 'TopLayout',
   components: {
     Logo,
-    NavMenu,
     settingDrawer
   },
   data: () => ({

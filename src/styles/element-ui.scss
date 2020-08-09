@@ -1,5 +1,6 @@
 .el-menu>.el-submenu,
 .el-menu>.el-menu-item,
+.el-menu>.el-menu-item-group,
 .el-menu--popup>.el-menu-item-group .el-menu-item {
   .svg-icon {
     margin-right: 5px;
@@ -11,12 +12,29 @@
 }
 
 .el-menu--collapse>.el-menu-item,
+.el-menu--collapse>.el-menu-item-group,
 .el-menu--collapse>.el-submenu>.el-submenu__title {
   .svg-icon {
     margin: 0;
     vertical-align: middle;
     width: 24px;
     text-align: center;
+  }
+
+
+}
+
+.el-menu--collapse>.el-menu-item-group .el-submenu {
+  span {
+    height: 0;
+    width: 0;
+    overflow: hidden;
+    visibility: hidden;
+    display: inline-block;
+  }
+
+  i {
+    display: none;
   }
 }
 

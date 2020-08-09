@@ -81,19 +81,6 @@ export const constantRoutes = [
         meta: { title: '首页', icon: 'dashboard' }
       }
     ]
-  },
-  {
-    path: '/about',
-    component: Layout,
-    redirect: '/about/index',
-    children: [
-      {
-        path: 'index',
-        component: () => import('@/views/about/index'),
-        name: 'about',
-        meta: { title: '关于EXIA', icon: 'info-circle' }
-      }
-    ]
   }
 ]
 

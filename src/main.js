@@ -11,6 +11,7 @@ import store from './store'
 
 import '@/icons'
 import '@/permission'
+import '@/components' // global components
 
 Vue.use(ElementUI, {
   size: 'small'
