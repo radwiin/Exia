@@ -48,7 +48,7 @@ const routes = [
         name: 'home',
         path: '/home',
         component: () => import('@/views/home'),
-        meta: { title: 'Home', icon: 'bx bx-home' }
+        meta: { title: 'Home', icon: 'dashboard' }
       }
     ]
   }

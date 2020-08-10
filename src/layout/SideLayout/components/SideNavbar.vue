@@ -4,7 +4,15 @@
       <svg-icon class="logo" icon-class="vue" />
       <span class="title">Exia Admin</span>
     </header>
-    <auto-el-menu v-scrollbar class="side-navbar__menu" :collapse="collapse" :default-active="activeMenu" :collapse-transition="false"></auto-el-menu>
+    <auto-el-menu
+      v-scrollbar
+      class="side-navbar__menu"
+      :collapse="collapse"
+      :default-active="activeMenu"
+      :collapse-transition="false"
+      router
+      :menus="menus"
+    ></auto-el-menu>
   </div>
 </template>
 
@@ -22,14 +30,30 @@ export default {
     collapse: true
   }),
   computed: {
-    ...mapGetters(['allRoutes']),
+    ...mapGetters(['routes']),
     activeMenu() {
       const route = this.$route
       const { path } = route
       return path
+    },
+    menus() {
+      return this.toMenus(this.routes)
     }
   },
   methods: {
+    toMenus(routes) {
+      // const groups = new Set()
+      // routes.filter(route => route && route.meta && route.meta.group).forEach(route => groups.add(route.meta.group))
+      // const theRoutes = []
+      // groups.forEach(route => {
+      //   if (route && route.meta && route.meta.group) {
+      //   } else {
+      //     theRoutes.push(route)
+      //   }
+      // })
+
+      return routes.map(route => this.toMenu(route))
+    },
     toMenu(route) {
       const checkHidden = it => it.meta && it.meta.hidden
       const checkAlwaysShow = it => it.meta && it.meta.alwaysShow
@@ -46,27 +70,30 @@ export default {
       if (isHidden) {
         return null
       }
+
       // 以下是对要显示的路由进行的逻辑处理，暂不支持外链
       if (hasVisibleChildren && (!hasOnlyOneVisibleChildren || isAlwaysShow)) {
         // 存在可见子节点，且要么有一个以上的子节点，要么只有一个子节点但设置alwaysShow属性。此时渲染为submenu
         return {
-          type: 'submenu',
+          component: 'submenu',
+          index: route.path,
           icon: route.meta.icon,
           title: route.meta.title,
-          children: route.children.map(this.toMenu)
+          children: this.toMenus(route.children)
         }
       } else if (hasVisibleChildren && hasOnlyOneVisibleChildren) {
         // 存在可见子节点，但只有一个节点且没有设置alwaysShow属性。此时默认将path传入子节点，且只渲染子节点
         return this.toMenu(visibleChildren[0])
       } else {
         // 不存在可见子节点。此时渲染为menu-item
-        let path = route.path
-        if (!isExternal(path) && isLink) {
-          path = this.getFullPath(path)
-        }
+        // let path = route.path
+        // if (!isExternal(path) && isLink) {
+        //   path = this.getFullPath(path)
+        // }
         return {
+          component: 'item',
           id: route.name,
-          index: isExternal(path) ? undefined : path,
+          index: route.path,
           icon: route.meta.icon,
           title: route.meta.title
         }

@@ -6,17 +6,16 @@ const menus = [
     path: '/auth',
     component: 'Layout',
     redirect: '/auth/role',
-    name: 'auth',
-    meta: { title: '权限管理', icon: 'setting', alwaysShow: true },
+    meta: { title: 'Auth', icon: 'setting', alwaysShow: true, group: 'sys' },
     children: [
       {
         id: '100-1',
         pId: '100',
         sort: 1,
+        name: 'role',
         path: 'role',
         component: '/auth/role',
-        name: 'role',
-        meta: { title: '角色管理', icon: 'key' }
+        meta: { title: 'Role', icon: 'key' }
       }
     ]
   },
@@ -27,26 +26,25 @@ const menus = [
     path: '/system',
     component: 'Layout',
     redirect: '/system/menu',
-    name: 'system',
-    meta: { title: '系统管理', icon: 'setting', alwaysShow: true },
+    meta: { title: 'System', icon: 'setting', alwaysShow: true, group: 'sys' },
     children: [
       {
         id: '101-1',
         pId: '101',
         sort: 1,
-        path: 'user',
-        component: '/system/user',
         name: 'user',
-        meta: { title: '用户管理', icon: 'key' }
+        path: '/system/user',
+        component: '/system/user',
+        meta: { title: 'User', icon: 'key' }
       },
       {
         id: '101-2',
         pId: '101',
         sort: 1,
-        path: 'menu',
-        component: '/system/menu',
         name: 'menu',
-        meta: { title: '菜单管理', icon: 'key' }
+        path: '/system/menu',
+        component: '/system/menu',
+        meta: { title: 'Menu', icon: 'key' }
       }
     ]
   }
