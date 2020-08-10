@@ -12,6 +12,7 @@ import store from './store'
 import '@/icons'
 import '@/permission'
 import '@/components' // global components
+import '@/directive' // global directive
 
 Vue.use(ElementUI, {
   size: 'small'

@@ -1,15 +1,12 @@
 import { getToken, setToken, removeToken } from '@/utils/auth'
-import { signIn, getUserInfo } from '@/api/app'
-import { constantRoutes, resetRouter } from '@/router'
-import { mapTree } from '@/utils'
-import Layout from '@/layout'
+import { generateRoutes, resetRouter } from '@/router'
+import { login, getUserInfo } from '@/api/app'
 
 const state = {
   token: getToken(),
   account: null,
   roles: [],
-  asyncRoutes: [],
-  allRoutes: []
+  routes: []
 }
 
 const mutations = {
@@ -22,33 +19,28 @@ const mutations = {
   SET_ROLES: (state, roles) => {
     state.roles = roles
   },
-  SET_ASYNC_ROUTES: (state, asyncRoutes) => {
-    state.asyncRoutes = asyncRoutes
-    state.allRoutes = constantRoutes.concat(asyncRoutes)
+  SET_ROUTES: (state, routes) => {
+    state.routes = routes
   }
 }
 
 const actions = {
-  signIn({ commit }, loginForm) {
-    return signIn(loginForm).then(rsp => {
-      commit('SET_TOKEN', rsp.data.token)
-      setToken(rsp.data.token)
-      return rsp
+  login({ commit }, loginForm) {
+    return login(loginForm).then(rsp => {
+      const { data } = rsp
+      commit('SET_TOKEN', data.token)
+      setToken(data.token)
+      return data
     })
   },
   getUserInfo({ commit }) {
     return getUserInfo().then(rsp => {
-      commit('SET_ACCOUNT', rsp.data.account)
-      commit('SET_ROLES', rsp.data.roles)
-      return rsp
-    })
-  },
-  generateRoutes({ commit }, menuTree) {
-    return new Promise(resolve => {
-      const asyncRoutes = generateAsyncRoutes(menuTree)
-      asyncRoutes.push({ path: '*', redirect: '/404', meta: { hidden: true } })
-      commit('SET_ASYNC_ROUTES', asyncRoutes)
-      resolve(asyncRoutes)
+      const { data } = rsp
+      Object.assign(data, generateRoutes(data.menus))
+      commit('SET_ACCOUNT', data.account)
+      commit('SET_ROLES', data.roles)
+      commit('SET_ROUTES', data.routes)
+      return data
     })
   },
   removeUserInfo({ commit }) {
@@ -56,29 +48,12 @@ const actions = {
       commit('SET_TOKEN', null)
       commit('SET_ACCOUNT', null)
       commit('SET_ROLES', [])
-      commit('SET_ASYNC_ROUTES', [])
+      commit('SET_ROUTES', [])
       removeToken()
       resetRouter()
       resolve()
     })
   }
-}
-
-function loadView(view) {
-  return resolve => require([`@/views${view}`], resolve)
-}
-
-function generateAsyncRoutes(menuTree) {
-  return mapTree(menuTree, menu => {
-    if (!menu.component || menu.component.length === 0) {
-      delete menu.component
-    } else if (menu.component === 'Layout') {
-      menu.component = Layout
-    } else {
-      menu.component = loadView(menu.component)
-    }
-    return menu
-  })
 }
 
 export default {

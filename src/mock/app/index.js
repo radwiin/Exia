@@ -1,7 +1,7 @@
 import Mock from 'mockjs'
 import menus from '@/mock/data/menus'
 
-Mock.mock('/app/signIn', 'post', () => {
+Mock.mock('/app/login', 'post', () => {
   return {
     code: 200,
     msg: '操作成功',

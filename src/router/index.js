@@ -1,94 +1,92 @@
 import Vue from 'vue'
 import VueRouter from 'vue-router'
-
 import Layout from '@/layout'
+import { mapTree } from '@/utils'
+import _ from 'lodash'
 
 Vue.use(VueRouter)
 
 /**
  * Note: sub-menu only appear when route children.length >= 1
  * Detail see: https://panjiachen.github.io/vue-element-admin-site/guide/essentials/router-and-nav.html
+ * the data format below is different from the above link, but the link still can be read for reference
  *
- * hidden: true                   if set true, item will not show in the sidebar(default is false)
- * alwaysShow: true               if set true, will always show the root menu
- *                                if not set alwaysShow, when item has more than one children route,
- *                                it will becomes nested mode, otherwise not show the root menu
- * redirect: noRedirect           if set noRedirect will no redirect in the breadcrumb
- * name:'router-name'             the name is used by <keep-alive> (must set!!!)
+ * name: 'router-name'           VueRouter parameter, required, the name is used by <keep-alive> (must set!!!)
+ * path: 'router-path'           VueRouter parameter, required
+ * component: Vue Component      VueRouter parameter, required
+ * redirect: 'redirect-path'     VueRouter parameter
+ * children: []                  VueRouter parameter
  * meta : {
+    hidden: false                if set true, item will not show in the sidebar(default is false)
+    alwaysShow: false            if set true, will always show the root menu(default is false)
+                                 if not set alwaysShow, when item has more than one children route,
+                                 it will becomes nested mode, otherwise not show the root menu
+    icon: 'bx-name'              the icon show in the sidebar (recommend set)
+    title: 'title'               the name show in the sidebar (recommend set)
+    noCache: false               if set true, the page will no be cached(default is false)
     roles: ['admin','editor']    control the page roles (you can set multiple roles)
-    title: 'title'               the name show in sidebar and breadcrumb (recommend set)
-    icon: 'svg-name'             the icon show in the sidebar
-    noCache: true                if set true, the page will no be cached(default is false)
-    affix: true                  if set true, the tag will affix in the tags-view
-    breadcrumb: false            if set false, the item will hidden in breadcrumb(default is true)
-    activeMenu: '/example/list'  if set path, the sidebar will highlight the path you set
+    noToken: false               if set true, the page can be accessed directly without token(default is false)
+    link: false                  if set true, when item clicked in menu, will open a new page.
+                                 by the way, if path is an external link(like start with http...),
+                                 will also open a new page even link is false
   }
  */
 
-export const constantRoutes = [
+const routes = [
   {
+    name: 'login',
     path: '/login',
     component: () => import('@/views/login'),
-    name: 'login',
-    meta: { title: 'Sign In', hidden: true }
-  },
-  {
-    path: '/forgot-password',
-    component: () => import('@/views/forgot-password'),
-    name: 'forgot-password',
-    meta: { title: 'Forgot Password', hidden: true }
-  },
-  {
-    path: '/404',
-    component: () => import('@/views/miscellaneous/404'),
-    name: '404',
-    meta: { title: 'Page Not Found', hidden: true }
-  },
-  {
-    path: '/401',
-    component: () => import('@/views/miscellaneous/401'),
-    name: '401',
-    meta: { title: 'Not Authorized', hidden: true }
-  },
-  {
-    path: '/500',
-    component: () => import('@/views/miscellaneous/401'),
-    name: '500',
-    meta: { title: 'Internal Server Error', hidden: true }
-  },
-  {
-    path: '/maintenance',
-    component: () => import('@/views/miscellaneous/maintenance'),
-    name: 'maintenance',
-    meta: { title: 'Under Maintenance', hidden: true }
-  },
-  {
-    path: '/coming-soon',
-    component: () => import('@/views/miscellaneous/coming-soon'),
-    name: 'coming-soon',
-    meta: { title: 'Coming Soon', hidden: true }
+    meta: { title: 'Login', hidden: true, noToken: true }
   },
   {
     path: '/',
     component: Layout,
-    redirect: '/dashboard',
+    redirect: '/home',
     children: [
       {
-        path: 'dashboard',
-        component: () => import('@/views/dashboard'),
-        name: 'dashboard',
-        meta: { title: '首页', icon: 'dashboard' }
+        name: 'home',
+        path: '/home',
+        component: () => import('@/views/home'),
+        meta: { title: 'Home', icon: 'bx bx-home' }
       }
     ]
   }
 ]
 
+const route_404 = { path: '*', redirect: '/404', meta: { hidden: true } }
+
+export function generateRoutes(menus) {
+  const asyncRoutes = generateAsyncRoutes(menus)
+  asyncRoutes.push(route_404)
+  return {
+    asyncRoutes, // 传入的menus参数所转化出来的异步路由
+    routes: [...routes, ...asyncRoutes] // 异步路由与基本路由以及404路由拼接的最终实际项目使用的路由
+  }
+}
+
+function generateAsyncRoutes(menus) {
+  return mapTree(_.cloneDeep(menus), item => {
+    if (!item.component || item.component.length === 0) {
+      delete item.component
+    } else if (item.component === 'Layout') {
+      item.component = Layout
+    } else {
+      item.component = loadView(item.component)
+    }
+    return item
+  })
+}
+
+function loadView(view) {
+  return resolve => require([`@/views${view}`], resolve)
+}
+
 const createRouter = () =>
   new VueRouter({
     // mode: 'history', // require service support
     scrollBehavior: () => ({ y: 0 }),
-    routes: constantRoutes
+    routes
   })
 
 const router = createRouter()

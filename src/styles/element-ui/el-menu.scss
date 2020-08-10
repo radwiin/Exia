@@ -3,7 +3,7 @@
 .el-menu>.el-menu-item-group,
 .el-menu--popup>.el-menu-item-group .el-menu-item {
   .svg-icon {
-    margin-right: 5px;
+    margin-right: 13px;
     width: 24px;
     height: 16px;
     text-align: center;
@@ -20,8 +20,6 @@
     width: 24px;
     text-align: center;
   }
-
-
 }
 
 .el-menu--collapse>.el-menu-item-group .el-submenu {
@@ -38,6 +36,21 @@
   }
 }
 
+.el-menu {
+  .el-menu-item-group__title{
+    overflow: hidden;
+    height: 32px;
+    padding: 7px 0px 7px 20px;
+  }
+
+  &.el-menu--collapse {
+    .el-menu-item-group__title{
+      height: 0px;
+      padding: 0px;
+    }
+  }
+}
+
 .el-submenu__title .svg-icon {
   color: inherit;
 }
@@ -50,41 +63,23 @@
   color: inherit;
 }
 
-@media screen and (max-width: 992px) {
-  .el-dialog {
-    width: 98% !important;
+
+.el-menu-item {
+  padding: 0 13px !important;
+  height: 47px;
+  line-height: 47px;
+
+  .el-tooltip {
+    padding: 0 13px !important;
   }
 }
 
-.el-input.is-disabled .el-input__inner {
-  background-color: unset;
-  border-color: #E4E7ED;
-  color: unset;
-  cursor: not-allowed;
+.el-submenu__title {
+  padding: 0 13px !important;
+  height: 47px;
+  line-height: 47px;
 }
 
-.el-table-column--selection .cell {
-  padding-right: 10px;
-}
-
-/* 按钮（small） */
-
-.el-button--small {
-  border-radius: 5px;
-}
-
-/* 弹窗 */
-
-.el-dialog {
-  border-radius: 10px;
-}
-
-/* 表格 */
-.el-table {
-  border-radius: 5px;
-}
-
-/* 消息 */
-.el-message {
-  border-radius: 5px;
+.el-menu span {
+  user-select:none;
 }

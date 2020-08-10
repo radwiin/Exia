@@ -91,7 +91,7 @@ export default {
       } else if (menu.component === 'item') {
         return h('el-menu-item', { props: menu }, [
           menu.icon ? h('svg-icon', { props: { 'icon-class': menu.icon } }) : null,
-          menu.title ? h('template', { slot: 'title' }, menu.title) : null
+          menu.title ? h('span', { slot: 'title' }, menu.title) : null
         ])
       } else if (menu.component === 'group') {
         return h('el-menu-item-group', { props: menu }, [

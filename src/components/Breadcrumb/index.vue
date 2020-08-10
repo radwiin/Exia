@@ -37,7 +37,7 @@ export default {
       const first = matched[0]
 
       if (!this.isDashboard(first)) {
-        matched = [{ path: '/dashboard', meta: { title: '首页' } }].concat(matched)
+        matched = [{ path: '/home', meta: { title: 'Home' } }].concat(matched)
       }
 
       this.levelList = matched.filter(item => item.meta.breadcrumb !== false)
@@ -47,7 +47,7 @@ export default {
       if (!name) {
         return false
       }
-      return name.trim().toLocaleLowerCase() === 'Dashboard'.toLocaleLowerCase()
+      return name.trim().toLocaleLowerCase() === 'Home'.toLocaleLowerCase()
     },
     pathCompile(path) {
       // To solve this problem https://github.com/PanJiaChen/vue-element-admin/issues/561
@@ -72,7 +72,6 @@ export default {
   display: inline-block;
   font-size: 14px;
   line-height: 50px;
-  margin-left: 30px;
 
   ::v-deep .el-breadcrumb__item {
     a {

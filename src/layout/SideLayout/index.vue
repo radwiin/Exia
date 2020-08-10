@@ -1,54 +1,8 @@
 <template>
   <div class="app-wrapper">
     <side-navbar></side-navbar>
-    <!-- <div class="aside-wrapper">
-      <div :class="`menu-header ${collapse ? 'is-collapse' : ''}`">
-        <svg-icon class="logo" icon-class="vue" class-name="vue" />
-        <span class="title">Exia Admin</span>
-      </div>
-      <auto-el-menu class="nav-menu" :collapse="collapse" @open="handleOpen" @close="handleClose" :default-active="activeMenu"></auto-el-menu>
-      <div :class="`menu-footer ${collapse ? 'is-collapse' : ''}`">
-        <div class="avatar-wrapper">
-          <el-avatar shape="circle" :size="30" :src="require('@/assets/avator.jpg')" />
-        </div>
-        <div class="setting-wrapper" @click="handleSettingClick">
-          <svg-icon icon-class="setting" class-name="setting" />
-        </div>
-        <div class="hamburger-wrapper" @click="collapse = !collapse">
-          <svg-icon icon-class="hamburger" :class-name="`hamburger ${collapse ? '' : 'is-active'}`" />
-        </div>
-      </div>
-    </div> -->
     <div class="main-wrapper">
-      <div class="header-wrapper">
-        <breadcrumb class="breadcrumb-container" />
-        <div class="right-menu-wrapper">
-          <el-tooltip content="Setting" placement="bottom">
-            <div class="menu-item" @click="handleSettingClick">
-              <svg-icon icon-class="setting" />
-            </div>
-          </el-tooltip>
-          <el-popover placement="bottom" width="250" trigger="hover" popper-class="popper-wrapper">
-            <div slot="reference" class="menu-item" @click="handleUserClick">
-              <span>{{ account }}</span>
-            </div>
-            <div class="user-menu">
-              <div class="user-info-item">
-                <el-avatar shape="square" :size="50" :src="require('@/assets/avator.jpg')" />
-                <span class="user-name">{{ account }}</span>
-              </div>
-              <div class="user-menu-item">
-                <svg-icon icon-class="user" class-name="user-menu-item-icon" />
-                <span class="user-menu-item-label">{{ roles.join(',') }}</span>
-              </div>
-              <div class="user-menu-item" @click="handleExitClick">
-                <svg-icon icon-class="logout" class-name="user-menu-item-icon" />
-                <span class="user-menu-item-label">登出</span>
-              </div>
-            </div>
-          </el-popover>
-        </div>
-      </div>
+      <top-navbar></top-navbar>
       <div class="content-wrapper">
         <transition name="fade-transform" mode="out-in">
           <keep-alive>
@@ -64,17 +18,17 @@
 <script>
 import AutoElMenu from '@/components/AutoElMenu'
 import { mapGetters } from 'vuex'
-import settingDrawer from '@/layout/components/SettingDrawer'
-import Breadcrumb from '@/layout/components/Breadcrumb'
+import settingDrawer from '@/components/SettingDrawer'
 import SideNavbar from './components/SideNavbar'
+import TopNavbar from './components/TopNavbar'
 
 export default {
   name: 'SideLayout',
   components: {
+    TopNavbar,
     SideNavbar,
     AutoElMenu,
-    settingDrawer,
-    Breadcrumb
+    settingDrawer
   },
   data: () => ({
     collapse: true,
@@ -242,49 +196,12 @@ $MenuWidthCollapse: 64px;
   }
 
   .main-wrapper {
-    margin-left: 65px;
+    margin-left: 50px;
     height: 100%;
     position: relative;
 
-    .header-wrapper {
-      width: 100%;
-      z-index: 1900;
-      height: $HeaderHeight;
-      display: flex;
-      align-items: center;
-      background: #fff;
-      border-bottom: solid 1px #e6e6e6;
-
-      .breadcrumb-container {
-        flex-grow: 1;
-      }
-
-      .right-menu-wrapper {
-        height: 100%;
-        flex-shrink: 0;
-        padding-left: 10px;
-        padding-right: 10px;
-        display: flex;
-        align-items: center;
-
-        .menu-item {
-          height: 100%;
-          margin-left: 10px;
-          margin-right: 10px;
-          display: flex;
-          align-items: center;
-          justify-content: center;
-          cursor: pointer;
-
-          .setting {
-            width: 16px;
-            height: 16px;
-          }
-        }
-      }
-    }
-
     .content-wrapper {
+      padding: 100px 0 0;
       height: calc(100% - #{$HeaderHeight});
       overflow-y: auto;
     }

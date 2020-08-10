@@ -24,6 +24,7 @@
     "mockjs": "^1.1.0",
     "nprogress": "^0.2.0",
     "path-to-regexp": "^6.1.0",
+    "perfect-scrollbar": "^1.5.0",
     "scrollmagic": "^2.0.7",
     "scrollmagic-plugin-gsap": "^1.0.4",
     "vue": "^2.6.10",

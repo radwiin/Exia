@@ -66,7 +66,7 @@ export default {
             spinner: 'el-icon-loading'
           })
           this.$store
-            .dispatch('app/signIn', this.loginForm)
+            .dispatch('app/login', this.loginForm)
             .then(() => {
               this.$router.push({ path: '/' }).catch(err => err)
             })

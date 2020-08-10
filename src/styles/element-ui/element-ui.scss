@@ -1,0 +1,38 @@
+@media screen and (max-width: 992px) {
+  .el-dialog {
+    width: 98% !important;
+  }
+}
+
+.el-input.is-disabled .el-input__inner {
+  background-color: unset;
+  border-color: #E4E7ED;
+  color: unset;
+  cursor: not-allowed;
+}
+
+.el-table-column--selection .cell {
+  padding-right: 10px;
+}
+
+/* 按钮（small） */
+
+.el-button--small {
+  border-radius: 5px;
+}
+
+/* 弹窗 */
+
+.el-dialog {
+  border-radius: 10px;
+}
+
+/* 表格 */
+.el-table {
+  border-radius: 5px;
+}
+
+/* 消息 */
+.el-message {
+  border-radius: 5px;
+}
