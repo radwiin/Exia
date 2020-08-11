@@ -18,21 +18,26 @@
 /* 按钮（small） */
 
 .el-button--small {
-  border-radius: 5px;
+  border-radius: 8px;
 }
 
 /* 弹窗 */
 
 .el-dialog {
-  border-radius: 10px;
+  border-radius: 8px;
 }
 
 /* 表格 */
 .el-table {
-  border-radius: 5px;
+  border-radius: 8px;
 }
 
 /* 消息 */
 .el-message {
   border-radius: 5px;
+}
+
+/* 输入框 */
+.el-input__inner {
+  border-radius: 8px;
 }
