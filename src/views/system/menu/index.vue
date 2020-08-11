@@ -5,7 +5,7 @@
       <el-button icon="el-icon-refresh" @click="handleResetClick">刷 新</el-button>
     </div>
     <div class="table-container">
-      <el-table :data="tableData" border height="100%" row-key="id" :tree-props="{ children: 'children' }">
+      <el-table :data="tableData" height="100%" row-key="id" :tree-props="{ children: 'children' }">
         <el-table-column fixed type="selection" width="50" align="center" />
         <el-table-column fixed type="index" label="#" width="50" align="center" />
         <el-table-column prop="title" label="标题" />

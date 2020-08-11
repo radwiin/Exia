@@ -5,7 +5,7 @@
       <el-button type="primary" plain icon="el-icon-refresh" @click="handleResetPasswordClick">密码重置</el-button>
     </div>
     <div class="table-container">
-      <el-table class="data-table" :data="tableData" border height="100%" @selection-change="handleSelectionChange">
+      <el-table class="data-table" :data="tableData" height="100%" @selection-change="handleSelectionChange">
         <el-table-column fixed type="selection" width="50" align="center" />
         <el-table-column fixed type="index" label="#" width="50" align="center" />
         <el-table-column prop="account" label="登录账号" />
