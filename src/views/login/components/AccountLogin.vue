@@ -62,7 +62,7 @@ export default {
         if (valid) {
           let loading = this.$loading({
             lock: true,
-            text: 'Sign In...',
+            text: 'Login...',
             spinner: 'el-icon-loading'
           })
           this.$store

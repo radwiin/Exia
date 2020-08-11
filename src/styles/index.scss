@@ -1,6 +1,6 @@
 @import './fonts.scss';
 @import './transition.scss';
-@import './element-variables.scss';
+// @import './element-variables.scss';
 @import './element-ui/index.scss';
 
 html,
@@ -10,7 +10,7 @@ body,
   margin: 0;
   padding: 0;
   box-sizing: border-box;
-  background: $--background-color-base;
+  background: #f4f7f8;
   font-family: "Poppins", "Avenir", Helvetica, Arial, sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;

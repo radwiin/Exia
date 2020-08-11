@@ -79,6 +79,7 @@ function generateAsyncRoutes(menus) {
 }
 
 function loadView(view) {
+  // return () => import(`@/views${view}`)
   return resolve => require([`@/views${view}`], resolve)
 }
 

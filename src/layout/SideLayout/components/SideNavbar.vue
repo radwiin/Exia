@@ -193,6 +193,7 @@ $MenuWidthCollapse: 50px;
     width: 100% !important;
     height: calc(100% - #{$HeaderHeight});
     border: 0px !important;
+    border-radius: 0px 0px 30px 0px;
     min-height: 0px;
 
     ::v-deep .ps__rail-y {
