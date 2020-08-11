@@ -1,5 +1,7 @@
 <template>
-  <div>dashboard</div>
+  <page-container>
+    <div style="height:200%;background:red">home</div>
+  </page-container>
 </template>
 
 <script>
@@ -8,4 +10,4 @@ export default {
 }
 </script>
 
-<style></style>
+<style lang="scss" scoped></style>

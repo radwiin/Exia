@@ -1,5 +1,5 @@
 <template>
-  <div class="page-container">
+  <page-container class="page-container">
     <div class="function-container">
       <el-button type="primary" icon="el-icon-plus" @click="handleCreateClick">新 增</el-button>
       <el-button type="primary" plain icon="el-icon-refresh" @click="handleResetPasswordClick">密码重置</el-button>
@@ -60,7 +60,7 @@
         <el-button type="primary" @click="handleDialogConfirmClick">确定</el-button>
       </div>
     </el-dialog>
-  </div>
+  </page-container>
 </template>
 
 <script>
@@ -238,7 +238,6 @@ export default {
 }
 
 .page-container {
-  padding: 20px;
   display: flex;
   flex-flow: column nowrap;
 

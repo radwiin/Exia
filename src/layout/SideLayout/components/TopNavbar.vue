@@ -28,17 +28,16 @@ $HeaderHeight: 55px;
   top: 0;
   left: 0;
   width: 100%;
-  height: 100px;
+  height: 80px;
   background: linear-gradient(180deg, hsla(0, 0%, 97.3%, 0.95) 44%, hsla(0, 0%, 97.3%, 0.46) 73%, hsla(0, 0%, 100%, 0));
 
   .top-navbar {
     height: $HeaderHeight;
     border-radius: 0.5rem;
     position: absolute;
-    top: 15px;
+    top: 10px;
     left: 15px;
     right: 15px;
-    width: calc(100% - 30px);
     display: flex;
     align-items: center;
     justify-content: space-between;

@@ -1,5 +1,5 @@
 <template>
-  <div class="page-container">
+  <page-container class="page-container">
     <div class="function-container">
       <el-button type="primary" icon="el-icon-plus" @click="handleCreateClick">新 增</el-button>
       <el-button icon="el-icon-refresh" @click="handleResetClick">刷 新</el-button>
@@ -84,7 +84,7 @@
         <el-button type="primary" @click="handleDialogConfirmClick">确定</el-button>
       </div>
     </el-dialog>
-  </div>
+  </page-container>
 </template>
 
 <script>
@@ -97,7 +97,7 @@ const DIALOG_CATEGORY = {
   EDIT: '编 辑'
 }
 export default {
-  name: 'menu',
+  name: 'system-menu',
   data() {
     return {
       DIALOG_CATEGORY, // for html
@@ -215,7 +215,6 @@ export default {
 }
 
 .page-container {
-  padding: 20px;
   display: flex;
   flex-flow: column nowrap;
 
