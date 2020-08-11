@@ -42,17 +42,26 @@ export default {
   },
   methods: {
     toMenus(routes) {
-      // const groups = new Set()
-      // routes.filter(route => route && route.meta && route.meta.group).forEach(route => groups.add(route.meta.group))
-      // const theRoutes = []
-      // groups.forEach(route => {
-      //   if (route && route.meta && route.meta.group) {
-      //   } else {
-      //     theRoutes.push(route)
-      //   }
-      // })
-
-      return routes.map(route => this.toMenu(route))
+      const theRoutes = []
+      const groupRoutes = {}
+      routes.forEach(route => {
+        if (route && route.meta && route.meta.group) {
+          if (groupRoutes.hasOwnProperty(route.meta.group)) {
+            groupRoutes[route.meta.group].children.push(route)
+          } else {
+            groupRoutes[route.meta.group] = {
+              component: 'group',
+              title: route.meta.group,
+              children: [route]
+            }
+            theRoutes.push(groupRoutes[route.meta.group])
+          }
+          delete route.meta.group
+        } else {
+          theRoutes.push(route)
+        }
+      })
+      return theRoutes.map(route => this.toMenu(route))
     },
     toMenu(route) {
       const checkHidden = it => it.meta && it.meta.hidden
@@ -69,6 +78,13 @@ export default {
       // 对于设置隐藏的路由，不显示其菜单
       if (isHidden) {
         return null
+      }
+
+      if (route && route.component === 'group') {
+        return {
+          ...route,
+          children: this.toMenus(route.children)
+        }
       }
 
       // 以下是对要显示的路由进行的逻辑处理，暂不支持外链

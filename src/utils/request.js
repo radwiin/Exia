@@ -57,6 +57,7 @@ service.interceptors.request.use(
     return config
   },
   error => {
+    console.error(error)
     NProgress.done()
     return Promise.reject(new Error(error))
   }
@@ -91,6 +92,7 @@ service.interceptors.response.use(
     return data
   },
   error => {
+    console.error(error)
     NProgress.done()
     return Promise.reject(new Error(error))
   }

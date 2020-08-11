@@ -13,7 +13,7 @@ const menus = [
         pId: '100',
         sort: 1,
         name: 'role',
-        path: 'role',
+        path: '/auth/role',
         component: '/auth/role',
         meta: { title: 'Role', icon: 'key' }
       }
