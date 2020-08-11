@@ -6,32 +6,30 @@
         v-model="loginForm.username"
         name="username"
         type="text"
-        auto-complete="off"
-        placeholder="Phone"
+        auto-complete="on"
+        placeholder="Account"
         clearable
       >
-        <i slot="prefix" class="el-input__icon el-icon-phone-outline" />
+        <i slot="prefix" class="el-input__icon el-icon-user" />
       </el-input>
     </el-form-item>
     <el-form-item prop="password">
-      <div style="display:flex">
-        <el-input
-          @keyup.enter.native="handleLogin"
-          :type="passwordType"
-          v-model="loginForm.password"
-          auto-complete="off"
-          placeholder="Code"
-          clearable
-          style="flex-grow:1"
-        >
-          <i slot="prefix" class="el-input__icon el-icon-message" />
-          <i class="el-input__icon el-icon-view" slot="suffix" @click="showPassword"></i>
-        </el-input>
-        <div style="flex:none;display:inline-block;width:70px;height:32px">
-          <span class="msg-text" :class="[{ display: false }]">{{ 'Send Code' }}</span>
-        </div>
-      </div>
+      <el-input
+        @keyup.enter.native="handleLogin"
+        :type="passwordType"
+        v-model="loginForm.password"
+        auto-complete="on"
+        placeholder="Password"
+        clearable
+      >
+        <i slot="prefix" class="el-input__icon el-icon-lock" />
+        <i class="el-input__icon el-icon-view" slot="suffix" @click="showPassword"></i>
+      </el-input>
     </el-form-item>
+    <div style="margin-bottom: 10px">
+      <el-checkbox v-model="checked" style="color: #000;font-weight: 400; font-size: 0.8rem;">Remember me</el-checkbox>
+      <a>Forgot Password?</a>
+    </div>
     <el-form-item>
       <el-button type="primary" @click.native.prevent="handleLogin" class="login-submit">{{ 'Sign In' }}</el-button>
     </el-form-item>
@@ -40,17 +38,17 @@
 
 <script>
 export default {
-  name: 'PhoneLogin',
+  name: 'Userlogin',
   data() {
     return {
       checked: false,
       loginForm: {
-        username: '15550001555',
-        password: '111111'
+        username: 'root',
+        password: 'root'
       },
       loginRules: {
-        username: [{ required: true, message: 'Phone required', trigger: 'blur' }],
-        password: [{ required: true, message: 'Code required', trigger: 'blur' }]
+        username: [{ required: true, message: 'Account required', trigger: 'blur' }],
+        password: [{ required: true, message: 'Password required', trigger: 'blur' }]
       },
       passwordType: 'password'
     }
@@ -64,11 +62,11 @@ export default {
         if (valid) {
           let loading = this.$loading({
             lock: true,
-            text: 'Sign In...',
+            text: 'Login...',
             spinner: 'el-icon-loading'
           })
           this.$store
-            .dispatch('app/signIn', this.loginForm)
+            .dispatch('app/login', this.loginForm)
             .then(() => {
               this.$router.push({ path: '/' }).catch(err => err)
             })
@@ -83,19 +81,6 @@ export default {
 </script>
 
 <style lang="scss" scoped>
-.msg-text {
-  display: block;
-  width: 100%;
-  font-size: 12px;
-  text-align: right;
-  cursor: pointer;
-  color: #909399;
-}
-
-.msg-text.display {
-  color: #ccc;
-}
-
 .login-form {
   margin: 10px 0;
 

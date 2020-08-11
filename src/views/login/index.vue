@@ -1,55 +1,28 @@
 <template>
   <div class="page-container">
-    <div class="card-wrapper">
-      <div class="left-wrapper">
-        <svg-icon class="logo" icon-class="vue" class-name="vue" />
+    <div class="login-wrapper">
+      <header class="login-header">
+        <div class="login-header-title">Welcome to <b>Exia</b></div>
+      </header>
+      <div class="login-content">
+        <user-login />
       </div>
-      <div class="right-wrapper">
-        <div class="login-wrapper">
-          <header class="login-header">
-            <div class="login-header-title">Login Exia</div>
-            <div class="login-header-sub-title">Welcome back, please login to your account.</div>
-          </header>
-          <div class="login-content">
-            <el-tabs v-model="activeName">
-              <el-tab-pane label="Account" name="Account">
-                <account-login />
-              </el-tab-pane>
-              <el-tab-pane label="Phone" name="Phone">
-                <phone-login />
-              </el-tab-pane>
-              <el-tab-pane label="Other" name="Other">
-                <other-login />
-              </el-tab-pane>
-            </el-tabs>
-          </div>
-          <footer class="login-footer">
-            <div class="new">
-              New Here?
-              <a class="router-link-active">Create New Account</a>
-            </div>
-          </footer>
+      <footer class="login-footer">
+        <div class="new">
+          New Here?
+          <a class="router-link-active">Create New Account</a>
         </div>
-      </div>
+      </footer>
     </div>
   </div>
 </template>
 
 <script>
-import AccountLogin from './components/AccountLogin'
-import PhoneLogin from './components/PhoneLogin'
-import OtherLogin from './components/OtherLogin'
+import UserLogin from './components/Userlogin'
 export default {
   name: 'login',
   components: {
-    AccountLogin,
-    PhoneLogin,
-    OtherLogin
-  },
-  data() {
-    return {
-      activeName: 'Account'
-    }
+    UserLogin
   }
 }
 </script>
@@ -58,84 +31,46 @@ export default {
 .page-container {
   width: 100%;
   height: 100%;
-  background: #1e2023;
   display: flex;
   justify-content: center;
   align-items: center;
+  background: url('~@/assets/login-bg.jpg') center center/cover;
 
-  .card-wrapper {
-    flex: none;
-    width: 800px;
-    min-height: 450px;
-    display: flex;
-    border-radius: 10px;
+  .login-wrapper {
+    width: 400px;
+    background-color: hsla(0, 0%, 100%, 0.35);
+    backdrop-filter: saturate(180%) blur(20px);
+    border-radius: 20px;
     box-shadow: 0 5px 30px 0 rgba(0, 0, 0, 0.4);
+    display: flex;
+    flex-flow: column nowrap;
+    align-items: center;
+    justify-content: stretch;
 
-    .left-wrapper {
-      width: 50%;
-      background-color: #000;
-      border-top-left-radius: 10px;
-      border-bottom-left-radius: 10px;
-      display: flex;
-      justify-content: center;
-      align-items: center;
+    .login-header {
+      height: 50px;
+      padding: 10px 16px;
 
-      .logo {
-        width: 30%;
-        height: 30%;
-        color: #fff;
+      .login-header-title {
+        padding: 10px 10px 0;
       }
     }
 
-    .right-wrapper {
-      width: 50%;
-      background-color: #fff;
-      border-top-right-radius: 10px;
-      border-bottom-right-radius: 10px;
+    .login-content {
+      width: 100%;
+      padding: 10px 16px 0;
+    }
 
-      .login-wrapper {
-        min-height: 100%;
-        display: flex;
-        flex-flow: column nowrap;
-        align-items: center;
+    .login-footer {
+      margin: 0 0 10px;
+      padding: 0;
+      font-size: 0.7rem;
 
-        .login-header {
-          flex: none;
-          width: 100%;
-          padding: 28px 28px 0;
+      .new a {
+        color: #409eff;
 
-          .login-header-title {
-            margin-bottom: 1rem;
-            font-weight: 500;
-            line-height: 1.2;
-            color: #2c2c2c;
-          }
-
-          .login-header-sub-title {
-            font-weight: 400;
-            color: #626262;
-          }
-        }
-
-        .login-content {
-          flex: auto;
-          width: 100%;
-          padding: 10px 28px 0;
-        }
-
-        .login-footer {
-          flex: none;
-          margin: 0 0 10px;
-          padding: 0;
-          font-size: 0.7rem;
-
-          .new a {
-            color: #409eff;
-
-            &:hover {
-              color: #66b1ff;
-            }
-          }
+        &:hover {
+          text-decoration: underline;
         }
       }
     }
