@@ -29,16 +29,11 @@ Vue.use(VueRouter)
     link: false                  if set true, when item clicked in menu, will open a new page.
                                  by the way, if path is an external link(like start with http...),
                                  will also open a new page even link is false
+    group: 'groupName'           if set group, the route with the same group name will be grouped in the sidebar
   }
  */
 
 const routes = [
-  {
-    name: 'login',
-    path: '/login',
-    component: () => import('@/views/login'),
-    meta: { title: 'Login', hidden: true, noToken: true }
-  },
   {
     path: '/',
     component: Layout,
@@ -48,9 +43,51 @@ const routes = [
         name: 'home',
         path: '/home',
         component: () => import('@/views/home'),
-        meta: { title: 'Home', icon: 'dashboard' }
+        meta: { title: 'Home', icon: 'bx-tachometer' }
       }
     ]
+  },
+  {
+    name: 'login',
+    path: '/login',
+    component: () => import('@/views/standard/authentication/login'),
+    meta: { title: 'Login', hidden: true, noToken: true }
+  },
+  {
+    name: 'forgot-password',
+    path: '/forgot-password',
+    component: () => import('@/views/standard/authentication/forgot-password'),
+    meta: { title: 'Forgot Password', hidden: true, noToken: true }
+  },
+  {
+    name: '401',
+    path: '/401',
+    component: () => import('@/views/standard/miscellaneous/401'),
+    meta: { title: 'Not Authorized', hidden: true, noToken: true }
+  },
+  {
+    name: '404',
+    path: '/404',
+    component: () => import('@/views/standard/miscellaneous/404'),
+    meta: { title: 'Not Found', hidden: true, noToken: true }
+  },
+  {
+    name: '500',
+    path: '/500',
+    component: () => import('@/views/standard/miscellaneous/500'),
+    meta: { title: 'Server Error', hidden: true, noToken: true }
+  },
+  {
+    name: 'maintenance',
+    path: '/maintenance',
+    component: () => import('@/views/standard/miscellaneous/maintenance'),
+    meta: { title: 'Maintenance', hidden: true, noToken: true }
+  },
+  {
+    name: 'coming-soon',
+    path: '/coming-soon',
+    component: () => import('@/views/standard/miscellaneous/coming-soon'),
+    meta: { title: 'Coming Soon', hidden: true, noToken: true }
   }
 ]
 

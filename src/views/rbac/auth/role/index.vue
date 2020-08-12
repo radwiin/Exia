@@ -43,8 +43,8 @@
         </el-form-item>
       </el-form>
       <div slot="footer">
-        <el-button @click="handleDialogCancelClick">取消</el-button>
-        <el-button type="primary" @click="handleDialogConfirmClick">确定</el-button>
+        <el-button @click="handleDialogCancelClick">取 消</el-button>
+        <el-button type="primary" @click="handleDialogConfirmClick">确 定</el-button>
       </div>
     </el-dialog>
     <el-drawer title="权限设置" :visible.sync="drawerVisible">

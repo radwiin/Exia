@@ -1,6 +1,6 @@
 <template>
   <div class="page-container">
-    <svg-icon class="logo" icon-class="vue" class-name="vue" />
+    <svg-icon icon-class="bxl-vuejs" class-name="logo" />
     <h1 class="title">You are not authorized!</h1>
     <p class="content">
       paraphonic unassessable foramination Caulopteris worral Spirophyton encrimson esparcet aggerate chondrule restate whistler shallopy biosystematy

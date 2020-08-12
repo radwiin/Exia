@@ -1,7 +1,7 @@
-.el-menu>.el-submenu,
-.el-menu>.el-menu-item,
-.el-menu>.el-menu-item-group,
-.el-menu--popup>.el-menu-item-group .el-menu-item {
+.el-menu .el-submenu,
+.el-menu .el-menu-item,
+.el-menu .el-menu-item-group,
+.el-menu--popup .el-menu-item-group .el-menu-item {
   .svg-icon {
     margin-right: 13px;
     width: 24px;
@@ -11,9 +11,9 @@
   }
 }
 
-.el-menu--collapse>.el-menu-item,
-.el-menu--collapse>.el-menu-item-group,
-.el-menu--collapse>.el-submenu>.el-submenu__title {
+.el-menu--collapse .el-menu-item,
+.el-menu--collapse .el-menu-item-group,
+.el-menu--collapse .el-submenu .el-submenu__title {
   .svg-icon {
     margin: 0;
     vertical-align: middle;
@@ -22,7 +22,7 @@
   }
 }
 
-.el-menu--collapse>.el-menu-item-group .el-submenu {
+.el-menu--collapse .el-menu-item-group .el-submenu {
   span {
     height: 0;
     width: 0;

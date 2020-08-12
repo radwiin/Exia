@@ -25,6 +25,8 @@
 
 .el-dialog {
   border-radius: 8px;
+  margin-top: 50vh !important;
+  transform: translateY(-50%);
 }
 
 /* 表格 */

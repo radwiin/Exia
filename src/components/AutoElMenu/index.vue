@@ -98,6 +98,13 @@ export default {
           h('template', { slot: 'title' }, [menu.title ? h('span', menu.title) : null]),
           ...(menu.children ? menu.children.map(child => this.renderMenu(h, child)) : [])
         ])
+      } else if (menu.component === 'link') {
+        return h('a', { attrs: { href: menu.index, target: '_blank', rel: 'noopener' } }, [
+          h('el-menu-item', { props: { ...menu, index: undefined } }, [
+            menu.icon ? h('svg-icon', { props: { 'icon-class': menu.icon } }) : null,
+            menu.title ? h('span', { slot: 'title' }, menu.title) : null
+          ])
+        ])
       }
     }
   }

@@ -1,7 +1,7 @@
 <template>
   <div :class="['side-navbar', { collapse }]" @mouseenter="collapse = false" @mouseleave="collapse = true">
     <header :class="`side-navbar__header ${collapse ? 'is-collapse' : ''}`">
-      <svg-icon class="logo" icon-class="vue" />
+      <svg-icon icon-class="bxl-vuejs" class-name="logo" />
       <span class="title">Exia Admin</span>
     </header>
     <auto-el-menu
@@ -102,14 +102,14 @@ export default {
         return this.toMenu(visibleChildren[0])
       } else {
         // 不存在可见子节点。此时渲染为menu-item
-        // let path = route.path
-        // if (!isExternal(path) && isLink) {
-        //   path = this.getFullPath(path)
-        // }
+        let path = route.path
+        if (!isExternal(path) && isLink) {
+          path = this.getFullPath(path)
+        }
         return {
-          component: 'item',
+          component: isExternal(path) ? 'link' : 'item',
           id: route.name,
-          index: route.path,
+          index: path,
           icon: route.meta.icon,
           title: route.meta.title
         }
@@ -176,7 +176,6 @@ $MenuWidthCollapse: 50px;
     .logo {
       width: $MenuWidthCollapse;
       height: 100%;
-      padding: 5px 0;
       flex: 0 0 auto;
       color: #000;
     }

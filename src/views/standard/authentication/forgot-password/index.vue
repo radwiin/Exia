@@ -2,7 +2,7 @@
   <div class="page-container">
     <div class="card-wrapper">
       <div class="left-wrapper">
-        <svg-icon class="logo" icon-class="vue" class-name="vue" />
+        <svg-icon icon-class="bxl-vuejs" class-name="logo" />
       </div>
       <div class="right-wrapper">
         <div class="forgot-password-wrapper">
@@ -61,8 +61,8 @@ export default {
       align-items: center;
 
       .logo {
-        width: 30%;
-        height: 30%;
+        width: 40%;
+        height: 40%;
         color: #fff;
       }
     }
