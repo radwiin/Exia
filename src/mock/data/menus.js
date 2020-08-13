@@ -1,5 +1,23 @@
 const menus = [
   {
+    id: '97',
+    pId: 'root',
+    sort: 1,
+    path: '/ui',
+    component: 'Layout',
+    meta: { group: 'ui' },
+    children: [
+      {
+        id: '97-1',
+        pId: '97',
+        sort: 1,
+        path: '/ui/tinymce',
+        component: '/ui/tinymce',
+        meta: { title: 'Tinymce', icon: 'bx-code-block' }
+      }
+    ]
+  },
+  {
     id: '98',
     pId: 'root',
     sort: 1,
