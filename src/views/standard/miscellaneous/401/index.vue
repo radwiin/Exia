@@ -16,6 +16,7 @@ export default {}
 
 <style lang="scss" scoped>
 .page-container {
+  height: 100%;
   background: #1e2023;
   display: flex;
   flex-flow: column nowrap;
@@ -32,13 +33,14 @@ export default {}
     width: 400px;
     text-align: center;
     color: #fff;
+    margin-bottom: 1rem;
   }
 
   .content {
     width: 600px;
     text-align: center;
     color: #fff;
-    margin-bottom: 3rem;
+    margin-bottom: 2rem;
   }
 
   .back {

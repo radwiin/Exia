@@ -1,45 +1,30 @@
 @import './fonts.scss';
 @import './transition.scss';
-// @import './element-variables.scss';
 @import './element-ui/index.scss';
-
-html,
-body,
-#app {
-  height: 100%;
-  margin: 0;
-  padding: 0;
-  box-sizing: border-box;
-  background: #f4f7f8;
-  font-family: "Poppins", "Avenir", Helvetica, Arial, sans-serif;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
-}
 
 *,
 *:before,
 *:after {
   box-sizing: inherit;
+  margin: 0;
+  padding: 0;
+  outline: none;
+  text-transform: none;
+  text-decoration: none;
 }
 
-::-webkit-scrollbar {
-  width: 5px;
-  height: 5px;
-  display: block;
-  background: var(--vs-theme-layout);
-}
-
-::-webkit-scrollbar-thumb {
-  background: var(--vs-theme-color);
-  border-radius: 5px;
-}
-
-::selection {
-  background: rgba(37,100,255,.15);
-}
-
-img {
-  vertical-align: bottom;
+html,
+body,
+#app {
+  height: 100%;
+  box-sizing: border-box;
+  background: #f4f7f8;
+  font-family: "Poppins", "Avenir", Helvetica, Arial, sans-serif;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  font-size: 16px;
+  line-height: 1.5;
+  letter-spacing: .01rem;
 }
 
 a:focus,
@@ -58,7 +43,17 @@ a:hover {
   text-decoration: none;
 }
 
-.page-container {
-  height: 100%;
-  position: relative;
+::selection {
+  background: rgba(88, 115, 182, 0.15);
+}
+
+img {
+  vertical-align: bottom;
+}
+
+h1, h2, h3, h4, h5, h6 {
+  font-family: inherit;
+  font-weight: 500;
+  line-height: 1.2;
+  color: #2c2c2c;
 }

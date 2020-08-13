@@ -3,7 +3,13 @@
     <div class="top-navbar">
       <breadcrumb class="breadcrumb-container" />
       <div class="top-navbar__right">
-        <el-avatar size="medium" src="https://cube.elemecdn.com/0/88/03b0d39583f48206768a7534e55bcpng.png"> </el-avatar>
+        <el-dropdown @command="handleCommand">
+          <el-avatar style="cursor: pointer;" size="medium" src="https://cube.elemecdn.com/0/88/03b0d39583f48206768a7534e55bcpng.png"> </el-avatar>
+          <el-dropdown-menu slot="dropdown">
+            <el-dropdown-item command="Home">Home</el-dropdown-item>
+            <el-dropdown-item command="Logout" divided>Logout</el-dropdown-item>
+          </el-dropdown-menu>
+        </el-dropdown>
       </div>
     </div>
   </header>
@@ -15,6 +21,17 @@ export default {
   name: 'TopNavbar',
   components: {
     Breadcrumb
+  },
+  methods: {
+    handleCommand(command) {
+      if (command === 'Home') {
+        this.$router.push({ path: '/' }).catch(err => err)
+      } else if (command === 'Logout') {
+        this.$store.dispatch('app/removeUserInfo').then(() => {
+          this.$router.push({ path: '/login' })
+        })
+      }
+    }
   }
 }
 </script>
