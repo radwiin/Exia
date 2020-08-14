@@ -35,14 +35,6 @@ span:focus {
   outline: none;
 }
 
-a,
-a:focus,
-a:hover {
-  cursor: pointer;
-  color: inherit;
-  text-decoration: none;
-}
-
 ::selection {
   background: rgba(88, 115, 182, 0.15);
 }

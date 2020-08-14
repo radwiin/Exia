@@ -1,6 +1,7 @@
 <template>
-  <page-container class="page-container">
+  <page-container>
     home
+    <div style="width: 100%;height: 800px;background: red;"></div>
   </page-container>
 </template>
 
@@ -10,10 +11,4 @@ export default {
 }
 </script>
 
-<style lang="scss" scoped>
-.page-container {
-  display: flex;
-  justify-content: center;
-  align-items: center;
-}
-</style>
+<style lang="scss" scoped></style>
