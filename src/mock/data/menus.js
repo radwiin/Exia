@@ -3,17 +3,18 @@ const menus = [
     id: '97',
     pId: 'root',
     sort: 1,
-    path: '/ui',
+    path: '/ui/extensions',
     component: 'Layout',
-    meta: { group: 'ui' },
+    redirect: '/ui/extensions/markdown-editor',
+    meta: { title: 'Extensions', icon: 'bx-extension', alwaysShow: true, group: 'ui' },
     children: [
       {
         id: '97-1',
         pId: '97',
         sort: 1,
-        path: '/ui/tinymce',
-        component: '/ui/tinymce',
-        meta: { title: 'Tinymce', icon: 'bx-code-block' }
+        path: '/ui/extensions/markdown-editor',
+        component: '/ui/extensions/markdown-editor',
+        meta: { title: 'Markdown', icon: 'bx-hash' }
       }
     ]
   },

@@ -773,10 +773,37 @@
     error-stack-parser "^2.0.0"
     string-width "^2.0.0"
 
+"@toast-ui/editor@^2.3.1":
+  version "2.3.1"
+  resolved "https://registry.npm.taobao.org/@toast-ui/editor/download/@toast-ui/editor-2.3.1.tgz#add692840011efcdbd9b4b6de93dda2da12c36a0"
+  integrity sha1-rdaShAAR7829m0tt6T3aLaEsNqA=
+  dependencies:
+    "@types/codemirror" "0.0.71"
+    codemirror "^5.48.4"
+
+"@toast-ui/vue-editor@^2.3.1":
+  version "2.3.1"
+  resolved "https://registry.npm.taobao.org/@toast-ui/vue-editor/download/@toast-ui/vue-editor-2.3.1.tgz#ca8771a77513d1998123db717626a2ec4267b6f5"
+  integrity sha1-yodxp3UT0ZmBI9txdiai7EJntvU=
+  dependencies:
+    "@toast-ui/editor" "^2.3.1"
+
+"@types/codemirror@0.0.71":
+  version "0.0.71"
+  resolved "https://registry.npm.taobao.org/@types/codemirror/download/@types/codemirror-0.0.71.tgz#861f1bcb3100c0a064567c5400f2981cf4ae8ca7"
+  integrity sha1-hh8byzEAwKBkVnxUAPKYHPSujKc=
+  dependencies:
+    "@types/tern" "*"
+
 "@types/color-name@^1.1.1":
   version "1.1.1"
   resolved "https://registry.npm.taobao.org/@types/color-name/download/@types/color-name-1.1.1.tgz#1c1261bbeaa10a8055bbc5d8ab84b7b2afc846a0"
   integrity sha1-HBJhu+qhCoBVu8XYq4S3sq/IRqA=
+
+"@types/estree@*":
+  version "0.0.45"
+  resolved "https://registry.npm.taobao.org/@types/estree/download/@types/estree-0.0.45.tgz#e9387572998e5ecdac221950dab3e8c3b16af884"
+  integrity sha1-6Th1cpmOXs2sIhlQ2rPow7Fq+IQ=
 
 "@types/events@*":
   version "3.0.0"
@@ -816,6 +843,13 @@
   version "1.5.2"
   resolved "https://registry.npm.taobao.org/@types/q/download/@types/q-1.5.2.tgz#690a1475b84f2a884fd07cd797c00f5f31356ea8"
   integrity sha1-aQoUdbhPKohP0HzXl8APXzE1bqg=
+
+"@types/tern@*":
+  version "0.23.3"
+  resolved "https://registry.npm.taobao.org/@types/tern/download/@types/tern-0.23.3.tgz?cache=0&other_urls=https%3A%2F%2Fregistry.npm.taobao.org%2F%40types%2Ftern%2Fdownload%2F%40types%2Ftern-0.23.3.tgz#4b54538f04a88c9ff79de1f6f94f575a7f339460"
+  integrity sha1-S1RTjwSojJ/3neH2+U9XWn8zlGA=
+  dependencies:
+    "@types/estree" "*"
 
 "@vue/babel-helper-vue-jsx-merge-props@^1.0.0":
   version "1.0.0"
@@ -2241,6 +2275,11 @@ code-point-at@^1.0.0:
   version "1.1.0"
   resolved "https://registry.npm.taobao.org/code-point-at/download/code-point-at-1.1.0.tgz#0d070b4d043a5bea33a2f1a40e2edb3d9a4ccf77"
   integrity sha1-DQcLTQQ6W+ozovGkDi7bPZpMz3c=
+
+codemirror@^5.48.4, codemirror@^5.56.0:
+  version "5.56.0"
+  resolved "https://registry.npm.taobao.org/codemirror/download/codemirror-5.56.0.tgz#675640fcc780105cd22d3faa738b5d7ea6426f61"
+  integrity sha1-Z1ZA/MeAEFzSLT+qc4tdfqZCb2E=
 
 collection-visit@^1.0.0:
   version "1.0.0"
