@@ -4,7 +4,7 @@
     <div class="page">
       <top-navbar></top-navbar>
       <transition name="fade-transform" mode="out-in">
-        <keep-alive>
+        <keep-alive :include="cachedRoutes">
           <router-view />
         </keep-alive>
       </transition>
@@ -15,12 +15,25 @@
 <script>
 import SideNavbar from './components/SideNavbar'
 import TopNavbar from './components/TopNavbar'
+import { mapTree } from '@/utils'
 
 export default {
   name: 'SideLayout',
   components: {
     TopNavbar,
     SideNavbar
+  },
+  computed: {
+    cachedRoutes() {
+      const cachedRoutes = []
+      mapTree(this.$store.getters.routes, route => {
+        if (!route.meta || !route.meta.noCache) {
+          route.name && cachedRoutes.push(route.name)
+        }
+        return route
+      })
+      return cachedRoutes
+    }
   }
 }
 </script>

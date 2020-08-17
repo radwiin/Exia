@@ -5,16 +5,26 @@ const menus = [
     sort: 1,
     path: '/ui/extensions',
     component: 'Layout',
-    redirect: '/ui/extensions/markdown-editor',
+    redirect: '/ui/extensions/markdown-demo',
     meta: { title: 'Extensions', icon: 'bx-extension', alwaysShow: true, group: 'ui' },
     children: [
       {
         id: '97-1',
         pId: '97',
         sort: 1,
-        path: '/ui/extensions/markdown-editor',
-        component: '/ui/extensions/markdown-editor',
+        name: 'markdown-demo',
+        path: '/ui/extensions/markdown-demo',
+        component: '/ui/extensions/markdown-demo',
         meta: { title: 'Markdown', icon: 'bx-hash' }
+      },
+      {
+        id: '97-2',
+        pId: '97',
+        sort: 1,
+        name: 'tinymce-demo',
+        path: '/ui/extensions/tinymce-demo',
+        component: '/ui/extensions/tinymce-demo',
+        meta: { title: 'Tinymce', icon: 'bx-hash', noCache: true }
       }
     ]
   },
