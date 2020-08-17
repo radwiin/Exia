@@ -9,6 +9,7 @@
     "deploy": "sh scripts/deploy.sh"
   },
   "dependencies": {
+    "@mapbox/mapbox-gl-language": "^0.10.1",
     "@toast-ui/vue-editor": "^2.3.1",
     "apexcharts": "^3.19.3",
     "axios": "^0.19.1",
@@ -23,6 +24,7 @@
     "jexl": "^2.2.2",
     "js-cookie": "^2.2.1",
     "lodash": "^4.17.15",
+    "mapbox-gl": "^1.12.0",
     "mockjs": "^1.1.0",
     "nprogress": "^0.2.0",
     "path-to-regexp": "^6.1.0",
