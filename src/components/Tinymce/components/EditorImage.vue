@@ -1,6 +1,6 @@
 <template>
   <div class="upload-container">
-    <el-button :style="{background:color,borderColor:color}" icon="el-icon-upload" size="mini" type="primary" @click=" dialogVisible=true">
+    <el-button :style="{ background: color, borderColor: color }" icon="el-icon-upload" size="mini" type="primary" @click="dialogVisible = true">
       upload
     </el-button>
     <el-dialog :visible.sync="dialogVisible">
@@ -54,7 +54,9 @@ export default {
     handleSubmit() {
       const arr = Object.keys(this.listObj).map(v => this.listObj[v])
       if (!this.checkAllSuccess()) {
-        this.$message('Please wait for all images to be uploaded successfully. If there is a network problem, please refresh the page and upload again!')
+        this.$message(
+          'Please wait for all images to be uploaded successfully. If there is a network problem, please refresh the page and upload again!'
+        )
         return
       }
       this.$emit('successCBK', arr)

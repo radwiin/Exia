@@ -1,5 +1,5 @@
 <template>
-  <div :class="{fullscreen:fullscreen}" class="tinymce-container" :style="{width:containerWidth}">
+  <div :class="{ fullscreen: fullscreen }" class="tinymce-container" :style="{ width: containerWidth }">
     <textarea :id="tinymceId" class="tinymce-textarea" />
     <div class="editor-custom-btn-container">
       <editorImage color="#1890ff" class="editor-upload-btn" @successCBK="imageSuccessCBK" />
@@ -13,12 +13,26 @@
  * https://panjiachen.github.io/vue-element-admin-site/feature/component/rich-editor.html#tinymce
  */
 import editorImage from './components/EditorImage'
-import plugins from './plugins'
-import toolbar from './toolbar'
-import load from './dynamicLoadScript'
+// import plugins from './plugins'
+// import toolbar from './toolbar'
+import load from './utils/dynamicLoadScript'
 
 // why use this cdn, detail see https://github.com/PanJiaChen/tinymce-all-in-one
 const tinymceCDN = 'https://cdn.jsdelivr.net/npm/tinymce-all-in-one@4.9.3/tinymce.min.js'
+
+// Any plugins you want to use has to be imported
+// Detail plugins list see https://www.tinymce.com/docs/plugins/
+// Custom builds see https://www.tinymce.com/download/custom-builds/
+const plugins = [
+  'advlist anchor autolink autosave code codesample colorpicker colorpicker contextmenu directionality emoticons fullscreen hr image imagetools insertdatetime link lists media nonbreaking noneditable pagebreak paste preview print save searchreplace spellchecker tabfocus table template textcolor textpattern visualblocks visualchars wordcount'
+]
+
+// Here is a list of the toolbar
+// Detail list see https://www.tinymce.com/docs/advanced/editor-control-identifiers/#toolbarcontrols
+const toolbar = [
+  'searchreplace bold italic underline strikethrough alignleft aligncenter alignright outdent indent  blockquote undo redo removeformat subscript superscript code codesample',
+  'hr bullist numlist link image charmap preview anchor pagebreak insertdatetime media table emoticons forecolor backcolor fullscreen'
+]
 
 export default {
   name: 'Tinymce',
@@ -63,17 +77,18 @@ export default {
       tinymceId: this.id,
       fullscreen: false,
       languageTypeList: {
-        'en': 'en',
-        'zh': 'zh_CN',
-        'es': 'es_MX',
-        'ja': 'ja'
+        en: 'en',
+        zh: 'zh_CN',
+        es: 'es_MX',
+        ja: 'ja'
       }
     }
   },
   computed: {
     containerWidth() {
       const width = this.width
-      if (/^[\d]+(\.[\d]+)?$/.test(width)) { // matches `100`, `'100'`
+      if (/^[\d]+(\.[\d]+)?$/.test(width)) {
+        // matches `100`, `'100'`
         return `${width}px`
       }
       return width
@@ -82,8 +97,7 @@ export default {
   watch: {
     value(val) {
       if (!this.hasChange && this.hasInit) {
-        this.$nextTick(() =>
-          window.tinymce.get(this.tinymceId).setContent(val || ''))
+        this.$nextTick(() => window.tinymce.get(this.tinymceId).setContent(val || ''))
       }
     }
   },
@@ -104,7 +118,7 @@ export default {
   methods: {
     init() {
       // dynamic load tinymce from cdn
-      load(tinymceCDN, (err) => {
+      load(tinymceCDN, err => {
         if (err) {
           this.$message.error(err.message)
           return
@@ -144,7 +158,7 @@ export default {
           })
         },
         setup(editor) {
-          editor.on('FullscreenStateChanged', (e) => {
+          editor.on('FullscreenStateChanged', e => {
             _this.fullscreen = e.state
           })
         },
