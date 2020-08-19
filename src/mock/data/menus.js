@@ -34,6 +34,15 @@ const menus = [
         path: '/ui/extensions/mapbox-demo',
         component: '/ui/extensions/mapbox-demo',
         meta: { title: 'Mapbox', icon: 'bx-hash', noCache: true }
+      },
+      {
+        id: '97-4',
+        pId: '97',
+        sort: 1,
+        name: 'l7-demo',
+        path: '/ui/extensions/l7-demo',
+        component: '/ui/extensions/l7-demo',
+        meta: { title: 'l7', icon: 'bx-hash', noCache: true }
       }
     ]
   },
