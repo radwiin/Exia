@@ -9,6 +9,7 @@
     "deploy": "sh scripts/deploy.sh"
   },
   "dependencies": {
+    "@antv/g2plot": "^1.1.25",
     "@antv/l7": "^2.2.32",
     "@antv/l7-maps": "^2.2.32",
     "@mapbox/mapbox-gl-language": "^0.10.1",

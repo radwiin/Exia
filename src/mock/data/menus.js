@@ -18,24 +18,6 @@ const menus = [
         meta: { title: 'Markdown', icon: 'bx-hash' }
       },
       {
-        id: '97-2',
-        pId: '97',
-        sort: 1,
-        name: 'tinymce-demo',
-        path: '/ui/extensions/tinymce-demo',
-        component: '/ui/extensions/tinymce-demo',
-        meta: { title: 'Tinymce', icon: 'bx-hash', noCache: true }
-      },
-      {
-        id: '97-3',
-        pId: '97',
-        sort: 1,
-        name: 'mapbox-demo',
-        path: '/ui/extensions/mapbox-demo',
-        component: '/ui/extensions/mapbox-demo',
-        meta: { title: 'Mapbox', icon: 'bx-hash', noCache: true }
-      },
-      {
         id: '97-4',
         pId: '97',
         sort: 1,
